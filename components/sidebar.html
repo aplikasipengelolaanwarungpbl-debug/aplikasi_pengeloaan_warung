@@ -12,7 +12,7 @@
     <ul class="nav flex-column gap-1">
       <!-- Dashboard -->
       <li class="nav-item">
-        <a href="#" class="nav-link-custom active" onclick="loadPage('pages/dashboard.html', this)">
+        <a href="#/dashboard" class="nav-link-custom active" onclick="loadPage('dashboard', this)">
           <i data-lucide="layout-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -30,12 +30,12 @@
         <div class="collapse" id="collapse-transaksi">
           <ul class="submenu-nav">
             <li>
-              <a href="#" class="nav-link-custom" onclick="loadPage('pages/kasir.html', this)">
+              <a href="#/kasir" class="nav-link-custom" onclick="loadPage('kasir', this)">
                 <span>Kasir</span>
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link-custom" onclick="loadPage('pages/riwayat-transaksi.html', this)">
+              <a href="#/riwayat-transaksi" class="nav-link-custom" onclick="loadPage('riwayat-transaksi', this)">
                 <span>Riwayat Transaksi</span>
               </a>
             </li>
@@ -55,12 +55,12 @@
         <div class="collapse" id="collapse-produk">
           <ul class="submenu-nav">
             <li>
-              <a href="#" class="nav-link-custom" onclick="loadPage('pages/produk.html', this)">
+              <a href="#/produk" class="nav-link-custom" onclick="loadPage('produk', this)">
                 <span>Daftar Produk</span>
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link-custom" onclick="loadPage('pages/kategori.html', this)">
+              <a href="#/kategori" class="nav-link-custom" onclick="loadPage('kategori', this)">
                 <span>Kategori</span>
               </a>
             </li>
@@ -75,25 +75,22 @@
             <i data-lucide="bar-chart-3"></i>
             <span>Laporan</span>
           </span>
-          <div class="d-flex align-items-center gap-1">
-            <span class="badge bg-warning-subtle text-warning-emphasis rounded-pill px-2 py-0 badge-owner">Owner</span>
-            <i data-lucide="chevron-down" class="rotate-icon"></i>
-          </div>
+          <i data-lucide="chevron-down" class="rotate-icon"></i>
         </a>
         <div class="collapse" id="collapse-laporan">
           <ul class="submenu-nav">
             <li>
-              <a href="#" class="nav-link-custom" onclick="loadPage('pages/laporan-laba-rugi.html', this)">
+              <a href="#/owner/laporan-laba-rugi" class="nav-link-custom" onclick="loadPage('owner/laporan-laba-rugi', this)">
                 <span>Laba Rugi</span>
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link-custom" onclick="loadPage('pages/laporan-stok.html', this)">
+              <a href="#/owner/laporan-stok" class="nav-link-custom" onclick="loadPage('owner/laporan-stok', this)">
                 <span>Stok</span>
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link-custom" onclick="loadPage('pages/laporan-terlaris.html', this)">
+              <a href="#/owner/laporan-terlaris" class="nav-link-custom" onclick="loadPage('owner/laporan-terlaris', this)">
                 <span>Terlaris</span>
               </a>
             </li>
@@ -103,12 +100,23 @@
 
       <!-- Kelola Akun Kasir (Owner Only) -->
       <li class="nav-item" data-role="owner">
-        <a href="#" class="nav-link-custom justify-content-between" onclick="loadPage('pages/manajemen-akun.html', this)">
-          <span class="d-flex align-items-center gap-2">
-            <i data-lucide="users"></i>
-            <span>Akun Kasir</span>
-          </span>
-          <span class="badge bg-warning-subtle text-warning-emphasis rounded-pill px-2 py-0 badge-owner">Owner</span>
+        <a href="#/owner/manajemen-akun" class="nav-link-custom" onclick="loadPage('owner/manajemen-akun', this)">
+          <i data-lucide="users"></i>
+          <span>Akun Kasir</span>
+        </a>
+      </li>
+
+      <!-- Menu Autentikasi / Halaman Auth -->
+      <li class="nav-item pt-2 border-top mt-2">
+        <a href="pages/login/index.html" class="nav-link-custom">
+          <i data-lucide="log-in"></i>
+          <span>Login</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="pages/register/index.html" class="nav-link-custom">
+          <i data-lucide="user-plus"></i>
+          <span>Register</span>
         </a>
       </li>
     </ul>

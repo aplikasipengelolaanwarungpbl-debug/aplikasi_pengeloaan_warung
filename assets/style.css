@@ -164,10 +164,6 @@ body, .bg-body-app {
   transform: rotate(-90deg);
 }
 
-.badge-owner {
-  font-size: 0.65rem;
-}
-
 /* Cards */
 .card-modern {
   background: var(--bg-surface);
@@ -377,19 +373,6 @@ body, .bg-body-app {
 /* Header & Topbar */
 .topbar-search-wrapper {
   width: 280px;
-}
-
-.role-switcher-box {
-  border-radius: var(--radius-sm);
-}
-
-.role-label-text {
-  font-size: 0.75rem;
-}
-
-.role-select-input {
-  width: auto;
-  cursor: pointer;
 }
 
 .user-profile-name {
