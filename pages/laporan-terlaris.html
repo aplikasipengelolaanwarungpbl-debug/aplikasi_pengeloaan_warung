@@ -1,0 +1,231 @@
+<!-- Page Header -->
+<div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4 gap-3">
+  <div>
+    <div class="d-flex align-items-center gap-2">
+      <h4 class="fw-bold text-dark mb-1">Laporan Produk Terlaris (Top Sales)</h4>
+      <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle rounded-pill px-2 py-0 badge-owner">Owner Only</span>
+    </div>
+    <p class="text-muted mb-0 small">Peringkat barang dengan volume penjualan tertinggi dan kontributor omzet terbesar.</p>
+  </div>
+  <div class="d-flex align-items-center gap-2">
+    <button class="btn btn-sm btn-outline-secondary rounded-btn-sm d-flex align-items-center gap-1 bg-white" onclick="exportDataLaporan('Terlaris')">
+      <i data-lucide="download" class="icon-xs"></i> Export PDF / Excel
+    </button>
+  </div>
+</div>
+
+<!-- Top Products KPI Cards -->
+<div class="row g-3 mb-4">
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card-modern p-3 h-100 metric-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="text-muted small fw-medium">Produk #1 Terlaris</span>
+        <div class="metric-icon-box metric-icon-blue">
+          <i data-lucide="trophy" class="icon-sm"></i>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between gap-2">
+        <span class="metric-value text-dark" style="font-size: 1.05rem;" title="Beras Ramos Setra">Beras Ramos Setra</span>
+        <span class="badge-status success">120 Terjual</span>
+      </div>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">Volume tertinggi</small>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card-modern p-3 h-100 metric-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="text-muted small fw-medium">Omzet Produk Terlaris</span>
+        <div class="metric-icon-box metric-icon-green">
+          <i data-lucide="banknote" class="icon-sm"></i>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between gap-2">
+        <span class="metric-value text-dark">Rp 8.280.000</span>
+      </div>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">55.4% dari total omzet</small>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card-modern p-3 h-100 metric-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="text-muted small fw-medium">Kategori Dominan</span>
+        <div class="metric-icon-box metric-icon-purple">
+          <i data-lucide="pie-chart" class="icon-sm"></i>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between gap-2">
+        <span class="metric-value text-dark">Sembako</span>
+        <span class="badge-status neutral">62.6%</span>
+      </div>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">Pangsa pasar utama</small>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card-modern p-3 h-100 metric-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="text-muted small fw-medium">Rata-rata Margin Laba</span>
+        <div class="metric-icon-box metric-icon-orange">
+          <i data-lucide="percent" class="icon-sm"></i>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between gap-2">
+        <span class="metric-value text-dark">15.2%</span>
+        <span class="badge-status success">Optimal</span>
+      </div>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">Tingkat profitabilitas</small>
+    </div>
+  </div>
+</div>
+
+<!-- Chart Bar Section: Volume & Revenue -->
+<div class="row g-3 mb-4">
+  <div class="col-12 col-lg-7">
+    <div class="card-modern p-4 h-100">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <div>
+          <h6 class="fw-bold text-dark mb-1">Peringkat Kuantitas Penjualan (Pcs/Kg)</h6>
+          <small class="text-muted">Perbandingan volume barang yang paling sering dibeli</small>
+        </div>
+      </div>
+      <div id="chart-top-selling-bar"></div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-5">
+    <div class="card-modern p-4 h-100 d-flex flex-column justify-content-between">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <div>
+          <h6 class="fw-bold text-dark mb-0">Distribusi Kategori Terlaris</h6>
+          <small class="text-muted">Pangsa pasar per kategori</small>
+        </div>
+      </div>
+      <div id="chart-category-pie" class="my-auto"></div>
+      <div class="pt-3 border-top d-flex justify-content-around text-center small">
+        <div>
+          <span class="text-muted d-block">Sembako</span>
+          <span class="fw-bold text-dark">62.6%</span>
+        </div>
+        <div>
+          <span class="text-muted d-block">Minyak</span>
+          <span class="fw-bold text-dark">21.6%</span>
+        </div>
+        <div>
+          <span class="text-muted d-block">Fresh</span>
+          <span class="fw-bold text-dark">15.8%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ranking Table Section -->
+<div class="card-modern">
+  <div class="p-3 border-bottom d-flex align-items-center justify-content-between">
+    <h6 class="fw-bold text-dark mb-0">Tabel Lengkap Peringkat Produk Terlaris</h6>
+    <select class="form-select form-select-sm border filter-select">
+      <option>Bulan Ini (September 2026)</option>
+      <option>Bulan Lalu (Agustus 2026)</option>
+    </select>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-modern align-middle mb-0">
+      <thead>
+        <tr>
+          <th class="ps-4" style="width: 70px;">Rank</th>
+          <th>Nama Produk</th>
+          <th>Kategori</th>
+          <th class="text-center">Kuantitas Terjual</th>
+          <th class="text-end">Total Omzet</th>
+          <th class="text-end pe-4">Estimasi Laba Bersih</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="ps-4">
+            <span class="badge bg-primary text-white rounded-circle p-2 d-inline-flex align-items-center justify-content-center" style="width: 24px; height: 24px;">1</span>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <div class="p-1.5 bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">
+                <i data-lucide="package" class="icon-xs"></i>
+              </div>
+              <span class="fw-semibold text-dark">Beras Ramos Setra 5kg</span>
+            </div>
+          </td>
+          <td><span class="badge bg-light text-dark border">Sembako</span></td>
+          <td class="text-center fw-bold text-dark">120 karung</td>
+          <td class="text-end fw-bold text-primary">Rp 8.280.000</td>
+          <td class="text-end pe-4 fw-bold text-success">Rp 1.080.000</td>
+        </tr>
+        <tr>
+          <td class="ps-4">
+            <span class="badge bg-secondary text-white rounded-circle p-2 d-inline-flex align-items-center justify-content-center" style="width: 24px; height: 24px;">2</span>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <div class="p-1.5 bg-warning-subtle text-warning rounded-2 d-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">
+                <i data-lucide="droplet" class="icon-xs"></i>
+              </div>
+              <span class="fw-semibold text-dark">Minyak Goreng Sawit 2L</span>
+            </div>
+          </td>
+          <td><span class="badge bg-light text-dark border">Minyak</span></td>
+          <td class="text-center fw-bold text-dark">95 pcs</td>
+          <td class="text-end fw-bold text-primary">Rp 3.230.000</td>
+          <td class="text-end pe-4 fw-bold text-success">Rp 380.000</td>
+        </tr>
+        <tr>
+          <td class="ps-4">
+            <span class="badge bg-secondary text-white rounded-circle p-2 d-inline-flex align-items-center justify-content-center" style="width: 24px; height: 24px;">3</span>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <div class="p-1.5 bg-success-subtle text-success rounded-2 d-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">
+                <i data-lucide="egg" class="icon-xs"></i>
+              </div>
+              <span class="fw-semibold text-dark">Telur Ayam Negeri (1kg)</span>
+            </div>
+          </td>
+          <td><span class="badge bg-light text-dark border">Fresh</span></td>
+          <td class="text-center fw-bold text-dark">84 kg</td>
+          <td class="text-end fw-bold text-primary">Rp 2.352.000</td>
+          <td class="text-end pe-4 fw-bold text-success">Rp 336.000</td>
+        </tr>
+        <tr>
+          <td class="ps-4">
+            <span class="text-muted fw-bold ps-1">4</span>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <div class="p-1.5 bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">
+                <i data-lucide="box" class="icon-xs"></i>
+              </div>
+              <span class="fw-semibold text-dark">Gula Pasir Kristal 1kg</span>
+            </div>
+          </td>
+          <td><span class="badge bg-light text-dark border">Sembako</span></td>
+          <td class="text-center fw-bold text-dark">62 pcs</td>
+          <td class="text-end fw-bold text-primary">Rp 1.085.000</td>
+          <td class="text-end pe-4 fw-bold text-success">Rp 155.000</td>
+        </tr>
+        <tr>
+          <td class="ps-4">
+            <span class="text-muted fw-bold ps-1">5</span>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <div class="p-1.5 bg-info-subtle text-info rounded-2 d-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">
+                <i data-lucide="coffee" class="icon-xs"></i>
+              </div>
+              <span class="fw-semibold text-dark">Teh Celup Kotak (25s)</span>
+            </div>
+          </td>
+          <td><span class="badge bg-light text-dark border">Minuman</span></td>
+          <td class="text-center fw-bold text-dark">45 pcs</td>
+          <td class="text-end fw-bold text-primary">Rp 292.500</td>
+          <td class="text-end pe-4 fw-bold text-success">Rp 58.500</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

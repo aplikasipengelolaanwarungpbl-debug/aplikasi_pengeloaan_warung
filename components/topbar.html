@@ -1,0 +1,88 @@
+<div class="topbar-header px-4 d-flex align-items-center justify-content-between">
+  <!-- Left Side: Toggle & Store Identity -->
+  <div class="d-flex align-items-center gap-3">
+    <button class="btn btn-circle d-md-none" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
+      <i data-lucide="menu"></i>
+    </button>
+    
+    <!-- Store Identity Badge -->
+    <div class="d-flex align-items-center gap-2">
+      <div class="p-1.5 bg-primary-subtle text-primary rounded-3 d-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">
+        <i data-lucide="store" class="icon-sm"></i>
+      </div>
+      <div>
+        <div class="fw-bold text-dark font-sm lh-sm">WarungKu Sembako</div>
+        <small class="text-muted d-block" style="font-size: 0.7rem;">Cabang Utama • Jl. Merdeka No. 12</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Side: Simulator Switcher, Notifications & User Dropdown -->
+  <div class="d-flex align-items-center gap-2">
+    <!-- Role Switcher (Simulasi Cepat Dev/Testing) -->
+    <div class="d-flex align-items-center gap-2 bg-white px-2 py-1 border role-switcher-box">
+      <small class="text-muted fw-semibold ps-1 role-label-text">Role:</small>
+      <select id="role-select" class="form-select form-select-sm border-0 bg-transparent py-0 fw-semibold text-primary role-select-input" onchange="setRole(this.value)">
+        <option value="owner">Owner</option>
+        <option value="kasir">Kasir</option>
+      </select>
+    </div>
+
+    <!-- Notification Dropdown Menu -->
+    <div class="dropdown">
+      <button class="btn btn-circle position-relative" data-bs-toggle="dropdown" aria-expanded="false" title="Pusat Notifikasi">
+        <i data-lucide="bell" class="icon-xl"></i>
+      </button>
+      <div class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3 mt-2 p-0 notif-dropdown-menu">
+        <!-- Header -->
+        <div class="p-3 border-bottom d-flex align-items-center justify-content-between bg-white rounded-top-3">
+          <h6 class="fw-bold text-dark mb-0 font-sm">Notifikasi</h6>
+        </div>
+
+        <!-- Notification List -->
+        <div class="notif-list-body" style="max-height: 280px; overflow-y: auto;">
+          <!-- Empty state: belum ada sistem notifikasi real-time -->
+          <div class="d-flex flex-column align-items-center justify-content-center py-5 text-center px-3">
+            <i data-lucide="bell-off" style="width: 1.5rem; height: 1.5rem; color: var(--text-subtle);"></i>
+            <p class="text-muted small mb-0 mt-2">Belum ada notifikasi.</p>
+            <small class="text-muted" style="font-size: 0.7rem;">Notifikasi aktif akan muncul di sini.</small>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="p-2 border-top text-center bg-light rounded-bottom-3">
+          <small class="text-muted" style="font-size: 0.725rem;">Pusat Pemberitahuan WarungKu</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- User Profile Dropdown (Compact: Ganti Password & Logout) -->
+    <div class="dropdown ms-1">
+      <a href="#" class="d-flex align-items-center gap-2 text-decoration-none dropdown-toggle text-dark p-1 rounded-3 user-dropdown-btn" data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="avatar-box bg-primary-subtle text-primary d-flex align-items-center justify-content-center">
+          <i data-lucide="user" class="icon-sm"></i>
+        </div>
+        <div class="d-none d-lg-block text-start pe-1">
+          <div class="fw-semibold user-profile-name">Budi Santoso</div>
+          <small class="text-muted user-profile-role" id="topbar-role-badge">OWNER</small>
+        </div>
+      </a>
+
+      <div class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-3 mt-2 p-1 user-profile-menu-compact">
+        <a class="dropdown-item py-1.5 px-2.5 rounded-2 d-flex align-items-center gap-2" href="#" onclick="openProfilWarungModal()">
+          <i data-lucide="store" class="icon-xs text-muted"></i>
+          <span>Profil Warung</span>
+        </a>
+        <a class="dropdown-item py-1.5 px-2.5 rounded-2 d-flex align-items-center gap-2" href="#" onclick="openChangePasswordModal()">
+          <i data-lucide="key" class="icon-xs text-muted"></i>
+          <span>Ganti Password</span>
+        </a>
+        <hr class="dropdown-divider my-1">
+        <a class="dropdown-item py-1.5 px-2.5 rounded-2 text-danger d-flex align-items-center gap-2" href="#" onclick="handleLogout()">
+          <i data-lucide="log-out" class="icon-xs"></i>
+          <span class="fw-semibold">Keluar (Logout)</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

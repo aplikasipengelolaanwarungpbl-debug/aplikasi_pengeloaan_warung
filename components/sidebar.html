@@ -1,0 +1,135 @@
+<div id="sidebar-wrapper" class="d-flex flex-column">
+  <!-- Brand Header (Aligned with Topbar height) -->
+  <div class="sidebar-brand-header d-flex align-items-center">
+    <div class="brand-logo-container">
+      <img src="assets/image/logo.png" alt="Logo WarungKu" class="brand-logo-img">
+      <img src="assets/image/warungku.png" alt="WarungKu" class="brand-text-img">
+    </div>
+  </div>
+
+  <div class="p-3">
+    <!-- Navigation List -->
+    <ul class="nav flex-column gap-1">
+      <!-- Dashboard -->
+      <li class="nav-item">
+        <a href="#" class="nav-link-custom active" onclick="loadPage('pages/dashboard.html', this)">
+          <i data-lucide="layout-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+
+      <!-- Transaksi -->
+      <li class="nav-item">
+        <a href="#collapse-transaksi" class="nav-link-custom justify-content-between collapsed" data-bs-toggle="collapse" role="button" aria-expanded="false">
+          <span class="d-flex align-items-center gap-2">
+            <i data-lucide="shopping-cart"></i>
+            <span>Transaksi</span>
+          </span>
+          <i data-lucide="chevron-down" class="rotate-icon"></i>
+        </a>
+        <div class="collapse" id="collapse-transaksi">
+          <ul class="submenu-nav">
+            <li>
+              <a href="#" class="nav-link-custom" onclick="loadPage('pages/kasir.html', this)">
+                <span>Kasir</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link-custom" onclick="loadPage('pages/riwayat-transaksi.html', this)">
+                <span>Riwayat Transaksi</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- Produk -->
+      <li class="nav-item">
+        <a href="#collapse-produk" class="nav-link-custom justify-content-between collapsed" data-bs-toggle="collapse" role="button" aria-expanded="false">
+          <span class="d-flex align-items-center gap-2">
+            <i data-lucide="package"></i>
+            <span>Produk</span>
+          </span>
+          <i data-lucide="chevron-down" class="rotate-icon"></i>
+        </a>
+        <div class="collapse" id="collapse-produk">
+          <ul class="submenu-nav">
+            <li>
+              <a href="#" class="nav-link-custom" onclick="loadPage('pages/produk.html', this)">
+                <span>Daftar Produk</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link-custom" onclick="loadPage('pages/kategori.html', this)">
+                <span>Kategori</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- Laporan (Owner Only) -->
+      <li class="nav-item" data-role="owner">
+        <a href="#collapse-laporan" class="nav-link-custom justify-content-between collapsed" data-bs-toggle="collapse" role="button" aria-expanded="false">
+          <span class="d-flex align-items-center gap-2">
+            <i data-lucide="bar-chart-3"></i>
+            <span>Laporan</span>
+          </span>
+          <div class="d-flex align-items-center gap-1">
+            <span class="badge bg-warning-subtle text-warning-emphasis rounded-pill px-2 py-0 badge-owner">Owner</span>
+            <i data-lucide="chevron-down" class="rotate-icon"></i>
+          </div>
+        </a>
+        <div class="collapse" id="collapse-laporan">
+          <ul class="submenu-nav">
+            <li>
+              <a href="#" class="nav-link-custom" onclick="loadPage('pages/laporan-laba-rugi.html', this)">
+                <span>Laba Rugi</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link-custom" onclick="loadPage('pages/laporan-stok.html', this)">
+                <span>Stok</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link-custom" onclick="loadPage('pages/laporan-terlaris.html', this)">
+                <span>Terlaris</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- Kelola Akun Kasir (Owner Only) -->
+      <li class="nav-item" data-role="owner">
+        <a href="#" class="nav-link-custom justify-content-between" onclick="loadPage('pages/manajemen-akun.html', this)">
+          <span class="d-flex align-items-center gap-2">
+            <i data-lucide="users"></i>
+            <span>Akun Kasir</span>
+          </span>
+          <span class="badge bg-warning-subtle text-warning-emphasis rounded-pill px-2 py-0 badge-owner">Owner</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Sidebar Bottom: Shift Status Widget -->
+  <div class="mt-auto p-3 border-top">
+    <div class="p-3 bg-light border rounded-3">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2 py-0" style="font-size: 0.675rem;">Toko Buka</span>
+        <small class="text-muted" style="font-size: 0.675rem;">Shift Pagi</small>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <div class="p-1.5 bg-white border rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 28px; height: 28px;">
+          <i data-lucide="user-check" class="icon-xs text-primary"></i>
+        </div>
+        <div class="overflow-hidden">
+          <div class="fw-semibold text-dark text-truncate" style="font-size: 0.775rem;" id="sidebar-staff-name">Budi Santoso</div>
+          <small class="text-muted d-block" style="font-size: 0.675rem;" id="sidebar-staff-role">Owner (Kasir Aktif)</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

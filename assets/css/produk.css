@@ -1,0 +1,13 @@
+/* Daftar Produk — inventory table, thumbnail preview, action buttons */
+
+.prod-table-thumb {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background-color: var(--bg-subtle);
+}
+
+.produk-row:hover td {
+  background-color: var(--bg-subtle);
+}

@@ -1,0 +1,51 @@
+<!-- Modal Tambah / Edit Kategori -->
+<div class="modal fade" id="modalFormKategori" tabindex="-1" aria-labelledby="modalFormKategoriLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-sm rounded-4 overflow-hidden">
+      <!-- Modal Header -->
+      <div class="modal-header border-bottom px-4 py-3 bg-white">
+        <div class="d-flex align-items-center gap-2">
+          <div class="p-2 bg-primary-subtle text-primary rounded-3">
+            <i data-lucide="tag" class="icon-sm"></i>
+          </div>
+          <div>
+            <h6 class="modal-title fw-bold text-dark mb-0" id="modalFormKategoriLabel">Tambah Kategori Baru</h6>
+            <small class="text-muted" style="font-size: 0.75rem;">Atur pengelompokan produk warung</small>
+          </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Modal Body Form -->
+      <div class="modal-body p-4">
+        <form id="form-kategori" onsubmit="event.preventDefault(); saveCategory();">
+          <div class="mb-3">
+            <label for="cat-name" class="form-label small fw-semibold text-muted mb-1">Nama Kategori <span class="text-danger">*</span></label>
+            <input type="text" id="cat-name" class="form-control form-control-standard" placeholder="Contoh: Bumbu & Rempah" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="cat-code" class="form-label small fw-semibold text-muted mb-1">Kode Kategori</label>
+            <input type="text" id="cat-code" class="form-control form-control-standard font-monospace" placeholder="Contoh: CAT-007">
+            <small class="text-muted d-block mt-1" style="font-size: 0.725rem;">Biarkan kosong untuk pembuatan kode otomatis.</small>
+          </div>
+
+          <div class="mb-2">
+            <label for="cat-desc" class="form-label small fw-semibold text-muted mb-1">Deskripsi Singkat</label>
+            <textarea id="cat-desc" class="form-control form-control-standard" rows="3" placeholder="Penjelasan jenis barang yang masuk dalam kategori ini..."></textarea>
+          </div>
+        </form>
+      </div>
+
+      <!-- Modal Footer Action -->
+      <div class="modal-footer border-top bg-light px-4 py-3 d-flex justify-content-between">
+        <button type="button" class="btn btn-sm btn-outline-secondary px-3 py-2 rounded-btn-sm fw-medium" data-bs-dismiss="modal">
+          Batal
+        </button>
+        <button type="button" class="btn btn-sm btn-primary px-4 py-2 rounded-btn-sm fw-semibold d-inline-flex align-items-center gap-2 shadow-sm" onclick="saveCategory()">
+          <i data-lucide="check" class="icon-sm"></i> Simpan Kategori
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<!-- Modal Profil Warung -->
+<div class="modal fade" id="modalProfilWarung" tabindex="-1" aria-labelledby="modalProfilWarungLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 440px;">
+    <div class="modal-content border-0 shadow-sm rounded-4 overflow-hidden">
+      <!-- Modal Header -->
+      <div class="modal-header border-bottom px-4 py-3 bg-white">
+        <div class="d-flex align-items-center gap-2">
+          <div class="p-2 bg-primary-subtle text-primary rounded-3">
+            <i data-lucide="store" class="icon-sm"></i>
+          </div>
+          <div>
+            <h6 class="modal-title fw-bold text-dark mb-0" id="modalProfilWarungLabel">Profil Warung</h6>
+            <small class="text-muted" style="font-size: 0.75rem;">Informasi identitas usaha & struk</small>
+          </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body p-4">
+        <form id="form-profil-warung" onsubmit="event.preventDefault(); saveProfilWarung();">
+          <div class="mb-3">
+            <label for="warung-name" class="form-label small fw-semibold text-muted mb-1">Nama Warung / Usaha <span class="text-danger">*</span></label>
+            <input type="text" id="warung-name" class="form-control form-control-standard" value="WarungKu Sembako" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="warung-phone" class="form-label small fw-semibold text-muted mb-1">Nomor WhatsApp / Telepon <span class="text-danger">*</span></label>
+            <input type="text" id="warung-phone" class="form-control form-control-standard" value="0812-3456-7890" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="warung-address" class="form-label small fw-semibold text-muted mb-1">Alamat Warung</label>
+            <textarea id="warung-address" class="form-control form-control-standard" rows="2" placeholder="Jl. Merdeka No. 12, Kota">Jl. Merdeka No. 12, Kota</textarea>
+          </div>
+
+          <div class="mb-2">
+            <label for="warung-footer" class="form-label small fw-semibold text-muted mb-1">Pesan Footer Struk</label>
+            <input type="text" id="warung-footer" class="form-control form-control-standard" value="Terima kasih atas kunjungan Anda!">
+          </div>
+        </form>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer border-top bg-light px-4 py-3 d-flex justify-content-between">
+        <button type="button" class="btn btn-sm btn-outline-secondary px-3 py-2 rounded-btn-sm fw-medium" data-bs-dismiss="modal">
+          Batal
+        </button>
+        <button type="button" class="btn btn-sm btn-primary px-4 py-2 rounded-btn-sm fw-semibold d-inline-flex align-items-center gap-2 shadow-sm" onclick="saveProfilWarung()">
+          <i data-lucide="check" class="icon-sm"></i> Simpan Profil
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

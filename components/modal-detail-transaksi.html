@@ -1,0 +1,102 @@
+<!-- Modal Detail Struk Transaksi -->
+<div class="modal fade" id="modalDetailTransaksi" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow">
+      <div class="modal-header border-bottom">
+        <h6 class="modal-title fw-bold text-dark">Detail Transaksi</h6>
+        <button type="button" class="btn-close" data-bs-toggle="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-4">
+        <!-- Receipt Styled Paper -->
+        <div class="receipt-paper">
+          <div class="text-center mb-3">
+            <h6 class="fw-bold mb-0">WARUNGKU</h6>
+            <small class="text-muted d-block">Jl. Raya Warung Sejahtera No. 12</small>
+            <small class="text-muted d-block">Telp: 0812-3456-7890</small>
+          </div>
+
+          <div class="dashed-divider"></div>
+
+          <div class="d-flex justify-content-between small text-muted">
+            <span>No. Faktur:</span>
+            <span class="text-dark fw-semibold">#TRX-20260924-038</span>
+          </div>
+          <div class="d-flex justify-content-between small text-muted">
+            <span>Tanggal:</span>
+            <span class="text-dark">24/09/2026 19:42</span>
+          </div>
+          <div class="d-flex justify-content-between small text-muted">
+            <span>Kasir:</span>
+            <span class="text-dark">Siti Aminah</span>
+          </div>
+          <div class="d-flex justify-content-between small text-muted">
+            <span>Metode:</span>
+            <span class="text-dark fw-semibold">QRIS</span>
+          </div>
+
+          <div class="dashed-divider"></div>
+
+          <!-- Items List -->
+          <div class="small">
+            <div class="mb-2">
+              <div class="d-flex justify-content-between">
+                <span>Minyak Goreng Sawit 2L</span>
+                <span class="fw-semibold">Rp 34.000</span>
+              </div>
+              <span class="text-muted">1 x Rp 34.000</span>
+            </div>
+            <div class="mb-2">
+              <div class="d-flex justify-content-between">
+                <span>Gula Pasir Kristal 1kg</span>
+                <span class="fw-semibold">Rp 17.500</span>
+              </div>
+              <span class="text-muted">1 x Rp 17.500</span>
+            </div>
+            <div class="mb-2">
+              <div class="d-flex justify-content-between">
+                <span>Telur Ayam Negeri (1kg)</span>
+                <span class="fw-semibold">Rp 23.000</span>
+              </div>
+              <span class="text-muted">1 x Rp 23.000</span>
+            </div>
+          </div>
+
+          <div class="dashed-divider"></div>
+
+          <!-- Totals -->
+          <div class="d-flex justify-content-between small mb-1">
+            <span>Subtotal</span>
+            <span>Rp 74.500</span>
+          </div>
+          <div class="d-flex justify-content-between small mb-1">
+            <span>Diskon</span>
+            <span>Rp 0</span>
+          </div>
+          <div class="d-flex justify-content-between fw-bold text-dark fs-6 pt-1">
+            <span>TOTAL</span>
+            <span>Rp 74.500</span>
+          </div>
+          <div class="d-flex justify-content-between small text-muted mt-2">
+            <span>Bayar (QRIS)</span>
+            <span>Rp 74.500</span>
+          </div>
+          <div class="d-flex justify-content-between small text-muted">
+            <span>Kembali</span>
+            <span>Rp 0</span>
+          </div>
+
+          <div class="dashed-divider"></div>
+          <div class="text-center small text-muted">
+            <small>-- Terima Kasih Telah Berbelanja --</small>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer border-top bg-light">
+        <button type="button" class="btn btn-sm btn-outline-secondary rounded-btn-sm" data-bs-dismiss="modal">Tutup</button>
+        <button type="button" class="btn btn-sm btn-primary rounded-btn-sm" onclick="window.print()">
+          <i data-lucide="printer" class="icon-xs me-1"></i> Cetak Struk
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

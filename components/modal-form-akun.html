@@ -1,0 +1,74 @@
+<!-- Modal Tambah / Edit Akun Kasir -->
+<div class="modal fade" id="modalFormAkun" tabindex="-1" aria-labelledby="modalFormAkunLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-sm rounded-4 overflow-hidden">
+      <!-- Modal Header -->
+      <div class="modal-header border-bottom px-4 py-3 bg-white">
+        <div class="d-flex align-items-center gap-2">
+          <div class="p-2 bg-primary-subtle text-primary rounded-3">
+            <i data-lucide="user-plus" class="icon-sm"></i>
+          </div>
+          <div>
+            <h6 class="modal-title fw-bold text-dark mb-0" id="modalFormAkunLabel">Tambah Akun Kasir Baru</h6>
+            <small class="text-muted" style="font-size: 0.75rem;">Buat kredensial login untuk staf kasir</small>
+          </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Modal Body Form -->
+      <div class="modal-body p-4">
+        <form id="form-akun" onsubmit="event.preventDefault(); saveUserAccount();">
+          <div class="mb-3">
+            <label for="acc-name" class="form-label small fw-semibold text-muted mb-1">Nama Lengkap <span class="text-danger">*</span></label>
+            <input type="text" id="acc-name" class="form-control form-control-standard" placeholder="Contoh: Siti Aminah" required>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <label for="acc-username" class="form-label small fw-semibold text-muted mb-1">Username <span class="text-danger">*</span></label>
+              <input type="text" id="acc-username" class="form-control form-control-standard" placeholder="sitiaminah" required>
+            </div>
+            <div class="col-6">
+              <label for="acc-phone" class="form-label small fw-semibold text-muted mb-1">No. WhatsApp / HP</label>
+              <input type="tel" id="acc-phone" class="form-control form-control-standard" placeholder="0812-xxxx-xxxx">
+            </div>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <label for="acc-role" class="form-label small fw-semibold text-muted mb-1">Role / Hak Akses <span class="text-danger">*</span></label>
+              <select id="acc-role" class="form-select form-select-standard" required>
+                <option value="kasir" selected>Kasir (Staff)</option>
+                <option value="owner">Owner (Admin)</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="acc-status" class="form-label small fw-semibold text-muted mb-1">Status Akun <span class="text-danger">*</span></label>
+              <select id="acc-status" class="form-select form-select-standard" required>
+                <option value="active" selected>Aktif</option>
+                <option value="inactive">Non-Aktif</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <label for="acc-password" class="form-label small fw-semibold text-muted mb-1">PIN / Password Login <span class="text-danger">*</span></label>
+            <input type="password" id="acc-password" class="form-control form-control-standard" placeholder="Minimal 6 karakter / PIN" required>
+            <small class="text-muted d-block mt-1" style="font-size: 0.725rem;">Gunakan PIN atau kata sandi yang mudah diingat kasir.</small>
+          </div>
+        </form>
+      </div>
+
+      <!-- Modal Footer Action -->
+      <div class="modal-footer border-top bg-light px-4 py-3 d-flex justify-content-between">
+        <button type="button" class="btn btn-sm btn-outline-secondary px-3 py-2 rounded-btn-sm fw-medium" data-bs-dismiss="modal">
+          Batal
+        </button>
+        <button type="button" class="btn btn-sm btn-primary px-4 py-2 rounded-btn-sm fw-semibold d-inline-flex align-items-center gap-2 shadow-sm" onclick="saveUserAccount()">
+          <i data-lucide="check" class="icon-sm"></i> Simpan Akun
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

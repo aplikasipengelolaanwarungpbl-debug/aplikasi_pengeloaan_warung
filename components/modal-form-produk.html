@@ -1,0 +1,90 @@
+<!-- Modal Tambah / Edit Produk -->
+<div class="modal fade" id="modalFormProduk" tabindex="-1" aria-labelledby="modalFormProdukLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-sm rounded-4 overflow-hidden">
+      <!-- Modal Header -->
+      <div class="modal-header border-bottom px-4 py-3 bg-white">
+        <div class="d-flex align-items-center gap-2">
+          <div class="p-2 bg-primary-subtle text-primary rounded-3">
+            <i data-lucide="package" class="icon-sm"></i>
+          </div>
+          <div>
+            <h6 class="modal-title fw-bold text-dark mb-0" id="modalFormProdukLabel">Tambah Produk Baru</h6>
+            <small class="text-muted" style="font-size: 0.75rem;">Lengkapi informasi data barang</small>
+          </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Modal Body Form -->
+      <div class="modal-body p-4">
+        <form id="form-produk" onsubmit="event.preventDefault(); saveProduct();">
+          <div class="mb-3">
+            <label for="prod-name" class="form-label small fw-semibold text-muted mb-1">Nama Produk <span class="text-danger">*</span></label>
+            <input type="text" id="prod-name" class="form-control form-control-standard" placeholder="Contoh: Beras Ramos Setra 5kg" required>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <label for="prod-category" class="form-label small fw-semibold text-muted mb-1">Kategori <span class="text-danger">*</span></label>
+              <select id="prod-category" class="form-select form-select-standard" required>
+                <option value="Sembako">Sembako</option>
+                <option value="Minyak">Minyak</option>
+                <option value="Fresh">Fresh</option>
+                <option value="Minuman">Minuman</option>
+                <option value="Bumbu">Bumbu</option>
+                <option value="Snack">Snack</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="prod-unit" class="form-label small fw-semibold text-muted mb-1">Satuan <span class="text-danger">*</span></label>
+              <select id="prod-unit" class="form-select form-select-standard" required>
+                <option value="pcs">Pcs / Buah</option>
+                <option value="karung">Karung</option>
+                <option value="kg">Kilogram (kg)</option>
+                <option value="botol">Botol</option>
+                <option value="dus">Dus / Karton</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <label for="prod-cost" class="form-label small fw-semibold text-muted mb-1">Harga Modal (Rp)</label>
+              <input type="number" id="prod-cost" class="form-control form-control-standard" placeholder="Contoh: 60000">
+            </div>
+            <div class="col-6">
+              <label for="prod-price" class="form-label small fw-semibold text-muted mb-1">Harga Jual (Rp) <span class="text-danger">*</span></label>
+              <input type="number" id="prod-price" class="form-control form-control-standard fw-bold text-primary" placeholder="Contoh: 69000" required>
+            </div>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <label for="prod-stock" class="form-label small fw-semibold text-muted mb-1">Stok Awal <span class="text-danger">*</span></label>
+              <input type="number" id="prod-stock" class="form-control form-control-standard" placeholder="Contoh: 50" required>
+            </div>
+            <div class="col-6">
+              <label for="prod-min-stock" class="form-label small fw-semibold text-muted mb-1">Min. Peringatan Stok</label>
+              <input type="number" id="prod-min-stock" class="form-control form-control-standard" placeholder="Contoh: 10" value="10">
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <small class="text-muted d-block" style="font-size: 0.725rem;"><i data-lucide="info" class="icon-xs me-1"></i> Ikon produk otomatis disesuaikan berdasarkan kategori yang dipilih.</small>
+          </div>
+        </form>
+      </div>
+
+      <!-- Modal Footer Action -->
+      <div class="modal-footer border-top bg-light px-4 py-3 d-flex justify-content-between">
+        <button type="button" class="btn btn-sm btn-outline-secondary px-3 py-2 rounded-btn-sm fw-medium" data-bs-dismiss="modal">
+          Batal
+        </button>
+        <button type="button" class="btn btn-sm btn-primary px-4 py-2 rounded-btn-sm fw-semibold d-inline-flex align-items-center gap-2 shadow-sm" onclick="saveProduct()">
+          <i data-lucide="check" class="icon-sm"></i> Simpan Produk
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

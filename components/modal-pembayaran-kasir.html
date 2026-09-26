@@ -1,0 +1,98 @@
+<!-- Modal Pembayaran Transaksi Kasir -->
+<div class="modal fade" id="modalPembayaranKasir" tabindex="-1" aria-labelledby="modalPembayaranKasirLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-sm rounded-4 overflow-hidden">
+      <!-- Modal Header -->
+      <div class="modal-header border-bottom px-4 py-3 bg-white">
+        <div class="d-flex align-items-center gap-2">
+          <div class="p-2 bg-primary-subtle text-primary rounded-3">
+            <i data-lucide="credit-card" class="icon-sm"></i>
+          </div>
+          <div>
+            <h6 class="modal-title fw-bold text-dark mb-0" id="modalPembayaranKasirLabel">Pembayaran Pesanan</h6>
+            <small class="text-muted" style="font-size: 0.75rem;">Selesaikan transaksi pelanggan</small>
+          </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body p-4">
+        <!-- Total Tagihan Card -->
+        <div class="bg-primary-subtle border border-primary-subtle p-3 rounded-3 text-center mb-4">
+          <span class="text-muted small fw-medium d-block mb-1">Total Tagihan</span>
+          <h3 class="fw-bold text-primary mb-0" id="kasir-modal-total">Rp 0</h3>
+        </div>
+
+        <!-- Segmented Tab: Metode Pembayaran (Tunai / QRIS) -->
+        <div class="mb-4">
+          <label class="form-label small fw-semibold text-muted mb-2">Pilih Metode Pembayaran</label>
+          <div class="pay-method-toggle-group p-1 bg-light border rounded-3 d-flex gap-1">
+            <button type="button" class="btn btn-sm pay-toggle-btn active flex-fill d-flex align-items-center justify-content-center gap-2 py-2 rounded-3 fw-semibold" id="pay-opt-cash" onclick="setPaymentMethod('cash')">
+              <i data-lucide="banknote" class="icon-sm text-success"></i> Tunai (Cash)
+            </button>
+            <button type="button" class="btn btn-sm pay-toggle-btn flex-fill d-flex align-items-center justify-content-center gap-2 py-2 rounded-3 fw-semibold" id="pay-opt-qris" onclick="setPaymentMethod('qris')">
+              <i data-lucide="qr-code" class="icon-sm text-purple"></i> QRIS
+            </button>
+          </div>
+        </div>
+
+        <!-- Cash Section -->
+        <div id="section-pay-cash">
+          <div class="mb-3">
+            <label for="kasir-input-uang" class="form-label small fw-semibold text-muted mb-1">Nominal Uang Diterima (Rp)</label>
+            <div class="input-group">
+              <span class="input-group-text bg-white border-end-0 fw-semibold text-muted">Rp</span>
+              <input type="number" id="kasir-input-uang" class="form-control form-control-lg fw-bold border-start-0 ps-1 text-dark" placeholder="0" oninput="calculateChange()">
+            </div>
+          </div>
+
+          <!-- Quick Cash Preset Pills -->
+          <div class="mb-3">
+            <span class="small text-muted d-block mb-2" style="font-size: 0.75rem;">Pilihan Cepat:</span>
+            <div class="row g-2">
+              <div class="col-3">
+                <button type="button" class="btn btn-sm btn-outline-secondary w-100 py-1 rounded-btn-sm fw-medium font-sm" onclick="setQuickCash('exact')">Uang Pas</button>
+              </div>
+              <div class="col-3">
+                <button type="button" class="btn btn-sm btn-outline-secondary w-100 py-1 rounded-btn-sm fw-medium font-sm" onclick="setQuickCash(20000)">20.000</button>
+              </div>
+              <div class="col-3">
+                <button type="button" class="btn btn-sm btn-outline-secondary w-100 py-1 rounded-btn-sm fw-medium font-sm" onclick="setQuickCash(50000)">50.000</button>
+              </div>
+              <div class="col-3">
+                <button type="button" class="btn btn-sm btn-outline-secondary w-100 py-1 rounded-btn-sm fw-medium font-sm" onclick="setQuickCash(100000)">100.000</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kembalian Display Box -->
+          <div class="p-3 bg-subtle rounded-3 border d-flex justify-content-between align-items-center">
+            <div>
+              <span class="text-muted small fw-medium d-block">Kembalian:</span>
+              <small class="text-muted" style="font-size: 0.7rem;">Sisa untuk pelanggan</small>
+            </div>
+            <span class="fw-bold fs-4 text-success mb-0" id="kasir-kembalian">Rp 0</span>
+          </div>
+        </div>
+
+        <!-- QRIS Section -->
+        <div id="section-pay-qris" class="d-none text-center py-2">
+          <div class="qris-box mx-auto mb-2 p-3 bg-white border rounded-3 d-inline-block shadow-xs">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=WARUNGKU-PAYMENT" alt="QRIS WarungKu" class="img-fluid rounded" width="160" height="160">
+          </div>
+          <p class="small text-muted mb-0">Arahkan kamera e-wallet / mobile banking pelanggan ke kode QR di atas.</p>
+        </div>
+      </div>
+
+      <!-- Modal Footer Action Buttons -->
+      <div class="modal-footer border-top bg-light px-4 py-3 d-flex justify-content-between">
+        <button type="button" class="btn btn-sm btn-outline-secondary px-3 py-2 rounded-btn-sm fw-medium" data-bs-dismiss="modal">
+          Batal
+        </button>
+        <button type="button" class="btn btn-sm btn-primary px-4 py-2 rounded-btn-sm fw-semibold d-inline-flex align-items-center gap-2 shadow-sm" onclick="completeTransaction()">
+          <i data-lucide="check-circle" class="icon-sm"></i> Selesaikan Transaksi
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

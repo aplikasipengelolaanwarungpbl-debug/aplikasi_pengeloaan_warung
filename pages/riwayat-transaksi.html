@@ -1,0 +1,323 @@
+<!-- Page Header -->
+<div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4 gap-3">
+  <div>
+    <h4 class="fw-bold text-dark mb-1">Riwayat Transaksi</h4>
+    <p class="text-muted mb-0 small">Pantau semua catatan kasir, filter transaksi, dan kelola struk belanja.</p>
+  </div>
+  <div class="d-flex align-items-center gap-2">
+    <button class="btn btn-sm btn-outline-secondary rounded-btn-sm d-flex align-items-center gap-1 bg-white" onclick="exportDataTrx()">
+      <i data-lucide="download" class="icon-xs"></i> Export Excel
+    </button>
+    <button class="btn btn-sm btn-primary rounded-btn-sm d-flex align-items-center gap-1" onclick="loadPage('pages/kasir.html')">
+      <i data-lucide="plus" class="icon-xs"></i> Transaksi Baru
+    </button>
+  </div>
+</div>
+
+<!-- Summary Metric Cards -->
+<div class="row g-3 mb-4">
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card-modern p-3 h-100 metric-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="text-muted small fw-medium">Total Transaksi</span>
+        <div class="trx-summary-icon trx-summary-blue">
+          <i data-lucide="receipt" class="icon-sm"></i>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between gap-2">
+        <span class="metric-value text-dark">38</span>
+        <span class="badge-status success"><i data-lucide="arrow-up-right" class="icon-xs"></i> +12%</span>
+      </div>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">Hari ini</small>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card-modern p-3 h-100 metric-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="text-muted small fw-medium">Total Pendapatan Tunai</span>
+        <div class="trx-summary-icon trx-summary-green">
+          <i data-lucide="banknote" class="icon-sm"></i>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between gap-2">
+        <span class="metric-value text-dark">Rp 369.000</span>
+      </div>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">26 pesanan</small>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card-modern p-3 h-100 metric-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="text-muted small fw-medium">Pendapatan QRIS</span>
+        <div class="trx-summary-icon trx-summary-purple">
+          <i data-lucide="qr-code" class="icon-sm"></i>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between gap-2">
+        <span class="metric-value text-dark">Rp 109.500</span>
+      </div>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">12 pesanan</small>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card-modern p-3 h-100 metric-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="text-muted small fw-medium">Rata-rata Transaksi</span>
+        <div class="trx-summary-icon trx-summary-orange">
+          <i data-lucide="trending-up" class="icon-sm"></i>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between gap-2">
+        <span class="metric-value text-dark">Rp 12.592</span>
+        <span class="badge-status neutral">Stabil</span>
+      </div>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">Per transaksi</small>
+    </div>
+  </div>
+</div>
+
+<!-- Main Table Card with Filter Controls -->
+<div class="card-modern">
+  <!-- Table Filter Toolbar -->
+  <div class="p-3 border-bottom d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3">
+    <!-- Search Bar -->
+    <div class="position-relative topbar-search-wrapper w-100-mobile">
+      <i data-lucide="search" class="search-icon-pos icon-sm"></i>
+      <input type="text" id="trx-table-search" class="search-input-box" placeholder="Cari nomor faktur, kasir...">
+    </div>
+
+    <!-- Filter Controls & Action Tools -->
+    <div class="d-flex flex-wrap align-items-center gap-2">
+      <!-- Periode -->
+      <select class="form-select form-select-sm border filter-select">
+        <option value="today">Hari Ini</option>
+        <option value="yesterday">Kemarin</option>
+        <option value="7days">7 Hari Terakhir</option>
+        <option value="30days">Bulan Ini</option>
+        <option value="all">Semua Periode</option>
+      </select>
+
+      <!-- Kasir Filter -->
+      <select class="form-select form-select-sm border filter-select">
+        <option value="all">Semua Kasir</option>
+        <option value="siti">Siti Aminah</option>
+        <option value="budi">Budi Santoso</option>
+      </select>
+
+      <!-- Metode Pembayaran -->
+      <select class="form-select form-select-sm border filter-select">
+        <option value="all">Semua Metode</option>
+        <option value="cash">Tunai (Cash)</option>
+        <option value="qris">QRIS / Digital</option>
+      </select>
+
+      <button class="btn btn-sm btn-outline-secondary rounded-btn-sm" title="Reset Filter">
+        <i data-lucide="rotate-ccw" class="icon-xs"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Data Table Responsive -->
+  <div class="table-responsive">
+    <table class="table table-modern align-middle mb-0">
+      <thead>
+        <tr>
+          <th class="ps-4">No. Faktur</th>
+          <th>Waktu Transaksi</th>
+          <th>Kasir</th>
+          <th>Rincian Item</th>
+          <th>Metode Bayar</th>
+          <th class="text-end">Total Bayar</th>
+          <th class="text-center pe-4" style="width: 110px;">Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="ps-4">
+            <span class="trx-faktur">#TRX-20260924-038</span>
+          </td>
+          <td>
+            <div class="trx-waktu">
+              <span class="trx-tanggal">24 Sep 2026</span>
+              <span class="trx-jam">19:42 WIB</span>
+            </div>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <span class="trx-avatar">SA</span>
+              <span class="fw-medium text-dark">Siti Aminah</span>
+            </div>
+          </td>
+          <td>
+            <span class="trx-item-badge">
+              <i data-lucide="package" class="icon-xs me-1"></i> 3 item
+            </span>
+          </td>
+          <td>
+            <span class="trx-metode trx-metode-qris">
+              <i data-lucide="qr-code" class="icon-xs"></i> QRIS
+            </span>
+          </td>
+          <td class="text-end fw-bold text-dark fs-6">Rp 74.500</td>
+          <td class="text-center pe-4">
+            <button class="btn btn-sm btn-outline-primary rounded-btn-sm px-3 py-1 fw-semibold d-inline-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#modalDetailTransaksi">
+              <i data-lucide="receipt" class="icon-xs"></i> Detail
+            </button>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="ps-4">
+            <span class="trx-faktur">#TRX-20260924-037</span>
+          </td>
+          <td>
+            <div class="trx-waktu">
+              <span class="trx-tanggal">24 Sep 2026</span>
+              <span class="trx-jam">18:15 WIB</span>
+            </div>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <span class="trx-avatar">SA</span>
+              <span class="fw-medium text-dark">Siti Aminah</span>
+            </div>
+          </td>
+          <td>
+            <span class="trx-item-badge">
+              <i data-lucide="package" class="icon-xs me-1"></i> 5 item
+            </span>
+          </td>
+          <td>
+            <span class="trx-metode trx-metode-tunai">
+              <i data-lucide="banknote" class="icon-xs"></i> Tunai
+            </span>
+          </td>
+          <td class="text-end fw-bold text-dark fs-6">Rp 142.000</td>
+          <td class="text-center pe-4">
+            <button class="btn btn-sm btn-outline-primary rounded-btn-sm px-3 py-1 fw-semibold d-inline-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#modalDetailTransaksi">
+              <i data-lucide="receipt" class="icon-xs"></i> Detail
+            </button>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="ps-4">
+            <span class="trx-faktur">#TRX-20260924-036</span>
+          </td>
+          <td>
+            <div class="trx-waktu">
+              <span class="trx-tanggal">24 Sep 2026</span>
+              <span class="trx-jam">17:05 WIB</span>
+            </div>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <span class="trx-avatar trx-avatar-alt">BS</span>
+              <span class="fw-medium text-dark">Budi Santoso</span>
+            </div>
+          </td>
+          <td>
+            <span class="trx-item-badge">
+              <i data-lucide="package" class="icon-xs me-1"></i> 1 item
+            </span>
+          </td>
+          <td>
+            <span class="trx-metode trx-metode-qris">
+              <i data-lucide="qr-code" class="icon-xs"></i> QRIS
+            </span>
+          </td>
+          <td class="text-end fw-bold text-dark fs-6">Rp 35.000</td>
+          <td class="text-center pe-4">
+            <button class="btn btn-sm btn-outline-primary rounded-btn-sm px-3 py-1 fw-semibold d-inline-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#modalDetailTransaksi">
+              <i data-lucide="receipt" class="icon-xs"></i> Detail
+            </button>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="ps-4">
+            <span class="trx-faktur">#TRX-20260924-035</span>
+          </td>
+          <td>
+            <div class="trx-waktu">
+              <span class="trx-tanggal">24 Sep 2026</span>
+              <span class="trx-jam">15:30 WIB</span>
+            </div>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <span class="trx-avatar">SA</span>
+              <span class="fw-medium text-dark">Siti Aminah</span>
+            </div>
+          </td>
+          <td>
+            <span class="trx-item-badge">
+              <i data-lucide="package" class="icon-xs me-1"></i> 2 item
+            </span>
+          </td>
+          <td>
+            <span class="trx-metode trx-metode-tunai">
+              <i data-lucide="banknote" class="icon-xs"></i> Tunai
+            </span>
+          </td>
+          <td class="text-end fw-bold text-dark fs-6">Rp 215.000</td>
+          <td class="text-center pe-4">
+            <button class="btn btn-sm btn-outline-primary rounded-btn-sm px-3 py-1 fw-semibold d-inline-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#modalDetailTransaksi">
+              <i data-lucide="receipt" class="icon-xs"></i> Detail
+            </button>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="ps-4">
+            <span class="trx-faktur">#TRX-20260924-034</span>
+          </td>
+          <td>
+            <div class="trx-waktu">
+              <span class="trx-tanggal">24 Sep 2026</span>
+              <span class="trx-jam">13:10 WIB</span>
+            </div>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <span class="trx-avatar trx-avatar-alt">BS</span>
+              <span class="fw-medium text-dark">Budi Santoso</span>
+            </div>
+          </td>
+          <td>
+            <span class="trx-item-badge">
+              <i data-lucide="package" class="icon-xs me-1"></i> 1 item
+            </span>
+          </td>
+          <td>
+            <span class="trx-metode trx-metode-tunai">
+              <i data-lucide="banknote" class="icon-xs"></i> Tunai
+            </span>
+          </td>
+          <td class="text-end fw-bold text-dark fs-6">Rp 12.000</td>
+          <td class="text-center pe-4">
+            <button class="btn btn-sm btn-outline-primary rounded-btn-sm px-3 py-1 fw-semibold d-inline-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#modalDetailTransaksi">
+              <i data-lucide="receipt" class="icon-xs"></i> Detail
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination & Total Rows Info Footer -->
+  <div class="p-3 border-top d-flex flex-column flex-sm-row align-items-center justify-content-between gap-3 bg-white rounded-bottom">
+    <div class="d-flex align-items-center gap-2">
+      <small class="text-muted">Menampilkan <strong>1 - 5</strong> dari <strong>38</strong> transaksi</small>
+    </div>
+    <nav aria-label="Navigasi Halaman Transaksi">
+      <ul class="pagination pagination-clean mb-0">
+        <li class="page-item disabled"><a class="page-link" href="#" aria-label="Sebelumnya">«</a></li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#" aria-label="Berikutnya">»</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>

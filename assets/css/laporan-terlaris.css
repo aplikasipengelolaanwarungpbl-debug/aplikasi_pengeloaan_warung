@@ -1,0 +1,4 @@
+/* Laporan Produk Terlaris */
+#chart-top-selling-bar, #chart-category-pie {
+  min-height: 240px;
+}
