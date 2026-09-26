@@ -1,0 +1,5 @@
+/* Kategori Produk — table badges and category icon boxes */
+
+.kategori-row:hover td {
+  background-color: var(--bg-subtle);
+}

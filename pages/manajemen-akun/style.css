@@ -1,0 +1,5 @@
+/* Manajemen Akun Kasir — user table styles */
+
+.akun-row:hover td {
+  background-color: var(--bg-subtle);
+}

@@ -1,0 +1,191 @@
+<!-- Page Header -->
+<div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4 gap-3">
+  <div>
+    <h4 class="fw-bold text-dark mb-1">Laporan Laba Rugi</h4>
+    <p class="text-muted mb-0 small">Analisis pendapatan kotor, beban pokok penjualan (HPP), dan laba bersih usaha.</p>
+  </div>
+  <div class="d-flex align-items-center gap-2">
+    <button class="btn btn-sm btn-outline-secondary rounded-btn-sm d-flex align-items-center gap-1 bg-white" onclick="exportDataLaporan('Laba-Rugi')">
+      <i data-lucide="download" class="icon-xs"></i> Export PDF / Excel
+    </button>
+  </div>
+</div>
+
+<!-- Summary Metric Cards -->
+<div class="row g-3 mb-4">
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card-modern p-3 h-100 metric-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="text-muted small fw-medium">Total Pendapatan (Omzet)</span>
+        <div class="metric-icon-box metric-icon-blue">
+          <i data-lucide="wallet" class="icon-sm"></i>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between gap-2">
+        <span class="metric-value text-dark">Rp 14.947.000</span>
+        <span class="badge-status success"><i data-lucide="arrow-up-right" class="icon-xs"></i> +14.2%</span>
+      </div>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">Bulan ini</small>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card-modern p-3 h-100 metric-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="text-muted small fw-medium">Beban Pokok (HPP)</span>
+        <div class="metric-icon-box metric-icon-orange">
+          <i data-lucide="shopping-cart" class="icon-sm"></i>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between gap-2">
+        <span class="metric-value text-dark">Rp 10.245.000</span>
+      </div>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">Modal barang</small>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card-modern p-3 h-100 metric-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="text-muted small fw-medium">Laba Bersih</span>
+        <div class="metric-icon-box metric-icon-green">
+          <i data-lucide="trending-up" class="icon-sm"></i>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between gap-2">
+        <span class="metric-value text-success">Rp 4.702.000</span>
+        <span class="badge-status success">31.4%</span>
+      </div>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">Margin keuntungan</small>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card-modern p-3 h-100 metric-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="text-muted small fw-medium">Biaya Operasional</span>
+        <div class="metric-icon-box metric-icon-purple">
+          <i data-lucide="receipt" class="icon-sm"></i>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between gap-2">
+        <span class="metric-value text-dark">Rp 450.000</span>
+      </div>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">Listrik, plastik, dll</small>
+    </div>
+  </div>
+</div>
+
+<!-- Chart & Breakdown Section -->
+<div class="row g-3 mb-4">
+  <!-- Area Chart Tren Laba Rugi -->
+  <div class="col-12 col-lg-8">
+    <div class="card-modern p-4 h-100">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <div>
+          <h6 class="fw-bold text-dark mb-1">Grafik Tren Omzet vs Laba Bersih</h6>
+          <small class="text-muted">Perbandingan pergerakan penjualan dan keuntungan harian</small>
+        </div>
+        <select class="form-select form-select-sm border filter-select">
+          <option>Bulan Ini (Sep 2026)</option>
+          <option>Bulan Lalu (Agu 2026)</option>
+        </select>
+      </div>
+      <div id="chart-laba-rugi-trend"></div>
+    </div>
+  </div>
+
+  <!-- Ringkasan Komposisi -->
+  <div class="col-12 col-lg-4">
+    <div class="card-modern p-4 h-100 d-flex flex-column justify-content-between">
+      <h6 class="fw-bold text-dark mb-3">Struktur Keuangan</h6>
+      <div class="d-flex flex-column gap-3 mb-auto">
+        <div class="p-3 rounded-3 bg-light border">
+          <div class="d-flex justify-content-between small mb-1">
+            <span class="text-muted">Pendapatan Kotor:</span>
+            <span class="fw-bold text-dark">Rp 14.947.000</span>
+          </div>
+          <div class="progress" style="height: 6px;">
+            <div class="progress-bar bg-primary" role="progressbar" style="width: 100%;"></div>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-3 bg-light border">
+          <div class="d-flex justify-content-between small mb-1">
+            <span class="text-muted">Beban Pokok (HPP):</span>
+            <span class="fw-bold text-dark">Rp 10.245.000 (68.5%)</span>
+          </div>
+          <div class="progress" style="height: 6px;">
+            <div class="progress-bar bg-warning" role="progressbar" style="width: 68.5%;"></div>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-3 bg-light border">
+          <div class="d-flex justify-content-between small mb-1">
+            <span class="text-muted">Laba Bersih Akhir:</span>
+            <span class="fw-bold text-success">Rp 4.702.000 (31.5%)</span>
+          </div>
+          <div class="progress" style="height: 6px;">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 31.5%;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="pt-3 border-top text-center">
+        <small class="text-muted">Kondisi performa keuangan bulan ini dinyatakan <strong>Sehat & Menguntungkan</strong>.</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Rincian Buku Kas / Laporan Table -->
+<div class="card-modern">
+  <div class="p-3 border-bottom d-flex align-items-center justify-content-between">
+    <h6 class="fw-bold text-dark mb-0">Rincian Buku Kas Harian</h6>
+    <span class="badge bg-light text-muted border">Periode: 1 - 24 Sep 2026</span>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-modern align-middle mb-0">
+      <thead>
+        <tr>
+          <th class="ps-4">Tanggal</th>
+          <th>Total Transaksi</th>
+          <th class="text-end">Omzet Penjualan</th>
+          <th class="text-end">Total HPP</th>
+          <th class="text-end">Operasional</th>
+          <th class="text-end pe-4">Laba Bersih</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="ps-4 fw-medium text-dark">24 Sep 2026</td>
+          <td>38 Trx</td>
+          <td class="text-end fw-semibold">Rp 478.500</td>
+          <td class="text-end text-muted">Rp 325.000</td>
+          <td class="text-end text-muted">Rp 15.000</td>
+          <td class="text-end pe-4 fw-bold text-success">+ Rp 138.500</td>
+        </tr>
+        <tr>
+          <td class="ps-4 fw-medium text-dark">23 Sep 2026</td>
+          <td>42 Trx</td>
+          <td class="text-end fw-semibold">Rp 560.000</td>
+          <td class="text-end text-muted">Rp 390.000</td>
+          <td class="text-end text-muted">Rp 20.000</td>
+          <td class="text-end pe-4 fw-bold text-success">+ Rp 150.000</td>
+        </tr>
+        <tr>
+          <td class="ps-4 fw-medium text-dark">22 Sep 2026</td>
+          <td>35 Trx</td>
+          <td class="text-end fw-semibold">Rp 430.000</td>
+          <td class="text-end text-muted">Rp 295.000</td>
+          <td class="text-end text-muted">Rp 10.000</td>
+          <td class="text-end pe-4 fw-bold text-success">+ Rp 125.000</td>
+        </tr>
+        <tr>
+          <td class="ps-4 fw-medium text-dark">21 Sep 2026</td>
+          <td>29 Trx</td>
+          <td class="text-end fw-semibold">Rp 385.000</td>
+          <td class="text-end text-muted">Rp 260.000</td>
+          <td class="text-end text-muted">Rp 12.000</td>
+          <td class="text-end pe-4 fw-bold text-success">+ Rp 113.000</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

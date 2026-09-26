@@ -1,0 +1,208 @@
+/* Riwayat Transaksi — table refinement, receipt modal, pagination, print */
+
+/* Summary Metric Cards */
+.trx-summary-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.trx-summary-blue {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+}
+
+.trx-summary-green {
+  background-color: var(--success-light);
+  color: var(--success-color);
+}
+
+.trx-summary-purple {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+}
+
+.trx-summary-orange {
+  background-color: #fff7ed;
+  color: #ea580c;
+}
+
+/* Faktur Number Badge */
+.trx-faktur {
+  font-family: 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  background-color: var(--primary-light);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  letter-spacing: -0.01em;
+  display: inline-block;
+}
+
+/* Date & Time Split Layout */
+.trx-waktu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  line-height: 1.25;
+}
+
+.trx-tanggal {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.trx-jam {
+  font-size: 0.725rem;
+  color: var(--text-subtle);
+}
+
+/* Kasir Avatar Circle */
+.trx-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  font-size: 0.675rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: -0.02em;
+}
+
+.trx-avatar-alt {
+  background-color: #fff7ed;
+  color: #ea580c;
+}
+
+/* Item Count Badge */
+.trx-item-badge {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Payment Method Badges */
+.trx-metode {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.trx-metode-qris {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  border: 1px solid #bfdbfe;
+}
+
+.trx-metode-tunai {
+  background-color: var(--success-light);
+  color: var(--success-color);
+  border: 1px solid #bbf7d0;
+}
+
+/* Receipt Paper Styles */
+.receipt-paper {
+  background-color: var(--bg-subtle);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.dashed-divider {
+  border-top: 1px dashed var(--border-color);
+  margin: 0.75rem 0;
+}
+
+/* Clean Pagination */
+.pagination-clean .page-link {
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  border-radius: var(--radius-sm);
+  margin: 0 2px;
+}
+
+.pagination-clean .page-item.active .page-link {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #ffffff;
+}
+
+/* Print — thermal receipt layout */
+@media print {
+  #sidebar-container,
+  #topbar-container,
+  #main-content > :not(.modal),
+  .modal-header,
+  .modal-footer,
+  .modal-backdrop {
+    display: none !important;
+  }
+
+  body, .bg-body-app {
+    background: #fff !important;
+    overflow: visible !important;
+  }
+
+  .modal {
+    position: static !important;
+    display: block !important;
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+
+  .modal-dialog {
+    margin: 0 !important;
+    max-width: 80mm !important;
+    transform: none !important;
+  }
+
+  .modal-content {
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .modal-body {
+    padding: 0 !important;
+  }
+
+  .receipt-paper {
+    width: 80mm;
+    padding: 4mm;
+    margin: 0;
+    border: none;
+    background: #fff;
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  .dashed-divider {
+    border-top: 1px dashed #000;
+  }
+
+  @page {
+    size: 80mm auto;
+    margin: 0;
+  }
+}

@@ -1,0 +1,210 @@
+<!-- Header Kasir & Order Info -->
+<div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-3 gap-2">
+  <div>
+    <h4 class="fw-bold text-dark mb-1">Kasir (Point of Sale)</h4>
+    <p class="text-muted mb-0 small">Pilih produk, atur keranjang pesanan, dan proses transaksi langsung.</p>
+  </div>
+  <div class="d-flex align-items-center gap-2">
+    <span class="badge bg-light text-dark border px-3 py-2 fw-medium">
+      <i data-lucide="hash" class="icon-xs me-1 text-primary"></i> No. TRX: <strong id="trx-number-preview">#TRX-20260925-001</strong>
+    </span>
+  </div>
+</div>
+
+<div class="row g-3">
+  <!-- Sisi Kiri: Daftar Katalog Produk & Pencarian -->
+  <div class="col-12 col-xl-8">
+    <div class="card-modern p-3 mb-3">
+      <div class="row g-2 align-items-center">
+        <!-- Search Bar -->
+        <div class="col-12 col-md-7 position-relative topbar-search-wrapper w-100-mobile">
+          <i data-lucide="search" class="search-icon-pos icon-sm"></i>
+          <input type="text" id="kasir-search-input" class="search-input-box" placeholder="Cari nama produk, barcode, kategori..." oninput="filterKasirProducts()">
+        </div>
+
+        <!-- Filter Kategori Tabs / Badges -->
+        <div class="col-12 col-md-12 mt-2">
+          <div class="kasir-category-scroll d-flex gap-2 pb-1">
+            <button class="btn btn-sm btn-category-pill active" onclick="filterKasirCategory('all', this)">Semua</button>
+            <button class="btn btn-sm btn-category-pill" onclick="filterKasirCategory('Sembako', this)">Sembako</button>
+            <button class="btn btn-sm btn-category-pill" onclick="filterKasirCategory('Minyak', this)">Minyak</button>
+            <button class="btn btn-sm btn-category-pill" onclick="filterKasirCategory('Fresh', this)">Fresh</button>
+            <button class="btn btn-sm btn-category-pill" onclick="filterKasirCategory('Minuman', this)">Minuman</button>
+            <button class="btn btn-sm btn-category-pill" onclick="filterKasirCategory('Bumbu', this)">Bumbu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Grid (Text-First Modern POS) -->
+    <div class="row g-3" id="kasir-product-grid">
+      <!-- Item 1: Beras -->
+      <div class="col-6 col-md-4 col-lg-3 product-card-wrapper" data-category="Sembako" data-name="Beras Ramos Setra 5kg">
+        <div class="card-modern product-pos-card h-100 p-3 d-flex flex-column justify-content-between" onclick="addToCart(1, 'Beras Ramos Setra 5kg', 69000, 8)">
+          <div>
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <span class="badge bg-primary-subtle text-primary border border-primary-subtle product-category-badge">Sembako</span>
+              <span class="badge-status danger">Stok: 8</span>
+            </div>
+            <h6 class="product-title mb-1">Beras Ramos Setra 5kg</h6>
+            <small class="text-muted font-monospace d-block" style="font-size: 0.675rem;">#PRD-001 • Karung</small>
+          </div>
+          <div class="d-flex align-items-center justify-content-between mt-3 pt-2 border-top">
+            <span class="fw-bold text-dark fs-6">Rp 69.000</span>
+            <button type="button" class="btn btn-sm btn-light border p-1 d-flex align-items-center justify-content-center btn-add-pos" aria-label="Tambah item">
+              <i data-lucide="plus" class="icon-xs"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 2: Minyak Goreng -->
+      <div class="col-6 col-md-4 col-lg-3 product-card-wrapper" data-category="Minyak" data-name="Minyak Goreng Sawit 2L">
+        <div class="card-modern product-pos-card h-100 p-3 d-flex flex-column justify-content-between" onclick="addToCart(2, 'Minyak Goreng Sawit 2L', 34000, 95)">
+          <div>
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle product-category-badge">Minyak</span>
+              <span class="badge-status success">Stok: 95</span>
+            </div>
+            <h6 class="product-title mb-1">Minyak Goreng Sawit 2L</h6>
+            <small class="text-muted font-monospace d-block" style="font-size: 0.675rem;">#PRD-002 • Pcs</small>
+          </div>
+          <div class="d-flex align-items-center justify-content-between mt-3 pt-2 border-top">
+            <span class="fw-bold text-dark fs-6">Rp 34.000</span>
+            <button type="button" class="btn btn-sm btn-light border p-1 d-flex align-items-center justify-content-center btn-add-pos" aria-label="Tambah item">
+              <i data-lucide="plus" class="icon-xs"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 3: Telur Ayam -->
+      <div class="col-6 col-md-4 col-lg-3 product-card-wrapper" data-category="Fresh" data-name="Telur Ayam Negeri (1kg)">
+        <div class="card-modern product-pos-card h-100 p-3 d-flex flex-column justify-content-between" onclick="addToCart(3, 'Telur Ayam Negeri (1kg)', 28000, 84)">
+          <div>
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <span class="badge bg-success-subtle text-success border border-success-subtle product-category-badge">Fresh</span>
+              <span class="badge-status success">Stok: 84</span>
+            </div>
+            <h6 class="product-title mb-1">Telur Ayam Negeri (1kg)</h6>
+            <small class="text-muted font-monospace d-block" style="font-size: 0.675rem;">#PRD-003 • Kg</small>
+          </div>
+          <div class="d-flex align-items-center justify-content-between mt-3 pt-2 border-top">
+            <span class="fw-bold text-dark fs-6">Rp 28.000</span>
+            <button type="button" class="btn btn-sm btn-light border p-1 d-flex align-items-center justify-content-center btn-add-pos" aria-label="Tambah item">
+              <i data-lucide="plus" class="icon-xs"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 4: Gula Pasir -->
+      <div class="col-6 col-md-4 col-lg-3 product-card-wrapper" data-category="Sembako" data-name="Gula Pasir Kristal 1kg">
+        <div class="card-modern product-pos-card h-100 p-3 d-flex flex-column justify-content-between" onclick="addToCart(4, 'Gula Pasir Kristal 1kg', 17500, 62)">
+          <div>
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <span class="badge bg-primary-subtle text-primary border border-primary-subtle product-category-badge">Sembako</span>
+              <span class="badge-status success">Stok: 62</span>
+            </div>
+            <h6 class="product-title mb-1">Gula Pasir Kristal 1kg</h6>
+            <small class="text-muted font-monospace d-block" style="font-size: 0.675rem;">#PRD-004 • Pcs</small>
+          </div>
+          <div class="d-flex align-items-center justify-content-between mt-3 pt-2 border-top">
+            <span class="fw-bold text-dark fs-6">Rp 17.500</span>
+            <button type="button" class="btn btn-sm btn-light border p-1 d-flex align-items-center justify-content-center btn-add-pos" aria-label="Tambah item">
+              <i data-lucide="plus" class="icon-xs"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 5: Teh Celup -->
+      <div class="col-6 col-md-4 col-lg-3 product-card-wrapper" data-category="Minuman" data-name="Teh Celup Kotak (25s)">
+        <div class="card-modern product-pos-card h-100 p-3 d-flex flex-column justify-content-between" onclick="addToCart(5, 'Teh Celup Kotak (25s)', 6500, 45)">
+          <div>
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <span class="badge bg-info-subtle text-info border border-info-subtle product-category-badge">Minuman</span>
+              <span class="badge-status success">Stok: 45</span>
+            </div>
+            <h6 class="product-title mb-1">Teh Celup Kotak (25s)</h6>
+            <small class="text-muted font-monospace d-block" style="font-size: 0.675rem;">#PRD-005 • Pcs</small>
+          </div>
+          <div class="d-flex align-items-center justify-content-between mt-3 pt-2 border-top">
+            <span class="fw-bold text-dark fs-6">Rp 6.500</span>
+            <button type="button" class="btn btn-sm btn-light border p-1 d-flex align-items-center justify-content-center btn-add-pos" aria-label="Tambah item">
+              <i data-lucide="plus" class="icon-xs"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 6: Garam -->
+      <div class="col-6 col-md-4 col-lg-3 product-card-wrapper" data-category="Bumbu" data-name="Garam Beryodium 250g">
+        <div class="card-modern product-pos-card h-100 p-3 d-flex flex-column justify-content-between" onclick="addToCart(6, 'Garam Beryodium 250g', 3500, 110)">
+          <div>
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle product-category-badge">Bumbu</span>
+              <span class="badge-status success">Stok: 110</span>
+            </div>
+            <h6 class="product-title mb-1">Garam Beryodium 250g</h6>
+            <small class="text-muted font-monospace d-block" style="font-size: 0.675rem;">#PRD-006 • Pcs</small>
+          </div>
+          <div class="d-flex align-items-center justify-content-between mt-3 pt-2 border-top">
+            <span class="fw-bold text-dark fs-6">Rp 3.500</span>
+            <button type="button" class="btn btn-sm btn-light border p-1 d-flex align-items-center justify-content-center btn-add-pos" aria-label="Tambah item">
+              <i data-lucide="plus" class="icon-xs"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sisi Kanan: Panel Keranjang & Ringkasan Checkout -->
+  <div class="col-12 col-xl-4">
+    <div class="card-modern cart-panel h-100 d-flex flex-column">
+      <!-- Cart Header -->
+      <div class="p-3 border-bottom d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-2">
+          <i data-lucide="shopping-bag" class="text-primary icon-md"></i>
+          <h6 class="fw-bold text-dark mb-0">Keranjang Belanja</h6>
+        </div>
+        <button class="btn btn-sm text-danger btn-link p-0 text-decoration-none small" onclick="clearCart()">
+          <i data-lucide="trash-2" class="icon-xs me-1"></i> Kosongkan
+        </button>
+      </div>
+
+      <!-- Cart Item List Container -->
+      <div class="cart-items-container flex-grow-1 p-3 overflow-y-auto" id="cart-items-list">
+        <!-- Default State: Empty -->
+        <div class="text-center py-5 text-muted" id="cart-empty-placeholder">
+          <i data-lucide="shopping-cart" class="icon-lg text-subtle mb-2"></i>
+          <p class="small mb-0">Keranjang masih kosong</p>
+          <small class="text-muted">Klik produk di samping untuk menambahkan</small>
+        </div>
+      </div>
+
+
+
+      <!-- Calculation & Checkout Action -->
+      <div class="p-3 border-top bg-subtle">
+        <div class="d-flex justify-content-between small text-muted mb-1">
+          <span>Subtotal</span>
+          <span class="text-dark fw-semibold" id="cart-subtotal">Rp 0</span>
+        </div>
+        <div class="d-flex justify-content-between small text-muted mb-2">
+          <span>Diskon</span>
+          <span class="text-dark fw-semibold" id="cart-discount">Rp 0</span>
+        </div>
+        <div class="d-flex justify-content-between align-items-baseline mb-3 pt-2 border-top">
+          <span class="fw-bold text-dark">Total Bayar</span>
+          <h4 class="fw-bold text-primary mb-0" id="cart-total">Rp 0</h4>
+        </div>
+
+        <button class="btn btn-primary w-100 py-2 d-flex align-items-center justify-content-center gap-2 fw-semibold rounded-btn-sm" id="btn-checkout" onclick="openPaymentModal()" disabled>
+          <i data-lucide="credit-card" class="icon-sm"></i> Bayar Sekarang
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,227 @@
+<!-- Page Header -->
+<div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4 gap-3">
+  <div>
+    <h4 class="fw-bold text-dark mb-1">Manajemen Akun Kasir</h4>
+    <p class="text-muted mb-0 small">Kelola hak akses kasir, buat akun baru, atur status staf dan reset kata sandi.</p>
+  </div>
+  <div class="d-flex align-items-center gap-2">
+    <button class="btn btn-sm btn-primary rounded-btn-sm d-flex align-items-center gap-1 fw-semibold" onclick="openAddAccountModal()">
+      <i data-lucide="user-plus" class="icon-xs"></i> Tambah Akun
+    </button>
+  </div>
+</div>
+
+<!-- Account Overview Cards -->
+<div class="row g-3 mb-4">
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card-modern p-3 h-100 metric-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="text-muted small fw-medium">Total Pengguna</span>
+        <div class="metric-icon-box metric-icon-blue">
+          <i data-lucide="users" class="icon-sm"></i>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between gap-2">
+        <span class="metric-value text-dark">3 Akun</span>
+      </div>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">1 Owner, 2 Kasir</small>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card-modern p-3 h-100 metric-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="text-muted small fw-medium">Kasir Aktif</span>
+        <div class="metric-icon-box metric-icon-green">
+          <i data-lucide="user-check" class="icon-sm"></i>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between gap-2">
+        <span class="metric-value text-dark">2 Staf</span>
+        <span class="badge-status success"><i data-lucide="check" class="icon-xs"></i> Siap Melayani</span>
+      </div>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">Shift operasional</small>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card-modern p-3 h-100 metric-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="text-muted small fw-medium">Total Transaksi Staf</span>
+        <div class="metric-icon-box metric-icon-purple">
+          <i data-lucide="receipt" class="icon-sm"></i>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between gap-2">
+        <span class="metric-value text-dark">142 Trx</span>
+      </div>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">Bulan ini</small>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card-modern p-3 h-100 metric-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="text-muted small fw-medium">Staf Terproduktif</span>
+        <div class="metric-icon-box metric-icon-orange">
+          <i data-lucide="award" class="icon-sm"></i>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between gap-2">
+        <span class="metric-value text-dark" style="font-size: 1.1rem;">Siti Aminah</span>
+      </div>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">98 Transaksi</small>
+    </div>
+  </div>
+</div>
+
+<!-- Main Table Card with Search -->
+<div class="card-modern">
+  <!-- Table Filter Toolbar -->
+  <div class="p-3 border-bottom d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3">
+    <!-- Search Bar -->
+    <div class="position-relative topbar-search-wrapper w-100-mobile">
+      <i data-lucide="search" class="search-icon-pos icon-sm"></i>
+      <input type="text" id="akun-table-search" class="search-input-box" placeholder="Cari nama, username, role..." oninput="filterAkunTable()">
+    </div>
+
+    <!-- Filter Role / Status -->
+    <div class="d-flex flex-wrap align-items-center gap-2">
+      <select id="akun-filter-role" class="form-select form-select-sm border filter-select" onchange="filterAkunTable()">
+        <option value="all">Semua Role</option>
+        <option value="owner">Owner (Admin)</option>
+        <option value="kasir">Kasir (Staff)</option>
+      </select>
+      <select id="akun-filter-status" class="form-select form-select-sm border filter-select" onchange="filterAkunTable()">
+        <option value="all">Semua Status</option>
+        <option value="active">Aktif</option>
+        <option value="inactive">Non-Aktif</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Data Table Responsive -->
+  <div class="table-responsive">
+    <table class="table table-modern align-middle mb-0">
+      <thead>
+        <tr>
+          <th class="ps-4">Pengguna</th>
+          <th>Username</th>
+          <th>Kontak</th>
+          <th>Hak Akses</th>
+          <th class="text-center">Status</th>
+          <th class="text-end">Total Transaksi</th>
+          <th class="text-center pe-4" style="width: 120px;">Aksi</th>
+        </tr>
+      </thead>
+      <tbody id="akun-table-body">
+        <!-- User 1: Owner -->
+        <tr class="akun-row" data-role="owner" data-status="active" data-name="Budi Santoso budisantoso owner">
+          <td class="ps-4">
+            <div class="d-flex align-items-center gap-2">
+              <span class="trx-avatar trx-avatar-alt">BS</span>
+              <div>
+                <span class="fw-semibold text-dark d-block">Budi Santoso</span>
+                <small class="text-muted">Pemilik Warung</small>
+              </div>
+            </div>
+          </td>
+          <td><span class="trx-faktur">@budisantoso</span></td>
+          <td class="text-muted small">0812-3456-7890</td>
+          <td>
+            <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle fw-semibold">Owner</span>
+          </td>
+          <td class="text-center">
+            <span class="badge-status success"><i data-lucide="check" class="icon-xs"></i> Aktif</span>
+          </td>
+          <td class="text-end fw-bold text-dark">44 Trx</td>
+          <td class="text-center pe-4">
+            <div class="d-inline-flex align-items-center gap-1">
+              <button class="btn btn-sm btn-outline-secondary rounded-btn-sm p-1" title="Edit Akun" onclick="editAccount(1)">
+                <i data-lucide="edit-3" class="icon-xs"></i>
+              </button>
+              <button class="btn btn-sm btn-outline-secondary rounded-btn-sm p-1 disabled" title="Owner utama tidak dapat dihapus">
+                <i data-lucide="lock" class="icon-xs"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+
+        <!-- User 2: Kasir 1 -->
+        <tr class="akun-row" data-role="kasir" data-status="active" data-name="Siti Aminah sitiaminah kasir">
+          <td class="ps-4">
+            <div class="d-flex align-items-center gap-2">
+              <span class="trx-avatar">SA</span>
+              <div>
+                <span class="fw-semibold text-dark d-block">Siti Aminah</span>
+                <small class="text-muted">Staf Kasir Pagi - Siang</small>
+              </div>
+            </div>
+          </td>
+          <td><span class="trx-faktur">@sitiaminah</span></td>
+          <td class="text-muted small">0813-9876-5432</td>
+          <td>
+            <span class="badge bg-primary-subtle text-primary border border-primary-subtle fw-semibold">Kasir</span>
+          </td>
+          <td class="text-center">
+            <span class="badge-status success"><i data-lucide="check" class="icon-xs"></i> Aktif</span>
+          </td>
+          <td class="text-end fw-bold text-dark">98 Trx</td>
+          <td class="text-center pe-4">
+            <div class="d-inline-flex align-items-center gap-1">
+              <button class="btn btn-sm btn-outline-secondary rounded-btn-sm p-1" title="Edit Akun" onclick="editAccount(2)">
+                <i data-lucide="edit-3" class="icon-xs"></i>
+              </button>
+              <button class="btn btn-sm btn-outline-danger rounded-btn-sm p-1" title="Hapus Akun" onclick="deleteAccount(2)">
+                <i data-lucide="trash-2" class="icon-xs"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+
+        <!-- User 3: Kasir 2 -->
+        <tr class="akun-row" data-role="kasir" data-status="active" data-name="Ahmad Rizky ahmadrizky kasir">
+          <td class="ps-4">
+            <div class="d-flex align-items-center gap-2">
+              <span class="trx-avatar" style="background-color: #f0fdf4; color: #16a34a;">AR</span>
+              <div>
+                <span class="fw-semibold text-dark d-block">Ahmad Rizky</span>
+                <small class="text-muted">Staf Kasir Sore - Malam</small>
+              </div>
+            </div>
+          </td>
+          <td><span class="trx-faktur">@ahmadrizky</span></td>
+          <td class="text-muted small">0857-1122-3344</td>
+          <td>
+            <span class="badge bg-primary-subtle text-primary border border-primary-subtle fw-semibold">Kasir</span>
+          </td>
+          <td class="text-center">
+            <span class="badge-status success"><i data-lucide="check" class="icon-xs"></i> Aktif</span>
+          </td>
+          <td class="text-end fw-bold text-dark">0 Trx</td>
+          <td class="text-center pe-4">
+            <div class="d-inline-flex align-items-center gap-1">
+              <button class="btn btn-sm btn-outline-secondary rounded-btn-sm p-1" title="Edit Akun" onclick="editAccount(3)">
+                <i data-lucide="edit-3" class="icon-xs"></i>
+              </button>
+              <button class="btn btn-sm btn-outline-danger rounded-btn-sm p-1" title="Hapus Akun" onclick="deleteAccount(3)">
+                <i data-lucide="trash-2" class="icon-xs"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination & Total Rows Info Footer -->
+  <div class="p-3 border-top d-flex flex-column flex-sm-row align-items-center justify-content-between gap-3 bg-white rounded-bottom">
+    <div class="d-flex align-items-center gap-2">
+      <small class="text-muted">Menampilkan <strong>1 - 3</strong> dari <strong>3</strong> pengguna terdaftar</small>
+    </div>
+    <nav aria-label="Navigasi Halaman Akun">
+      <ul class="pagination pagination-clean mb-0">
+        <li class="page-item disabled"><a class="page-link" href="#" aria-label="Sebelumnya">«</a></li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item disabled"><a class="page-link" href="#" aria-label="Berikutnya">»</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
