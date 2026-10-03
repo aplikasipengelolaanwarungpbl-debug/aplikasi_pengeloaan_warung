@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WarungKu — Preview Seluruh Modal & Sidebar (Figma Export)</title>
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Custom Modern SaaS CSS & Page CSS -->
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="pages/riwayat-transaksi/style.css">
+  <link rel="stylesheet" href="pages/kasir/style.css">
+
+  <!-- Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Styling khusus halaman preview agar modal tampil statis & rapi untuk html-to-design */
+    .modal-preview-container .modal {
+      position: static !important;
+      display: block !important;
+      z-index: auto !important;
+      overflow: visible !important;
+      opacity: 1 !important;
+      padding: 0 !important;
+    }
+
+    .modal-preview-container .modal-dialog {
+      margin: 0 auto !important;
+      transform: none !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+
+    .modal-card-box {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .modal-card-box.modal-narrow {
+      max-width: 400px;
+    }
+
+    .modal-card-box.modal-receipt {
+      max-width: 420px;
+    }
+
+    .preview-header-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 2rem;
+      align-items: start;
+    }
+  </style>
+</head>
+<body class="bg-body-app">
+  <div class="d-flex" id="wrapper">
+    <!-- Sidebar Menu (Persis Component Sidebar Asli dengan Submenu Terbuka) -->
+    <aside id="sidebar-wrapper" class="d-flex flex-column" style="position: sticky; top: 0; height: 100vh;">
+      <!-- Brand Header -->
+      <div class="sidebar-brand-header d-flex align-items-center">
+        <div class="brand-logo-container">
+          <img src="assets/image/logo.png" alt="Logo WarungKu" class="brand-logo-img">
+          <img src="assets/image/warungku.png" alt="WarungKu" class="brand-text-img">
+        </div>
+      </div>
+
+      <div class="p-3">
+        <!-- Navigation List -->
+        <ul class="nav flex-column gap-1">
+          <!-- Dashboard -->
+          <li class="nav-item">
+            <a href="javascript:void(0)" class="nav-link-custom active">
+              <i data-lucide="layout-grid"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+
+          <!-- Transaksi -->
+          <li class="nav-item">
+            <a href="javascript:void(0)" class="nav-link-custom justify-content-between" aria-expanded="true">
+              <span class="d-flex align-items-center gap-2">
+                <i data-lucide="shopping-cart"></i>
+                <span>Transaksi</span>
+              </span>
+              <i data-lucide="chevron-down" class="rotate-icon" style="transform: rotate(0deg);"></i>
+            </a>
+            <div class="collapse show" id="collapse-transaksi">
+              <ul class="submenu-nav">
+                <li>
+                  <a href="javascript:void(0)" class="nav-link-custom">
+                    <span>Kasir</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:void(0)" class="nav-link-custom">
+                    <span>Riwayat Transaksi</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- Produk -->
+          <li class="nav-item">
+            <a href="javascript:void(0)" class="nav-link-custom justify-content-between" aria-expanded="true">
+              <span class="d-flex align-items-center gap-2">
+                <i data-lucide="package"></i>
+                <span>Produk</span>
+              </span>
+              <i data-lucide="chevron-down" class="rotate-icon" style="transform: rotate(0deg);"></i>
+            </a>
+            <div class="collapse show" id="collapse-produk">
+              <ul class="submenu-nav">
+                <li>
+                  <a href="javascript:void(0)" class="nav-link-custom">
+                    <span>Daftar Produk</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:void(0)" class="nav-link-custom">
+                    <span>Kategori</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- Laporan (Owner Only) -->
+          <li class="nav-item" data-role="owner">
+            <a href="javascript:void(0)" class="nav-link-custom justify-content-between" aria-expanded="true">
+              <span class="d-flex align-items-center gap-2">
+                <i data-lucide="bar-chart-3"></i>
+                <span>Laporan</span>
+              </span>
+              <i data-lucide="chevron-down" class="rotate-icon" style="transform: rotate(0deg);"></i>
+            </a>
+            <div class="collapse show" id="collapse-laporan">
+              <ul class="submenu-nav">
+                <li>
+                  <a href="javascript:void(0)" class="nav-link-custom">
+                    <span>Laba Rugi</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:void(0)" class="nav-link-custom">
+                    <span>Stok</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:void(0)" class="nav-link-custom">
+                    <span>Terlaris</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- Kelola Akun Kasir (Owner Only) -->
+          <li class="nav-item" data-role="owner">
+            <a href="javascript:void(0)" class="nav-link-custom">
+              <i data-lucide="users"></i>
+              <span>Akun Kasir</span>
+            </a>
+          </li>
+
+          <!-- Menu Autentikasi / Halaman Auth -->
+          <li class="nav-item pt-2 border-top mt-2">
+            <a href="javascript:void(0)" class="nav-link-custom">
+              <i data-lucide="log-in"></i>
+              <span>Login</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="javascript:void(0)" class="nav-link-custom">
+              <i data-lucide="user-plus"></i>
+              <span>Register</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="preview-modals.html" class="nav-link-custom active">
+              <i data-lucide="layers"></i>
+              <span>Preview Modals</span>
+              <span class="badge bg-primary-subtle text-primary ms-auto" style="font-size: 0.65rem;">Figma</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Sidebar Bottom: Shift Status Widget -->
+      <div class="mt-auto p-3 border-top">
+        <div class="p-3 bg-light border rounded-3">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+            <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2 py-0" style="font-size: 0.675rem;">Toko Buka</span>
+            <small class="text-muted" style="font-size: 0.675rem;">Shift Pagi</small>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <div class="p-1.5 bg-white border rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 28px; height: 28px;">
+              <i data-lucide="user-check" class="icon-xs text-primary"></i>
+            </div>
+            <div class="overflow-hidden">
+              <div class="fw-semibold text-dark text-truncate" style="font-size: 0.775rem;">Budi Santoso</div>
+              <small class="text-muted d-block" style="font-size: 0.675rem;">Owner (Kasir Aktif)</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area: Preview Semua Modal -->
+    <div id="page-content-wrapper" class="w-100 min-vh-100 p-4 p-lg-5">
+      <!-- Title Header -->
+      <div class="mb-5 pb-3 border-bottom d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
+        <div>
+          <div class="d-flex align-items-center gap-2 mb-1">
+            <span class="badge bg-primary text-white rounded-pill px-2.5 py-1 preview-header-badge">Figma Assets</span>
+            <span class="badge bg-light text-muted border rounded-pill px-2.5 py-1 preview-header-badge">8 Modals + Sidebar</span>
+          </div>
+          <h3 class="fw-bold text-dark mb-1">Koleksi Seluruh Komponen Modal WarungKu</h3>
+          <p class="text-muted mb-0 small">Halaman preview untuk import langsung ke Figma via plugin <em>html.to.design</em>. Tampilan 100% presisi sesuai desain aplikasi.</p>
+        </div>
+        <div>
+          <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-3 fw-medium">
+            <i data-lucide="check-circle" class="icon-xs me-1"></i> Siap Copy ke Figma
+          </span>
+        </div>
+      </div>
+
+      <div class="modal-preview-container d-flex flex-column gap-5">
+        
+        <!-- SECTION 1: TRANSAKSI & PEMBAYARAN -->
+        <div>
+          <div class="d-flex align-items-center gap-2 mb-4">
+            <div class="p-1.5 bg-primary-light text-primary rounded-2">
+              <i data-lucide="credit-card" class="icon-sm"></i>
+            </div>
+            <h5 class="fw-bold text-dark mb-0">1. Modal Transaksi & Pembayaran Kasir</h5>
+          </div>
+
+          <div class="preview-grid">
+            
+            <!-- 1A: Modal Pembayaran Kasir (Metode Tunai / Cash) -->
+            <div class="modal-card-box">
+              <div class="small fw-bold text-muted mb-2 d-flex align-items-center justify-content-between">
+                <span>Pembayaran Kasir — Metode Tunai</span>
+                <span class="badge bg-light text-muted border">modal-pembayaran-kasir.html</span>
+              </div>
+              <div class="modal fade show" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content border-0 shadow-sm rounded-4 overflow-hidden">
+                    <!-- Modal Header -->
+                    <div class="modal-header border-bottom px-4 py-3 bg-white">
+                      <div class="d-flex align-items-center gap-2">
+                        <div class="p-2 bg-primary-subtle text-primary rounded-3">
+                          <i data-lucide="credit-card" class="icon-sm"></i>
+                        </div>
+                        <div>
+                          <h6 class="modal-title fw-bold text-dark mb-0">Pembayaran Pesanan</h6>
+                          <small class="text-muted" style="font-size: 0.75rem;">Selesaikan transaksi pelanggan</small>
+                        </div>
+                      </div>
+                      <button type="button" class="btn-close" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body p-4">
+                      <!-- Total Tagihan Card -->
+                      <div class="bg-primary-subtle border border-primary-subtle p-3 rounded-3 text-center mb-4">
+                        <span class="text-muted small fw-medium d-block mb-1">Total Tagihan</span>
+                        <h3 class="fw-bold text-primary mb-0">Rp 74.500</h3>
+                      </div>
+
+                      <!-- Segmented Tab: Metode Pembayaran (Tunai / QRIS) -->
+                      <div class="mb-4">
+                        <label class="form-label small fw-semibold text-muted mb-2">Pilih Metode Pembayaran</label>
+                        <div class="pay-method-toggle-group p-1 bg-light border rounded-3 d-flex gap-1">
+                          <button type="button" class="btn btn-sm pay-toggle-btn active flex-fill d-flex align-items-center justify-content-center gap-2 py-2 rounded-3 fw-semibold">
+                            <i data-lucide="banknote" class="icon-sm text-success"></i> Tunai (Cash)
+                          </button>
+                          <button type="button" class="btn btn-sm pay-toggle-btn flex-fill d-flex align-items-center justify-content-center gap-2 py-2 rounded-3 fw-semibold">
+                            <i data-lucide="qr-code" class="icon-sm text-primary"></i> QRIS
+                          </button>
+                        </div>
+                      </div>
+
+                      <!-- Cash Section -->
+                      <div id="section-pay-cash-preview">
+                        <div class="mb-3">
+                          <label class="form-label small fw-semibold text-muted mb-1">Nominal Uang Diterima (Rp)</label>
+                          <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0 fw-semibold text-muted">Rp</span>
+                            <input type="text" class="form-control form-control-lg fw-bold border-start-0 ps-1 text-dark" value="100.000">
+                          </div>
+                        </div>
+
+                        <!-- Quick Cash Preset Pills -->
+                        <div class="mb-3">
+                          <span class="small text-muted d-block mb-2" style="font-size: 0.75rem;">Pilihan Cepat:</span>
+                          <div class="row g-2">
+                            <div class="col-3">
+                              <button type="button" class="btn btn-sm btn-outline-secondary w-100 py-1 rounded-btn-sm fw-medium font-sm">Uang Pas</button>
+                            </div>
+                            <div class="col-3">
+                              <button type="button" class="btn btn-sm btn-outline-secondary w-100 py-1 rounded-btn-sm fw-medium font-sm">20.000</button>
+                            </div>
+                            <div class="col-3">
+                              <button type="button" class="btn btn-sm btn-outline-secondary w-100 py-1 rounded-btn-sm fw-medium font-sm">50.000</button>
+                            </div>
+                            <div class="col-3">
+                              <button type="button" class="btn btn-sm btn-outline-secondary w-100 py-1 rounded-btn-sm fw-medium font-sm active bg-primary-light text-primary border-primary">100.000</button>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Kembalian Display Box -->
+                        <div class="p-3 bg-subtle rounded-3 border d-flex justify-content-between align-items-center">
+                          <div>
+                            <span class="text-muted small fw-medium d-block">Kembalian:</span>
+                            <small class="text-muted" style="font-size: 0.7rem;">Sisa untuk pelanggan</small>
+                          </div>
+                          <span class="fw-bold fs-4 text-success mb-0">Rp 25.500</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Modal Footer Action Buttons -->
+                    <div class="modal-footer border-top bg-light px-4 py-3 d-flex justify-content-between">
+                      <button type="button" class="btn btn-sm btn-outline-secondary px-3 py-2 rounded-btn-sm fw-medium">
+                        Batal
+                      </button>
+                      <button type="button" class="btn btn-sm btn-primary px-4 py-2 rounded-btn-sm fw-semibold d-inline-flex align-items-center gap-2 shadow-sm">
+                        <i data-lucide="check-circle" class="icon-sm"></i> Selesaikan Transaksi
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 1B: Modal Pembayaran Kasir (Metode QRIS) -->
+            <div class="modal-card-box">
+              <div class="small fw-bold text-muted mb-2 d-flex align-items-center justify-content-between">
+                <span>Pembayaran Kasir — Metode QRIS</span>
+                <span class="badge bg-light text-muted border">modal-pembayaran-kasir.html (QRIS)</span>
+              </div>
+              <div class="modal fade show" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content border-0 shadow-sm rounded-4 overflow-hidden">
+                    <!-- Modal Header -->
+                    <div class="modal-header border-bottom px-4 py-3 bg-white">
+                      <div class="d-flex align-items-center gap-2">
+                        <div class="p-2 bg-primary-subtle text-primary rounded-3">
+                          <i data-lucide="credit-card" class="icon-sm"></i>
+                        </div>
+                        <div>
+                          <h6 class="modal-title fw-bold text-dark mb-0">Pembayaran Pesanan</h6>
+                          <small class="text-muted" style="font-size: 0.75rem;">Selesaikan transaksi pelanggan</small>
+                        </div>
+                      </div>
+                      <button type="button" class="btn-close" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body p-4">
+                      <!-- Total Tagihan Card -->
+                      <div class="bg-primary-subtle border border-primary-subtle p-3 rounded-3 text-center mb-4">
+                        <span class="text-muted small fw-medium d-block mb-1">Total Tagihan</span>
+                        <h3 class="fw-bold text-primary mb-0">Rp 74.500</h3>
+                      </div>
+
+                      <!-- Segmented Tab: Metode Pembayaran (Tunai / QRIS) -->
+                      <div class="mb-4">
+                        <label class="form-label small fw-semibold text-muted mb-2">Pilih Metode Pembayaran</label>
+                        <div class="pay-method-toggle-group p-1 bg-light border rounded-3 d-flex gap-1">
+                          <button type="button" class="btn btn-sm pay-toggle-btn flex-fill d-flex align-items-center justify-content-center gap-2 py-2 rounded-3 fw-semibold">
+                            <i data-lucide="banknote" class="icon-sm text-success"></i> Tunai (Cash)
+                          </button>
+                          <button type="button" class="btn btn-sm pay-toggle-btn active flex-fill d-flex align-items-center justify-content-center gap-2 py-2 rounded-3 fw-semibold">
+                            <i data-lucide="qr-code" class="icon-sm text-primary"></i> QRIS
+                          </button>
+                        </div>
+                      </div>
+
+                      <!-- QRIS Section -->
+                      <div class="text-center py-2">
+                        <div class="qris-box mx-auto mb-2 p-3 bg-white border rounded-3 d-inline-block shadow-xs">
+                          <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=WARUNGKU-PAYMENT" alt="QRIS WarungKu" class="img-fluid rounded" width="160" height="160">
+                        </div>
+                        <p class="small text-muted mb-0">Arahkan kamera e-wallet / mobile banking pelanggan ke kode QR di atas.</p>
+                      </div>
+                    </div>
+
+                    <!-- Modal Footer Action Buttons -->
+                    <div class="modal-footer border-top bg-light px-4 py-3 d-flex justify-content-between">
+                      <button type="button" class="btn btn-sm btn-outline-secondary px-3 py-2 rounded-btn-sm fw-medium">
+                        Batal
+                      </button>
+                      <button type="button" class="btn btn-sm btn-primary px-4 py-2 rounded-btn-sm fw-semibold d-inline-flex align-items-center gap-2 shadow-sm">
+                        <i data-lucide="check-circle" class="icon-sm"></i> Selesaikan Transaksi
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 1C: Modal Detail Struk Transaksi -->
+            <div class="modal-card-box modal-receipt">
+              <div class="small fw-bold text-muted mb-2 d-flex align-items-center justify-content-between">
+                <span>Detail Struk Transaksi</span>
+                <span class="badge bg-light text-muted border">modal-detail-transaksi.html</span>
+              </div>
+              <div class="modal fade show" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content border-0 shadow">
+                    <div class="modal-header border-bottom">
+                      <h6 class="modal-title fw-bold text-dark">Detail Transaksi</h6>
+                      <button type="button" class="btn-close" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                      <!-- Receipt Styled Paper -->
+                      <div class="receipt-paper">
+                        <div class="text-center mb-3">
+                          <h6 class="fw-bold mb-0">WARUNGKU</h6>
+                          <small class="text-muted d-block">Jl. Raya Warung Sejahtera No. 12</small>
+                          <small class="text-muted d-block">Telp: 0812-3456-7890</small>
+                        </div>
+
+                        <div class="dashed-divider"></div>
+
+                        <div class="d-flex justify-content-between small text-muted">
+                          <span>No. Faktur:</span>
+                          <span class="text-dark fw-semibold">#TRX-20260924-038</span>
+                        </div>
+                        <div class="d-flex justify-content-between small text-muted">
+                          <span>Tanggal:</span>
+                          <span class="text-dark">24/09/2026 19:42</span>
+                        </div>
+                        <div class="d-flex justify-content-between small text-muted">
+                          <span>Kasir:</span>
+                          <span class="text-dark">Siti Aminah</span>
+                        </div>
+                        <div class="d-flex justify-content-between small text-muted">
+                          <span>Metode:</span>
+                          <span class="text-dark fw-semibold">QRIS</span>
+                        </div>
+
+                        <div class="dashed-divider"></div>
+
+                        <!-- Items List -->
+                        <div class="small">
+                          <div class="mb-2">
+                            <div class="d-flex justify-content-between">
+                              <span>Minyak Goreng Sawit 2L</span>
+                              <span class="fw-semibold">Rp 34.000</span>
+                            </div>
+                            <span class="text-muted">1 x Rp 34.000</span>
+                          </div>
+                          <div class="mb-2">
+                            <div class="d-flex justify-content-between">
+                              <span>Gula Pasir Kristal 1kg</span>
+                              <span class="fw-semibold">Rp 17.500</span>
+                            </div>
+                            <span class="text-muted">1 x Rp 17.500</span>
+                          </div>
+                          <div class="mb-2">
+                            <div class="d-flex justify-content-between">
+                              <span>Telur Ayam Negeri (1kg)</span>
+                              <span class="fw-semibold">Rp 23.000</span>
+                            </div>
+                            <span class="text-muted">1 x Rp 23.000</span>
+                          </div>
+                        </div>
+
+                        <div class="dashed-divider"></div>
+
+                        <!-- Totals -->
+                        <div class="d-flex justify-content-between small mb-1">
+                          <span>Subtotal</span>
+                          <span>Rp 74.500</span>
+                        </div>
+                        <div class="d-flex justify-content-between small mb-1">
+                          <span>Diskon</span>
+                          <span>Rp 0</span>
+                        </div>
+                        <div class="d-flex justify-content-between fw-bold text-dark fs-6 pt-1">
+                          <span>TOTAL</span>
+                          <span>Rp 74.500</span>
+                        </div>
+                        <div class="d-flex justify-content-between small text-muted mt-2">
+                          <span>Bayar (QRIS)</span>
+                          <span>Rp 74.500</span>
+                        </div>
+                        <div class="d-flex justify-content-between small text-muted">
+                          <span>Kembali</span>
+                          <span>Rp 0</span>
+                        </div>
+
+                        <div class="dashed-divider"></div>
+                        <div class="text-center small text-muted">
+                          <small>-- Terima Kasih Telah Berbelanja --</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer border-top bg-light">
+                      <button type="button" class="btn btn-sm btn-outline-secondary rounded-btn-sm">Tutup</button>
+                      <button type="button" class="btn btn-sm btn-primary rounded-btn-sm">
+                        <i data-lucide="printer" class="icon-xs me-1"></i> Cetak Struk
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- SECTION 2: PRODUK & KATEGORI -->
+        <div>
+          <div class="d-flex align-items-center gap-2 mb-4">
+            <div class="p-1.5 bg-primary-light text-primary rounded-2">
+              <i data-lucide="package" class="icon-sm"></i>
+            </div>
+            <h5 class="fw-bold text-dark mb-0">2. Modal Produk & Kategori</h5>
+          </div>
+
+          <div class="preview-grid">
+
+            <!-- 2A: Modal Form Produk -->
+            <div class="modal-card-box">
+              <div class="small fw-bold text-muted mb-2 d-flex align-items-center justify-content-between">
+                <span>Form Tambah / Edit Produk</span>
+                <span class="badge bg-light text-muted border">modal-form-produk.html</span>
+              </div>
+              <div class="modal fade show" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content border-0 shadow-sm rounded-4 overflow-hidden">
+                    <!-- Modal Header -->
+                    <div class="modal-header border-bottom px-4 py-3 bg-white">
+                      <div class="d-flex align-items-center gap-2">
+                        <div class="p-2 bg-primary-subtle text-primary rounded-3">
+                          <i data-lucide="package" class="icon-sm"></i>
+                        </div>
+                        <div>
+                          <h6 class="modal-title fw-bold text-dark mb-0">Tambah Produk Baru</h6>
+                          <small class="text-muted" style="font-size: 0.75rem;">Lengkapi informasi data barang</small>
+                        </div>
+                      </div>
+                      <button type="button" class="btn-close" aria-label="Close"></button>
+                    </div>
+
+                    <!-- Modal Body Form -->
+                    <div class="modal-body p-4">
+                      <form>
+                        <div class="mb-3">
+                          <label class="form-label small fw-semibold text-muted mb-1">Nama Produk <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control form-control-standard" placeholder="Contoh: Beras Ramos Setra 5kg" value="Beras Premium Ramos Setra 5kg">
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                          <div class="col-6">
+                            <label class="form-label small fw-semibold text-muted mb-1">Kategori <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-standard">
+                              <option value="Sembako" selected>Sembako</option>
+                              <option value="Minyak">Minyak</option>
+                              <option value="Fresh">Fresh</option>
+                              <option value="Minuman">Minuman</option>
+                              <option value="Bumbu">Bumbu</option>
+                              <option value="Snack">Snack</option>
+                            </select>
+                          </div>
+                          <div class="col-6">
+                            <label class="form-label small fw-semibold text-muted mb-1">Satuan <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-standard">
+                              <option value="pcs">Pcs / Buah</option>
+                              <option value="karung" selected>Karung</option>
+                              <option value="kg">Kilogram (kg)</option>
+                              <option value="botol">Botol</option>
+                              <option value="dus">Dus / Karton</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                          <div class="col-6">
+                            <label class="form-label small fw-semibold text-muted mb-1">Harga Modal (Rp)</label>
+                            <input type="number" class="form-control form-control-standard" placeholder="Contoh: 60000" value="62000">
+                          </div>
+                          <div class="col-6">
+                            <label class="form-label small fw-semibold text-muted mb-1">Harga Jual (Rp) <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control form-control-standard fw-bold text-primary" placeholder="Contoh: 69000" value="69000">
+                          </div>
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                          <div class="col-6">
+                            <label class="form-label small fw-semibold text-muted mb-1">Stok Awal <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control form-control-standard" placeholder="Contoh: 50" value="50">
+                          </div>
+                          <div class="col-6">
+                            <label class="form-label small fw-semibold text-muted mb-1">Min. Peringatan Stok</label>
+                            <input type="number" class="form-control form-control-standard" placeholder="Contoh: 10" value="10">
+                          </div>
+                        </div>
+
+                        <div class="mb-2">
+                          <small class="text-muted d-block" style="font-size: 0.725rem;"><i data-lucide="info" class="icon-xs me-1"></i> Ikon produk otomatis disesuaikan berdasarkan kategori yang dipilih.</small>
+                        </div>
+                      </form>
+                    </div>
+
+                    <!-- Modal Footer Action -->
+                    <div class="modal-footer border-top bg-light px-4 py-3 d-flex justify-content-between">
+                      <button type="button" class="btn btn-sm btn-outline-secondary px-3 py-2 rounded-btn-sm fw-medium">
+                        Batal
+                      </button>
+                      <button type="button" class="btn btn-sm btn-primary px-4 py-2 rounded-btn-sm fw-semibold d-inline-flex align-items-center gap-2 shadow-sm">
+                        <i data-lucide="check" class="icon-sm"></i> Simpan Produk
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2B: Modal Form Kategori -->
+            <div class="modal-card-box">
+              <div class="small fw-bold text-muted mb-2 d-flex align-items-center justify-content-between">
+                <span>Form Tambah / Edit Kategori</span>
+                <span class="badge bg-light text-muted border">modal-form-kategori.html</span>
+              </div>
+              <div class="modal fade show" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content border-0 shadow-sm rounded-4 overflow-hidden">
+                    <!-- Modal Header -->
+                    <div class="modal-header border-bottom px-4 py-3 bg-white">
+                      <div class="d-flex align-items-center gap-2">
+                        <div class="p-2 bg-primary-subtle text-primary rounded-3">
+                          <i data-lucide="tag" class="icon-sm"></i>
+                        </div>
+                        <div>
+                          <h6 class="modal-title fw-bold text-dark mb-0">Tambah Kategori Baru</h6>
+                          <small class="text-muted" style="font-size: 0.75rem;">Atur pengelompokan produk warung</small>
+                        </div>
+                      </div>
+                      <button type="button" class="btn-close" aria-label="Close"></button>
+                    </div>
+
+                    <!-- Modal Body Form -->
+                    <div class="modal-body p-4">
+                      <form>
+                        <div class="mb-3">
+                          <label class="form-label small fw-semibold text-muted mb-1">Nama Kategori <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control form-control-standard" placeholder="Contoh: Bumbu & Rempah" value="Bumbu & Dapur">
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label small fw-semibold text-muted mb-1">Kode Kategori</label>
+                          <input type="text" class="form-control form-control-standard font-monospace" placeholder="Contoh: CAT-007" value="CAT-005">
+                          <small class="text-muted d-block mt-1" style="font-size: 0.725rem;">Biarkan kosong untuk pembuatan kode otomatis.</small>
+                        </div>
+
+                        <div class="mb-2">
+                          <label class="form-label small fw-semibold text-muted mb-1">Deskripsi Singkat</label>
+                          <textarea class="form-control form-control-standard" rows="3" placeholder="Penjelasan jenis barang yang masuk dalam kategori ini...">Kategori untuk bumbu masak, rempah-rempah, kecap, garam, dan kebutuhan dapur harian.</textarea>
+                        </div>
+                      </form>
+                    </div>
+
+                    <!-- Modal Footer Action -->
+                    <div class="modal-footer border-top bg-light px-4 py-3 d-flex justify-content-between">
+                      <button type="button" class="btn btn-sm btn-outline-secondary px-3 py-2 rounded-btn-sm fw-medium">
+                        Batal
+                      </button>
+                      <button type="button" class="btn btn-sm btn-primary px-4 py-2 rounded-btn-sm fw-semibold d-inline-flex align-items-center gap-2 shadow-sm">
+                        <i data-lucide="check" class="icon-sm"></i> Simpan Kategori
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- SECTION 3: PENGGUNA & AKUN -->
+        <div>
+          <div class="d-flex align-items-center gap-2 mb-4">
+            <div class="p-1.5 bg-primary-light text-primary rounded-2">
+              <i data-lucide="users" class="icon-sm"></i>
+            </div>
+            <h5 class="fw-bold text-dark mb-0">3. Modal Manajemen Akun, Profil, & Password</h5>
+          </div>
+
+          <div class="preview-grid">
+
+            <!-- 3A: Modal Form Akun Kasir -->
+            <div class="modal-card-box">
+              <div class="small fw-bold text-muted mb-2 d-flex align-items-center justify-content-between">
+                <span>Form Tambah / Edit Akun Kasir</span>
+                <span class="badge bg-light text-muted border">modal-form-akun.html</span>
+              </div>
+              <div class="modal fade show" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content border-0 shadow-sm rounded-4 overflow-hidden">
+                    <!-- Modal Header -->
+                    <div class="modal-header border-bottom px-4 py-3 bg-white">
+                      <div class="d-flex align-items-center gap-2">
+                        <div class="p-2 bg-primary-subtle text-primary rounded-3">
+                          <i data-lucide="user-plus" class="icon-sm"></i>
+                        </div>
+                        <div>
+                          <h6 class="modal-title fw-bold text-dark mb-0">Tambah Akun Kasir Baru</h6>
+                          <small class="text-muted" style="font-size: 0.75rem;">Buat kredensial login untuk staf kasir</small>
+                        </div>
+                      </div>
+                      <button type="button" class="btn-close" aria-label="Close"></button>
+                    </div>
+
+                    <!-- Modal Body Form -->
+                    <div class="modal-body p-4">
+                      <form>
+                        <div class="mb-3">
+                          <label class="form-label small fw-semibold text-muted mb-1">Nama Lengkap <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control form-control-standard" placeholder="Contoh: Siti Aminah" value="Siti Aminah">
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                          <div class="col-6">
+                            <label class="form-label small fw-semibold text-muted mb-1">Username <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control form-control-standard" placeholder="sitiaminah" value="sitiaminah">
+                          </div>
+                          <div class="col-6">
+                            <label class="form-label small fw-semibold text-muted mb-1">No. WhatsApp / HP</label>
+                            <input type="tel" class="form-control form-control-standard" placeholder="0812-xxxx-xxxx" value="0812-9876-5432">
+                          </div>
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                          <div class="col-6">
+                            <label class="form-label small fw-semibold text-muted mb-1">Role / Hak Akses <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-standard">
+                              <option value="kasir" selected>Kasir (Staff)</option>
+                              <option value="owner">Owner (Admin)</option>
+                            </select>
+                          </div>
+                          <div class="col-6">
+                            <label class="form-label small fw-semibold text-muted mb-1">Status Akun <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-standard">
+                              <option value="active" selected>Aktif</option>
+                              <option value="inactive">Non-Aktif</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="mb-2">
+                          <label class="form-label small fw-semibold text-muted mb-1">PIN / Password Login <span class="text-danger">*</span></label>
+                          <input type="password" class="form-control form-control-standard" placeholder="Minimal 6 karakter / PIN" value="123456">
+                          <small class="text-muted d-block mt-1" style="font-size: 0.725rem;">Gunakan PIN atau kata sandi yang mudah diingat kasir.</small>
+                        </div>
+                      </form>
+                    </div>
+
+                    <!-- Modal Footer Action -->
+                    <div class="modal-footer border-top bg-light px-4 py-3 d-flex justify-content-between">
+                      <button type="button" class="btn btn-sm btn-outline-secondary px-3 py-2 rounded-btn-sm fw-medium">
+                        Batal
+                      </button>
+                      <button type="button" class="btn btn-sm btn-primary px-4 py-2 rounded-btn-sm fw-semibold d-inline-flex align-items-center gap-2 shadow-sm">
+                        <i data-lucide="check" class="icon-sm"></i> Simpan Akun
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3B: Modal Profil Warung -->
+            <div class="modal-card-box">
+              <div class="small fw-bold text-muted mb-2 d-flex align-items-center justify-content-between">
+                <span>Modal Profil Warung</span>
+                <span class="badge bg-light text-muted border">modal-profil-warung.html</span>
+              </div>
+              <div class="modal fade show" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content border-0 shadow-sm rounded-4 overflow-hidden">
+                    <!-- Modal Header -->
+                    <div class="modal-header border-bottom px-4 py-3 bg-white">
+                      <div class="d-flex align-items-center gap-2">
+                        <div class="p-2 bg-primary-subtle text-primary rounded-3">
+                          <i data-lucide="store" class="icon-sm"></i>
+                        </div>
+                        <div>
+                          <h6 class="modal-title fw-bold text-dark mb-0">Profil Warung</h6>
+                          <small class="text-muted" style="font-size: 0.75rem;">Informasi identitas usaha & struk</small>
+                        </div>
+                      </div>
+                      <button type="button" class="btn-close" aria-label="Close"></button>
+                    </div>
+
+                    <!-- Modal Body -->
+                    <div class="modal-body p-4">
+                      <form>
+                        <div class="mb-3">
+                          <label class="form-label small fw-semibold text-muted mb-1">Nama Warung / Usaha <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control form-control-standard" value="WarungKu Sembako">
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label small fw-semibold text-muted mb-1">Nomor WhatsApp / Telepon <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control form-control-standard" value="0812-3456-7890">
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label small fw-semibold text-muted mb-1">Alamat Warung</label>
+                          <textarea class="form-control form-control-standard" rows="2" placeholder="Jl. Merdeka No. 12, Kota">Jl. Merdeka No. 12, Kota</textarea>
+                        </div>
+
+                        <div class="mb-2">
+                          <label class="form-label small fw-semibold text-muted mb-1">Pesan Footer Struk</label>
+                          <input type="text" class="form-control form-control-standard" value="Terima kasih atas kunjungan Anda!">
+                        </div>
+                      </form>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="modal-footer border-top bg-light px-4 py-3 d-flex justify-content-between">
+                      <button type="button" class="btn btn-sm btn-outline-secondary px-3 py-2 rounded-btn-sm fw-medium">
+                        Batal
+                      </button>
+                      <button type="button" class="btn btn-sm btn-primary px-4 py-2 rounded-btn-sm fw-semibold d-inline-flex align-items-center gap-2 shadow-sm">
+                        <i data-lucide="check" class="icon-sm"></i> Simpan Profil
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3C: Modal Ganti Password -->
+            <div class="modal-card-box modal-narrow">
+              <div class="small fw-bold text-muted mb-2 d-flex align-items-center justify-content-between">
+                <span>Modal Ganti Password</span>
+                <span class="badge bg-light text-muted border">modal-ganti-password.html</span>
+              </div>
+              <div class="modal fade show" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content border-0 shadow-sm rounded-4 overflow-hidden">
+                    <!-- Modal Header -->
+                    <div class="modal-header border-bottom px-4 py-3 bg-white">
+                      <div class="d-flex align-items-center gap-2">
+                        <div class="p-2 bg-primary-subtle text-primary rounded-3">
+                          <i data-lucide="key" class="icon-sm"></i>
+                        </div>
+                        <div>
+                          <h6 class="modal-title fw-bold text-dark mb-0">Ganti Password</h6>
+                          <small class="text-muted" style="font-size: 0.75rem;">Perbarui kata sandi login akun</small>
+                        </div>
+                      </div>
+                      <button type="button" class="btn-close" aria-label="Close"></button>
+                    </div>
+
+                    <!-- Modal Body -->
+                    <div class="modal-body p-4">
+                      <form>
+                        <div class="mb-3">
+                          <label class="form-label small fw-semibold text-muted mb-1">Password Saat Ini <span class="text-danger">*</span></label>
+                          <input type="password" class="form-control form-control-standard" placeholder="Masukkan password lama" value="currentpass123">
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label small fw-semibold text-muted mb-1">Password Baru <span class="text-danger">*</span></label>
+                          <input type="password" class="form-control form-control-standard" placeholder="Minimal 6 karakter" value="newpass456">
+                        </div>
+
+                        <div class="mb-2">
+                          <label class="form-label small fw-semibold text-muted mb-1">Konfirmasi Password Baru <span class="text-danger">*</span></label>
+                          <input type="password" class="form-control form-control-standard" placeholder="Ulangi password baru" value="newpass456">
+                        </div>
+                      </form>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="modal-footer border-top bg-light px-4 py-3 d-flex justify-content-between">
+                      <button type="button" class="btn btn-sm btn-outline-secondary px-3 py-2 rounded-btn-sm fw-medium">
+                        Batal
+                      </button>
+                      <button type="button" class="btn btn-sm btn-primary px-4 py-2 rounded-btn-sm fw-semibold d-inline-flex align-items-center gap-2 shadow-sm">
+                        <i data-lucide="check" class="icon-sm"></i> Simpan Password
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3D: Modal Lupa Password (Auth) -->
+            <div class="modal-card-box modal-narrow">
+              <div class="small fw-bold text-muted mb-2 d-flex align-items-center justify-content-between">
+                <span>Modal Lupa Password (Auth)</span>
+                <span class="badge bg-light text-muted border">modal-lupa-password.html</span>
+              </div>
+              <div class="modal fade show" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content border-0 shadow-sm rounded-4 overflow-hidden">
+                    <div class="modal-header border-0 pb-0 pt-3 px-4">
+                      <h5 class="modal-title fs-6 fw-bold">Atur Ulang Password</h5>
+                      <button type="button" class="btn-close" aria-label="Tutup"></button>
+                    </div>
+                    <form>
+                      <div class="modal-body py-3 px-4">
+                        <p class="small text-muted mb-3">Masukkan email dan nomor HP yang terdaftar pada akun warung Anda untuk menerima instruksi reset password.</p>
+                        <div class="mb-3">
+                          <label class="form-label small fw-semibold text-muted mb-1">Email Terdaftar</label>
+                          <input type="email" class="form-control form-control-standard" placeholder="nama@email.com" value="owner@warungku.id">
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label small fw-semibold text-muted mb-1">Nomor Handphone (WhatsApp)</label>
+                          <input type="tel" class="form-control form-control-standard" placeholder="Contoh: 081234567890" value="081234567890">
+                        </div>
+                        <div class="alert alert-success py-2 px-3 small rounded-3 mb-0" role="alert">
+                          <i data-lucide="check-circle-2" class="icon-xs me-1"></i> Tautan reset telah dikirim ke email & WhatsApp Anda.
+                        </div>
+                      </div>
+                      <div class="modal-footer border-0 pt-0 pb-3 px-4">
+                        <button type="button" class="btn btn-light btn-standard">Batal</button>
+                        <button type="submit" class="btn btn-primary btn-standard">Kirim Instruksi</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Lucide Icon Init -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>
