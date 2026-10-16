@@ -1,35 +1,23 @@
-/* Dashboard — metric cards & chart containers */
+/* Dashboard Harian — Clean, Minimalist, Standardized Spacing */
 
 .metric-icon-box {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border-radius: var(--radius-sm);
+  background-color: var(--bg-subtle);
   border: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--text-muted);
 }
 
-.metric-icon-blue {
-  background-color: #eff6ff;
-  color: #3b82f6;
+.table-modern th.ps-4,
+.table-modern td.ps-4 {
+  padding-left: 1.25rem;
 }
 
-.metric-icon-green {
-  background-color: #f0fdf4;
-  color: #16a34a;
-}
-
-.metric-icon-purple {
-  background-color: var(--primary-light);
-  color: var(--primary-color);
-}
-
-.metric-icon-orange {
-  background-color: #fff7ed;
-  color: #ea580c;
-}
-
-.metric-label {
-  font-size: 0.85rem;
+.table-modern th.pe-4,
+.table-modern td.pe-4 {
+  padding-right: 1.25rem;
 }

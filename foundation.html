@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WarungKu — Design System & UI Foundation</title>
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS (CDN asli yang digunakan aplikasi) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- CSS Asli Project WarungKu -->
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="pages/dashboard/style.css">
+  <link rel="stylesheet" href="pages/kasir/style.css">
+  <link rel="stylesheet" href="pages/riwayat-transaksi/style.css">
+
+  <!-- Lucide Icons (CDN asli aplikasi) -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Styling khusus layout dokumentasi (tidak mengubah token asli aplikasi) */
+    :root {
+      --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+      --doc-sidebar-w: 270px;
+    }
+
+    body {
+      background-color: var(--bg-app);
+      color: var(--text-main);
+      font-family: var(--font-family);
+    }
+
+    .doc-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .doc-sidebar {
+      width: var(--doc-sidebar-w);
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 1.25rem 1rem;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 1000;
+    }
+
+    .doc-main {
+      flex: 1;
+      min-width: 0;
+      padding: 2rem 3rem 6rem 3rem;
+      max-width: 1200px;
+    }
+
+    @media (max-width: 992px) {
+      .doc-layout {
+        flex-direction: column;
+      }
+      .doc-sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .doc-main {
+        padding: 1.25rem 1rem;
+      }
+    }
+
+    .doc-group-title {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-subtle);
+      margin: 1.2rem 0 0.4rem 0.5rem;
+    }
+
+    .doc-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.42rem 0.65rem;
+      font-size: 0.825rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: all 0.15s ease;
+      margin-bottom: 2px;
+    }
+
+    .doc-link:hover {
+      background: var(--bg-subtle);
+      color: var(--primary-color);
+    }
+
+    .doc-link.active {
+      background: var(--primary-light);
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    .foundation-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 2rem;
+      margin-bottom: 2.25rem;
+      scroll-margin-top: 1.5rem;
+    }
+
+    .foundation-header {
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .foundation-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0;
+    }
+
+    .foundation-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+      margin-bottom: 0;
+    }
+
+    .token-code {
+      font-family: var(--font-mono);
+      font-size: 0.725rem;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      padding: 0.12rem 0.4rem;
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .token-subhead {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin: 1.25rem 0 0.75rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Color Swatch Card */
+    .color-swatch-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .color-swatch-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border-color: var(--primary-color);
+    }
+
+    .swatch-fill {
+      height: 64px;
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 0.4rem;
+    }
+
+    .swatch-content {
+      padding: 0.75rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.35rem;
+    }
+
+    .swatch-label {
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .swatch-token-name {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--primary-color);
+      background: var(--primary-light);
+      padding: 0.1rem 0.35rem;
+      border-radius: var(--radius-sm);
+      display: inline-block;
+      width: fit-content;
+    }
+
+    .swatch-meta {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px dashed var(--border-color);
+      padding-top: 0.35rem;
+      margin-top: 0.15rem;
+    }
+
+    /* Floating Copy Toast */
+    .doc-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--text-main);
+      color: #ffffff;
+      padding: 0.65rem 1.15rem;
+      border-radius: var(--radius-md);
+      font-size: 0.825rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      transform: translateY(70px);
+      opacity: 0;
+      transition: all 0.22s ease;
+      z-index: 99999;
+      pointer-events: none;
+    }
+
+    .doc-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @media print {
+      .doc-sidebar, .doc-toast, .no-print {
+        display: none !important;
+      }
+      .doc-main {
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+      .foundation-box {
+        break-inside: avoid;
+        margin-bottom: 1.5rem !important;
+        padding: 1.25rem !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Toast -->
+  <div id="copyToast" class="doc-toast">
+    <i data-lucide="check" class="icon-sm text-success"></i>
+    <span id="toastText">Token disalin!</span>
+  </div>
+
+  <div class="doc-layout">
+
+    <!-- SIDEBAR NAV -->
+    <aside class="doc-sidebar">
+      <div>
+        <!-- Brand Header (Menggunakan komponen asli WarungKu) -->
+        <div class="d-flex align-items-center gap-2 pb-3 border-bottom mb-3">
+          <img src="assets/image/logo.png" alt="Logo" class="brand-logo-img" style="width: 36px; height: 36px;">
+          <div>
+            <div class="fw-bold lh-1 text-dark" style="font-size: 0.95rem;">WarungKu</div>
+            <span class="text-muted" style="font-size: 0.7rem;">Design Tokens & Code Foundation</span>
+          </div>
+        </div>
+
+        <div class="doc-group-title">Foundations</div>
+        <nav class="nav flex-column">
+          <a class="doc-link active" href="#sec-brand"><i data-lucide="image" class="icon-xs"></i> 01. Brand & Logo</a>
+          <a class="doc-link" href="#sec-colors"><i data-lucide="palette" class="icon-xs"></i> 02. Color Tokens (:root)</a>
+          <a class="doc-link" href="#sec-typography"><i data-lucide="type" class="icon-xs"></i> 03. Tipografi (Inter)</a>
+          <a class="doc-link" href="#sec-layout"><i data-lucide="ruler" class="icon-xs"></i> 04. Dimensi Layout</a>
+          <a class="doc-link" href="#sec-radius"><i data-lucide="box" class="icon-xs"></i> 05. Radius & Borders</a>
+          <a class="doc-link" href="#sec-icons"><i data-lucide="sparkles" class="icon-xs"></i> 06. Ikonografi (.icon-*)</a>
+        </nav>
+
+        <div class="doc-group-title">Kode Komponen Asli</div>
+        <nav class="nav flex-column">
+          <a class="doc-link" href="#sec-buttons"><i data-lucide="mouse-pointer" class="icon-xs"></i> 07. Tombol (.btn-*)</a>
+          <a class="doc-link" href="#sec-forms"><i data-lucide="form-input" class="icon-xs"></i> 08. Form & Search Input</a>
+          <a class="doc-link" href="#sec-badges"><i data-lucide="tag" class="icon-xs"></i> 09. Status Badges</a>
+          <a class="doc-link" href="#sec-metrics"><i data-lucide="layout-grid" class="icon-xs"></i> 10. Metric Card KPI</a>
+          <a class="doc-link" href="#sec-tables"><i data-lucide="table" class="icon-xs"></i> 11. Table Modern</a>
+          <a class="doc-link" href="#sec-pos"><i data-lucide="shopping-cart" class="icon-xs"></i> 12. POS Card & Kasir</a>
+          <a class="doc-link" href="#sec-rbac"><i data-lucide="shield-check" class="icon-xs"></i> 13. RBAC (Owner vs Kasir)</a>
+        </nav>
+      </div>
+
+      <div class="pt-3 border-top mt-3">
+        <div class="d-grid gap-2 mb-2">
+          <a href="index.html" class="btn btn-sm btn-standard btn-standard-outline w-100 justify-content-start">
+            <i data-lucide="arrow-left" class="icon-xs"></i> Buka Aplikasi POS
+          </a>
+          <a href="preview-modals.html" class="btn btn-sm btn-standard btn-standard-outline w-100 justify-content-start">
+            <i data-lucide="layers" class="icon-xs"></i> Preview Modal
+          </a>
+        </div>
+        <div class="text-muted text-center" style="font-size: 0.68rem;">PBL Polibatam &bull; Semester 1</div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="doc-main">
+
+      <!-- HEADER HERO -->
+      <div class="foundation-box">
+        <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+          <div>
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <span class="badge bg-primary text-white px-2.5 py-1 fw-semibold" style="font-size: 0.72rem;">100% CODE-ACCURATE</span>
+              <span class="badge bg-light text-secondary border px-2.5 py-1" style="font-size: 0.72rem;">Vanilla CSS & Bootstrap 5</span>
+            </div>
+            <h1 class="fw-bold text-dark mb-1" style="font-size: 1.75rem; letter-spacing: -0.02em;">Dokumentasi UI Foundation & Design System</h1>
+            <p class="text-muted mb-0" style="max-width: 680px; font-size: 0.875rem; line-height: 1.5;">
+              Semua token warna, kelas CSS, ukuran font, dan komponen di halaman ini <strong>100% sesuai dengan file CSS asli</strong> di dalam codebase (<code>assets/style.css</code>, <code>dashboard.css</code>, <code>kasir.css</code>, dan <code>riwayat-transaksi.css</code>).
+            </p>
+          </div>
+          <div class="d-flex flex-column align-items-md-end gap-2 flex-shrink-0 no-print">
+            <button onclick="window.print()" class="btn btn-standard btn-standard-outline">
+              <i data-lucide="printer" class="icon-xs"></i> Cetak / Simpan PDF
+            </button>
+            <span class="text-muted" style="font-size: 0.72rem;">Klik kotak warna untuk menyalin nilai HEX / Token.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 01. BRAND & LOGO -->
+      <section id="sec-brand" class="foundation-box">
+        <div class="foundation-header">
+          <div>
+            <h2 class="foundation-title"><i data-lucide="image" class="text-primary icon-md"></i> 01. Brand & Logo Assets</h2>
+            <p class="foundation-desc">Aset logo resmi yang ada di folder <code>assets/image/</code> dan di-render di Sidebar.</p>
+          </div>
+          <span class="token-code">assets/image/</span>
+        </div>
+
+        <div class="row g-3">
+          <!-- Logo Icon -->
+          <div class="col-md-6 col-lg-4">
+            <div class="p-3 border rounded text-center bg-white h-100 d-flex flex-column justify-content-between">
+              <div>
+                <span class="badge bg-light text-muted border mb-3">Logo Icon (.brand-logo-img)</span>
+                <div class="p-3 bg-subtle rounded d-flex align-items-center justify-content-center mb-2" style="min-height: 80px;">
+                  <img src="assets/image/logo.png" alt="Logo Icon" class="brand-logo-img">
+                </div>
+              </div>
+              <div class="text-muted font-monospace" style="font-size: 0.72rem;">assets/image/logo.png (50x50px)</div>
+            </div>
+          </div>
+
+          <!-- Logo Text -->
+          <div class="col-md-6 col-lg-4">
+            <div class="p-3 border rounded text-center bg-white h-100 d-flex flex-column justify-content-between">
+              <div>
+                <span class="badge bg-light text-muted border mb-3">Logo Wordmark (.brand-text-img)</span>
+                <div class="p-3 bg-subtle rounded d-flex align-items-center justify-content-center mb-2" style="min-height: 80px;">
+                  <img src="assets/image/warungku.png" alt="Wordmark" class="brand-text-img">
+                </div>
+              </div>
+              <div class="text-muted font-monospace" style="font-size: 0.72rem;">assets/image/warungku.png (h: 44px)</div>
+            </div>
+          </div>
+
+          <!-- Brand Container Spec -->
+          <div class="col-md-12 col-lg-4">
+            <div class="p-3 border rounded bg-white h-100">
+              <span class="badge bg-light text-muted border mb-3">CSS Class Struktur</span>
+              <div class="d-flex flex-column gap-2" style="font-size: 0.8rem;">
+                <div><span class="token-code">.sidebar-brand-header</span><br><small class="text-muted">height: var(--topbar-height); padding: 0 1.25rem;</small></div>
+                <div><span class="token-code">.brand-logo-container</span><br><small class="text-muted">display: flex; align-items: center; gap: 0.85rem;</small></div>
+                <div><span class="token-code">.brand-icon-box</span><br><small class="text-muted">width: 34px; height: 34px; border-radius: 4px;</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02. COLOR TOKENS -->
+      <section id="sec-colors" class="foundation-box">
+        <div class="foundation-header">
+          <div>
+            <h2 class="foundation-title"><i data-lucide="palette" class="text-primary icon-md"></i> 02. Color Tokens (:root)</h2>
+            <p class="foundation-desc">Seluruh CSS Variable warna yang terdefinisi di baris 1-22 file <code>assets/style.css</code>.</p>
+          </div>
+          <span class="token-code">assets/style.css (:root)</span>
+        </div>
+
+        <!-- Primary Brand -->
+        <div class="token-subhead"><i data-lucide="droplet" class="icon-xs text-primary"></i> Primary Brand Tokens</div>
+        <div class="row g-3 mb-3">
+          <div class="col-6 col-md-3">
+            <div class="color-swatch-item" onclick="copyToken('#2563eb', '--primary-color')">
+              <div class="swatch-fill" style="background-color: #2563eb;">
+                <span class="badge bg-dark bg-opacity-50 text-white" style="font-size: 0.65rem;">Brand Primary</span>
+              </div>
+              <div class="swatch-content">
+                <div>
+                  <div class="swatch-label">Primary Color</div>
+                  <span class="swatch-token-name">--primary-color</span>
+                </div>
+                <div class="swatch-meta"><span>#2563eb</span> <i data-lucide="copy" class="icon-xs"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <div class="color-swatch-item" onclick="copyToken('#1d4ed8', '--primary-hover')">
+              <div class="swatch-fill" style="background-color: #1d4ed8;">
+                <span class="badge bg-dark bg-opacity-50 text-white" style="font-size: 0.65rem;">Hover</span>
+              </div>
+              <div class="swatch-content">
+                <div>
+                  <div class="swatch-label">Primary Hover</div>
+                  <span class="swatch-token-name">--primary-hover</span>
+                </div>
+                <div class="swatch-meta"><span>#1d4ed8</span> <i data-lucide="copy" class="icon-xs"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <div class="color-swatch-item" onclick="copyToken('#eff6ff', '--primary-light')">
+              <div class="swatch-fill border-bottom" style="background-color: #eff6ff;">
+                <span class="badge bg-light text-dark border" style="font-size: 0.65rem;">Tint / Active</span>
+              </div>
+              <div class="swatch-content">
+                <div>
+                  <div class="swatch-label">Primary Light</div>
+                  <span class="swatch-token-name">--primary-light</span>
+                </div>
+                <div class="swatch-meta"><span>#eff6ff</span> <i data-lucide="copy" class="icon-xs"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <div class="color-swatch-item" onclick="copyToken('#2563eb', '--border-focus')">
+              <div class="swatch-fill" style="background-color: #2563eb;">
+                <span class="badge bg-dark bg-opacity-50 text-white" style="font-size: 0.65rem;">Outline</span>
+              </div>
+              <div class="swatch-content">
+                <div>
+                  <div class="swatch-label">Border Focus</div>
+                  <span class="swatch-token-name">--border-focus</span>
+                </div>
+                <div class="swatch-meta"><span>#2563eb</span> <i data-lucide="copy" class="icon-xs"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Semantic Colors -->
+        <div class="token-subhead"><i data-lucide="alert-triangle" class="icon-xs text-warning"></i> Semantic Status Tokens</div>
+        <div class="row g-3 mb-3">
+          <div class="col-6 col-md-4">
+            <div class="color-swatch-item" onclick="copyToken('#16a34a', '--success-color')">
+              <div class="swatch-fill" style="background-color: #16a34a;">
+                <span class="badge bg-dark bg-opacity-50 text-white" style="font-size: 0.65rem;">Lunas / Naik</span>
+              </div>
+              <div class="swatch-content">
+                <div>
+                  <div class="swatch-label">Success Color</div>
+                  <span class="swatch-token-name">--success-color</span>
+                </div>
+                <div class="swatch-meta"><span>#16a34a</span> <i data-lucide="copy" class="icon-xs"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-4">
+            <div class="color-swatch-item" onclick="copyToken('#d97706', '--warning-color')">
+              <div class="swatch-fill" style="background-color: #d97706;">
+                <span class="badge bg-dark bg-opacity-50 text-white" style="font-size: 0.65rem;">Pending / Menipis</span>
+              </div>
+              <div class="swatch-content">
+                <div>
+                  <div class="swatch-label">Warning Color</div>
+                  <span class="swatch-token-name">--warning-color</span>
+                </div>
+                <div class="swatch-meta"><span>#d97706</span> <i data-lucide="copy" class="icon-xs"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-4">
+            <div class="color-swatch-item" onclick="copyToken('#dc2626', '--danger-color')">
+              <div class="swatch-fill" style="background-color: #dc2626;">
+                <span class="badge bg-dark bg-opacity-50 text-white" style="font-size: 0.65rem;">Batal / Habis</span>
+              </div>
+              <div class="swatch-content">
+                <div>
+                  <div class="swatch-label">Danger Color</div>
+                  <span class="swatch-token-name">--danger-color</span>
+                </div>
+                <div class="swatch-meta"><span>#dc2626</span> <i data-lucide="copy" class="icon-xs"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Surfaces & Texts -->
+        <div class="token-subhead"><i data-lucide="layers" class="icon-xs text-secondary"></i> Background, Text & Border Tokens</div>
+        <div class="row g-3">
+          <div class="col-6 col-md-3">
+            <div class="color-swatch-item" onclick="copyToken('#0f172a', '--text-main')">
+              <div class="swatch-fill" style="background-color: #0f172a;">
+                <span class="badge bg-light text-dark" style="font-size: 0.65rem;">Main Text</span>
+              </div>
+              <div class="swatch-content">
+                <div>
+                  <div class="swatch-label">Text Main</div>
+                  <span class="swatch-token-name">--text-main</span>
+                </div>
+                <div class="swatch-meta"><span>#0f172a</span> <i data-lucide="copy" class="icon-xs"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <div class="color-swatch-item" onclick="copyToken('#475569', '--text-muted')">
+              <div class="swatch-fill" style="background-color: #475569;">
+                <span class="badge bg-dark bg-opacity-50 text-white" style="font-size: 0.65rem;">Body / Muted</span>
+              </div>
+              <div class="swatch-content">
+                <div>
+                  <div class="swatch-label">Text Muted</div>
+                  <span class="swatch-token-name">--text-muted</span>
+                </div>
+                <div class="swatch-meta"><span>#475569</span> <i data-lucide="copy" class="icon-xs"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <div class="color-swatch-item" onclick="copyToken('#64748b', '--text-subtle')">
+              <div class="swatch-fill" style="background-color: #64748b;">
+                <span class="badge bg-dark bg-opacity-50 text-white" style="font-size: 0.65rem;">Icons / Sub</span>
+              </div>
+              <div class="swatch-content">
+                <div>
+                  <div class="swatch-label">Text Subtle</div>
+                  <span class="swatch-token-name">--text-subtle</span>
+                </div>
+                <div class="swatch-meta"><span>#64748b</span> <i data-lucide="copy" class="icon-xs"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <div class="color-swatch-item" onclick="copyToken('#e2e8f0', '--border-color')">
+              <div class="swatch-fill border-bottom" style="background-color: #e2e8f0;">
+                <span class="badge bg-light text-dark border" style="font-size: 0.65rem;">Borders</span>
+              </div>
+              <div class="swatch-content">
+                <div>
+                  <div class="swatch-label">Border Color</div>
+                  <span class="swatch-token-name">--border-color</span>
+                </div>
+                <div class="swatch-meta"><span>#e2e8f0</span> <i data-lucide="copy" class="icon-xs"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <div class="color-swatch-item" onclick="copyToken('#ffffff', '--bg-surface')">
+              <div class="swatch-fill border-bottom" style="background-color: #ffffff;">
+                <span class="badge bg-light text-dark border" style="font-size: 0.65rem;">Cards / Modals</span>
+              </div>
+              <div class="swatch-content">
+                <div>
+                  <div class="swatch-label">BG Surface</div>
+                  <span class="swatch-token-name">--bg-surface</span>
+                </div>
+                <div class="swatch-meta"><span>#ffffff</span> <i data-lucide="copy" class="icon-xs"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <div class="color-swatch-item" onclick="copyToken('#f8fafc', '--bg-subtle')">
+              <div class="swatch-fill border-bottom" style="background-color: #f8fafc;">
+                <span class="badge bg-light text-dark border" style="font-size: 0.65rem;">Table Head</span>
+              </div>
+              <div class="swatch-content">
+                <div>
+                  <div class="swatch-label">BG Subtle</div>
+                  <span class="swatch-token-name">--bg-subtle</span>
+                </div>
+                <div class="swatch-meta"><span>#f8fafc</span> <i data-lucide="copy" class="icon-xs"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <div class="color-swatch-item" onclick="copyToken('#f4f7fe', '--bg-app')">
+              <div class="swatch-fill border-bottom" style="background-color: #f4f7fe;">
+                <span class="badge bg-light text-dark border" style="font-size: 0.65rem;">Body Canvas</span>
+              </div>
+              <div class="swatch-content">
+                <div>
+                  <div class="swatch-label">BG App</div>
+                  <span class="swatch-token-name">--bg-app</span>
+                </div>
+                <div class="swatch-meta"><span>#f4f7fe</span> <i data-lucide="copy" class="icon-xs"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03. TYPOGRAPHY -->
+      <section id="sec-typography" class="foundation-box">
+        <div class="foundation-header">
+          <div>
+            <h2 class="foundation-title"><i data-lucide="type" class="text-primary icon-md"></i> 03. Tipografi (Inter)</h2>
+            <p class="foundation-desc"><code>--font-family: 'Inter', system-ui, -apple-system, sans-serif;</code></p>
+          </div>
+          <span class="token-code">assets/style.css:2</span>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-modern align-middle mb-0">
+            <thead>
+              <tr>
+                <th style="width: 220px;">Role / Konteks</th>
+                <th style="width: 160px;">Ukuran & Weight</th>
+                <th>Pratinjau Nyata</th>
+                <th style="width: 180px;">CSS Target</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="fw-semibold">Dashboard Metric Value</td>
+                <td class="font-monospace text-muted small">1.25rem (1.35rem on xl)<br>font-weight: 700</td>
+                <td><div class="metric-value text-primary">Rp 12.850.000</div></td>
+                <td><span class="token-code">.metric-value</span></td>
+              </tr>
+              <tr>
+                <td class="fw-semibold">Page Title / Section</td>
+                <td class="font-monospace text-muted small">1.25rem (20px)<br>font-weight: 700</td>
+                <td><h4 class="mb-0 fw-bold" style="font-size: 1.25rem;">Riwayat Transaksi Penjualan</h4></td>
+                <td><span class="token-code">h4.fw-bold</span></td>
+              </tr>
+              <tr>
+                <td class="fw-semibold">Card / Modal Header</td>
+                <td class="font-monospace text-muted small">0.9rem - 1.0rem<br>font-weight: 600</td>
+                <td><div class="fw-semibold">Daftar Stok Produk Warung</div></td>
+                <td><span class="token-code">.card-header-clean</span></td>
+              </tr>
+              <tr>
+                <td class="fw-semibold">Navigation Link</td>
+                <td class="font-monospace text-muted small">0.875rem (14px)<br>font-weight: 500 / 600</td>
+                <td><div class="nav-link-custom active d-inline-flex px-2 py-1"><i data-lucide="layout-grid" class="icon-xs"></i> Dashboard</div></td>
+                <td><span class="token-code">.nav-link-custom</span></td>
+              </tr>
+              <tr>
+                <td class="fw-semibold">Table Body Cell</td>
+                <td class="font-monospace text-muted small">0.8rem (12.8px)<br>font-weight: 400 / 500</td>
+                <td><div>Minyak Goreng Bimoli 2L &bull; Qty: 2</div></td>
+                <td><span class="token-code">.table-modern td</span></td>
+              </tr>
+              <tr>
+                <td class="fw-semibold">Table Header (TH)</td>
+                <td class="font-monospace text-muted small">0.7rem (11.2px)<br>font-weight: 600 UPPER</td>
+                <td><span class="text-uppercase fw-semibold text-muted" style="font-size: 0.7rem; letter-spacing: 0.03em;">NO. FAKTUR &bull; TOTAL</span></td>
+                <td><span class="token-code">.table-modern thead th</span></td>
+              </tr>
+              <tr>
+                <td class="fw-semibold">Status Badge</td>
+                <td class="font-monospace text-muted small">0.7rem<br>font-weight: 600</td>
+                <td><span class="badge-status success"><i data-lucide="check" class="icon-xs"></i> Lunas</span></td>
+                <td><span class="token-code">.badge-status</span></td>
+              </tr>
+              <tr>
+                <td class="fw-semibold">No. Faktur Monospace</td>
+                <td class="font-monospace text-muted small">0.775rem<br>Consolas / Monospace</td>
+                <td><span class="trx-faktur">#TRX-2026-001</span></td>
+                <td><span class="token-code">.trx-faktur</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 04. LAYOUT METRICS -->
+      <section id="sec-layout" class="foundation-box">
+        <div class="foundation-header">
+          <div>
+            <h2 class="foundation-title"><i data-lucide="ruler" class="text-primary icon-md"></i> 04. Dimensi Layout & Spacing</h2>
+            <p class="foundation-desc">Dimensi layout tetap yang mengatur sidebar, topbar, dan breakpoint aplikasi.</p>
+          </div>
+          <span class="token-code">assets/style.css:29-31</span>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="p-3 border rounded text-center bg-subtle">
+              <div class="text-muted small">Lebar Sidebar</div>
+              <div class="fs-4 fw-bold font-monospace text-primary">250px</div>
+              <span class="token-code">--sidebar-width: 250px</span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="p-3 border rounded text-center bg-subtle">
+              <div class="text-muted small">Tinggi Topbar</div>
+              <div class="fs-4 fw-bold font-monospace text-primary">70px</div>
+              <span class="token-code">--topbar-height: 70px</span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="p-3 border rounded text-center bg-subtle">
+              <div class="text-muted small">Mobile Breakpoint</div>
+              <div class="fs-4 fw-bold font-monospace text-primary">768px</div>
+              <span class="token-code">@media (max-width: 768px)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05. RADIUS & BORDERS -->
+      <section id="sec-radius" class="foundation-box">
+        <div class="foundation-header">
+          <div>
+            <h2 class="foundation-title"><i data-lucide="box" class="text-primary icon-md"></i> 05. Radius & Borders</h2>
+            <p class="foundation-desc">Kelengkungan sudut token asli <code>--radius-sm</code>, <code>--radius-md</code>, <code>--radius-lg</code>.</p>
+          </div>
+          <span class="token-code">assets/style.css:25-27</span>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-6 col-md-3">
+            <div class="p-3 border rounded text-center bg-white">
+              <div class="p-2 bg-subtle border d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 50px; height: 50px; border-radius: var(--radius-sm);">
+                <span class="font-monospace fw-bold small">4px</span>
+              </div>
+              <div class="fw-semibold small">Radius SM (4px)</div>
+              <span class="token-code mt-1">--radius-sm</span>
+              <div class="text-muted mt-1" style="font-size: 0.7rem;">.btn-standard, inputs, badges</div>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <div class="p-3 border rounded text-center bg-white">
+              <div class="p-2 bg-subtle border d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 50px; height: 50px; border-radius: var(--radius-md);">
+                <span class="font-monospace fw-bold small">6px</span>
+              </div>
+              <div class="fw-semibold small">Radius MD (6px)</div>
+              <span class="token-code mt-1">--radius-md</span>
+              <div class="text-muted mt-1" style="font-size: 0.7rem;">Dropdowns, popovers</div>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <div class="p-3 border rounded text-center bg-white">
+              <div class="p-2 bg-subtle border d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 50px; height: 50px; border-radius: var(--radius-lg);">
+                <span class="font-monospace fw-bold small">8px</span>
+              </div>
+              <div class="fw-semibold small">Radius LG (8px)</div>
+              <span class="token-code mt-1">--radius-lg</span>
+              <div class="text-muted mt-1" style="font-size: 0.7rem;">.card-modern, modals</div>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <div class="p-3 border rounded text-center bg-white">
+              <div class="p-2 bg-subtle border d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 50px; height: 50px; border-radius: 50%;">
+                <span class="font-monospace fw-bold small">50%</span>
+              </div>
+              <div class="fw-semibold small">Circle (50%)</div>
+              <span class="token-code mt-1">border-radius: 50%</span>
+              <div class="text-muted mt-1" style="font-size: 0.7rem;">.trx-avatar, avatar-box</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 06. ICONOGRAPHY -->
+      <section id="sec-icons" class="foundation-box">
+        <div class="foundation-header">
+          <div>
+            <h2 class="foundation-title"><i data-lucide="sparkles" class="text-primary icon-md"></i> 06. Ikonografi (Lucide Classes)</h2>
+            <p class="foundation-desc">Kelas ukuran icon yang ada di file <code>assets/style.css:388-412</code>.</p>
+          </div>
+          <span class="token-code">assets/style.css (.icon-*)</span>
+        </div>
+
+        <div class="p-3 border rounded bg-subtle mb-3">
+          <div class="d-flex flex-wrap align-items-center gap-4">
+            <div class="d-flex align-items-center gap-2">
+              <div class="p-1.5 bg-white border rounded"><i data-lucide="shopping-cart" class="icon-xs text-primary"></i></div>
+              <div>
+                <div class="fw-semibold" style="font-size: 0.8rem;">.icon-xs (0.85rem / 14px)</div>
+                <small class="text-muted font-monospace">Buttons, inline text</small>
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <div class="p-1.5 bg-white border rounded"><i data-lucide="shopping-cart" class="icon-sm text-primary"></i></div>
+              <div>
+                <div class="fw-semibold" style="font-size: 0.8rem;">.icon-sm (1.0rem / 16px)</div>
+                <small class="text-muted font-monospace">Action buttons, search</small>
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <div class="p-1.5 bg-white border rounded"><i data-lucide="shopping-cart" class="icon-md text-primary"></i></div>
+              <div>
+                <div class="fw-semibold" style="font-size: 0.8rem;">.icon-md (1.1rem / 18px)</div>
+                <small class="text-muted font-monospace">Nav sidebar icon</small>
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <div class="p-1.5 bg-white border rounded"><i data-lucide="shopping-cart" class="icon-lg text-primary"></i></div>
+              <div>
+                <div class="fw-semibold" style="font-size: 0.8rem;">.icon-lg (1.25rem / 20px)</div>
+                <small class="text-muted font-monospace">Topbar header icon</small>
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <div class="p-1.5 bg-white border rounded"><i data-lucide="shopping-cart" class="icon-xl text-primary"></i></div>
+              <div>
+                <div class="fw-semibold" style="font-size: 0.8rem;">.icon-xl (1.65rem / 26px)</div>
+                <small class="text-muted font-monospace">Metric card icon</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 07. BUTTONS -->
+      <section id="sec-buttons" class="foundation-box">
+        <div class="foundation-header">
+          <div>
+            <h2 class="foundation-title"><i data-lucide="mouse-pointer" class="text-primary icon-md"></i> 07. Tombol & Aksi (.btn-*)</h2>
+            <p class="foundation-desc">Kelas tombol resmi yang ada di <code>assets/style.css:226-276</code> dan <code>kasir.css</code>.</p>
+          </div>
+          <span class="token-code">assets/style.css</span>
+        </div>
+
+        <div class="row g-3 align-items-end">
+          <div class="col-md-3">
+            <label class="text-muted small fw-semibold mb-1 d-block">.btn-standard-primary</label>
+            <button class="btn btn-standard btn-standard-primary w-100">
+              <i data-lucide="plus" class="icon-xs"></i> Tambah Produk
+            </button>
+          </div>
+
+          <div class="col-md-3">
+            <label class="text-muted small fw-semibold mb-1 d-block">.btn-standard-outline</label>
+            <button class="btn btn-standard btn-standard-outline w-100">
+              <i data-lucide="filter" class="icon-xs"></i> Filter Data
+            </button>
+          </div>
+
+          <div class="col-md-3">
+            <label class="text-muted small fw-semibold mb-1 d-block">.btn-circle (38x38px)</label>
+            <div class="d-flex gap-2">
+              <button class="btn-circle" title="Print"><i data-lucide="printer" class="icon-sm"></i></button>
+              <button class="btn-circle" title="Edit"><i data-lucide="edit" class="icon-sm"></i></button>
+              <button class="btn-circle text-danger" title="Delete"><i data-lucide="trash-2" class="icon-sm"></i></button>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <label class="text-muted small fw-semibold mb-1 d-block">.btn-category-pill.active</label>
+            <div class="d-flex gap-1">
+              <button class="btn-category-pill active">Semua</button>
+              <button class="btn-category-pill">Sembako</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 08. FORM CONTROLS -->
+      <section id="sec-forms" class="foundation-box">
+        <div class="foundation-header">
+          <div>
+            <h2 class="foundation-title"><i data-lucide="form-input" class="text-primary icon-md"></i> 08. Form & Search Controls</h2>
+            <p class="foundation-desc">Kelas form resmi di <code>assets/style.css:184-224</code>.</p>
+          </div>
+          <span class="token-code">assets/style.css</span>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label class="form-label text-muted small fw-semibold">.form-control-standard</label>
+            <input type="text" class="form-control-standard w-100" placeholder="Contoh: Beras Ramos 5kg" value="Minyak Goreng Bimoli 2L">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label text-muted small fw-semibold">.form-select-standard</label>
+            <select class="form-select-standard w-100">
+              <option selected>Sembako & Kebutuhan Pokok</option>
+              <option>Minuman</option>
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label text-muted small fw-semibold">.search-input-box + .search-icon-pos</label>
+            <div class="position-relative">
+              <i data-lucide="search" class="icon-sm search-icon-pos"></i>
+              <input type="text" class="search-input-box" placeholder="Cari transaksi / produk...">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 09. BADGES & STATUS -->
+      <section id="sec-badges" class="foundation-box">
+        <div class="foundation-header">
+          <div>
+            <h2 class="foundation-title"><i data-lucide="tag" class="text-primary icon-md"></i> 09. Status Badges (.badge-status)</h2>
+            <p class="foundation-desc">Kelas badge resmi di <code>assets/style.css:286-322</code>.</p>
+          </div>
+          <span class="token-code">assets/style.css</span>
+        </div>
+
+        <div class="d-flex flex-wrap align-items-center gap-3">
+          <div class="p-2.5 border rounded bg-white">
+            <span class="badge-status success"><i data-lucide="check-circle" class="icon-xs"></i> Lunas</span>
+            <span class="token-code ms-2">.badge-status.success</span>
+          </div>
+
+          <div class="p-2.5 border rounded bg-white">
+            <span class="badge-status warning"><i data-lucide="clock" class="icon-xs"></i> Pending</span>
+            <span class="token-code ms-2">.badge-status.warning</span>
+          </div>
+
+          <div class="p-2.5 border rounded bg-white">
+            <span class="badge-status danger"><i data-lucide="x-circle" class="icon-xs"></i> Batal</span>
+            <span class="token-code ms-2">.badge-status.danger</span>
+          </div>
+
+          <div class="p-2.5 border rounded bg-white">
+            <span class="badge-status neutral"><i data-lucide="file-text" class="icon-xs"></i> Draft</span>
+            <span class="token-code ms-2">.badge-status.neutral</span>
+          </div>
+
+          <div class="p-2.5 border rounded bg-white">
+            <span class="trx-faktur">#TRX-2026-001</span>
+            <span class="token-code ms-2">.trx-faktur</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10. METRIC CARDS -->
+      <section id="sec-metrics" class="foundation-box">
+        <div class="foundation-header">
+          <div>
+            <h2 class="foundation-title"><i data-lucide="layout-grid" class="text-primary icon-md"></i> 10. Metric Card KPI</h2>
+            <p class="foundation-desc">Kelas kartu dashboard di <code>assets/style.css:324-344</code> dan <code>pages/dashboard/style.css</code>.</p>
+          </div>
+          <span class="token-code">.card-modern.metric-card</span>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="card-modern metric-card p-3">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <span class="text-muted metric-label">Total Penjualan Hari Ini</span>
+                  <div class="metric-value text-dark mt-1">Rp 2.450.000</div>
+                </div>
+                <div class="metric-icon-box metric-icon-blue">
+                  <i data-lucide="wallet" class="icon-lg"></i>
+                </div>
+              </div>
+              <div class="text-success small mt-2"><i data-lucide="trending-up" class="icon-xs"></i> +12.5% dari kemarin</div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card-modern metric-card p-3">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <span class="text-muted metric-label">Jumlah Transaksi</span>
+                  <div class="metric-value text-dark mt-1">84 Struk</div>
+                </div>
+                <div class="metric-icon-box metric-icon-green">
+                  <i data-lucide="shopping-bag" class="icon-lg"></i>
+                </div>
+              </div>
+              <div class="text-muted small mt-2"><i data-lucide="clock" class="icon-xs"></i> Rata-rata Rp 29.166</div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card-modern metric-card p-3">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <span class="text-muted metric-label">Stok Menipis</span>
+                  <div class="metric-value text-warning mt-1">3 Produk</div>
+                </div>
+                <div class="metric-icon-box metric-icon-orange">
+                  <i data-lucide="alert-triangle" class="icon-lg"></i>
+                </div>
+              </div>
+              <div class="text-danger small mt-2"><i data-lucide="arrow-right" class="icon-xs"></i> Perlu restock</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11. TABLE MODERN -->
+      <section id="sec-tables" class="foundation-box">
+        <div class="foundation-header">
+          <div>
+            <h2 class="foundation-title"><i data-lucide="table" class="text-primary icon-md"></i> 11. Table Modern (.table-modern)</h2>
+            <p class="foundation-desc">Kelas tabel resmi di <code>assets/style.css:346-372</code>.</p>
+          </div>
+          <span class="token-code">assets/style.css</span>
+        </div>
+
+        <div class="card-modern overflow-hidden">
+          <div class="card-header-clean">
+            <h6 class="mb-0 fw-semibold" style="font-size: 0.85rem;">Daftar Transaksi Terbaru</h6>
+            <button class="btn btn-sm btn-standard btn-standard-outline"><i data-lucide="download" class="icon-xs"></i> Export</button>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-modern align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>No. Faktur</th>
+                  <th>Waktu</th>
+                  <th>Kasir</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th class="text-end">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="trx-faktur">#TRX-2026-001</span></td>
+                  <td>
+                    <div class="trx-waktu">
+                      <span class="trx-tanggal">03 Okt 2026</span>
+                      <span class="trx-jam">14:20 WIB</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <img src="assets/image/logo.png" class="trx-avatar" alt="Kasir">
+                      <span>Budi Santoso</span>
+                    </div>
+                  </td>
+                  <td class="fw-semibold">Rp 75.000</td>
+                  <td><span class="badge-status success"><i data-lucide="check" class="icon-xs"></i> Lunas</span></td>
+                  <td class="text-end">
+                    <button class="btn-circle btn-sm d-inline-flex" title="Detail"><i data-lucide="eye" class="icon-xs"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 12. POS CARD & KASIR -->
+      <section id="sec-pos" class="foundation-box">
+        <div class="foundation-header">
+          <div>
+            <h2 class="foundation-title"><i data-lucide="shopping-cart" class="text-primary icon-md"></i> 12. POS Product Card & Kasir</h2>
+            <p class="foundation-desc">Kelas POS Card di <code>pages/kasir/style.css:38-99</code>.</p>
+          </div>
+          <span class="token-code">pages/kasir/style.css</span>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-6 col-lg-4">
+            <div class="card-modern product-pos-card p-3 d-flex flex-column justify-content-between">
+              <div>
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                  <span class="badge bg-light text-muted border product-category-badge">Sembako</span>
+                  <span class="text-muted small" style="font-size: 0.75rem;">Stok: 24</span>
+                </div>
+                <h6 class="product-title mb-1">Minyak Goreng Bimoli Spesial 2 Liter Pouch</h6>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top">
+                <div class="fw-bold text-primary" style="font-size: 0.95rem;">Rp 38.500</div>
+                <button class="btn btn-sm btn-outline-primary rounded-circle btn-add-pos d-flex align-items-center justify-content-center p-0">
+                  <i data-lucide="plus" class="icon-xs"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 13. RBAC -->
+      <section id="sec-rbac" class="foundation-box">
+        <div class="foundation-header">
+          <div>
+            <h2 class="foundation-title"><i data-lucide="shield-check" class="text-primary icon-md"></i> 13. Role-Based Access Control (RBAC)</h2>
+            <p class="foundation-desc">Sistem kontrol hak akses via atribut <code>data-role="owner"</code> pada file <code>assets/app.js:145-165</code>.</p>
+          </div>
+          <span class="token-code">data-role="owner"</span>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="p-3 border rounded bg-white h-100">
+              <span class="badge bg-primary text-white mb-2">Role: Owner</span>
+              <ul class="list-unstyled mb-0 d-flex flex-column gap-1.5 small text-muted">
+                <li><i data-lucide="check" class="icon-xs text-success me-1"></i> Dashboard & Analytics grafik laba</li>
+                <li><i data-lucide="check" class="icon-xs text-success me-1"></i> Manajemen Akun Karyawan (pages/manajemen-akun)</li>
+                <li><i data-lucide="check" class="icon-xs text-success me-1"></i> Laporan Keuangan Laba Rugi</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="p-3 border rounded bg-white h-100">
+              <span class="badge bg-secondary text-white mb-2">Role: Kasir</span>
+              <ul class="list-unstyled mb-0 d-flex flex-column gap-1.5 small text-muted">
+                <li><i data-lucide="check" class="icon-xs text-success me-1"></i> Menu Kasir POS (pages/kasir)</li>
+                <li><i data-lucide="check" class="icon-xs text-success me-1"></i> Riwayat Transaksi Penjualan</li>
+                <li><i data-lucide="x" class="icon-xs text-danger me-1"></i> Tersembunyi dari menu manajemen akun & laba rugi</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="text-center text-muted pt-3 border-top" style="font-size: 0.78rem;">
+        <p class="mb-0">WarungKu Foundation Spec &bull; Sesuai 100% dengan Codebase Asli &bull; PBL Semester 1</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <script>
+    // Init icons
+    lucide.createIcons();
+
+    // Copy function
+    function copyToken(val, label) {
+      navigator.clipboard.writeText(val).then(() => {
+        const toast = document.getElementById('copyToast');
+        const txt = document.getElementById('toastText');
+        txt.textContent = `${label} (${val}) disalin!`;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+      });
+    }
+
+    // Scrollspy
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('.foundation-box');
+      const links = document.querySelectorAll('.doc-link');
+      let currentId = '';
+
+      sections.forEach(sec => {
+        const top = sec.offsetTop - 120;
+        if (window.pageYOffset >= top) {
+          currentId = sec.getAttribute('id');
+        }
+      });
+
+      links.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentId}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

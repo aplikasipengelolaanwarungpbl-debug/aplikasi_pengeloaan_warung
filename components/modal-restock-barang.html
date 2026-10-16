@@ -1,0 +1,67 @@
+<!-- Modal Catat Restock Barang Masuk -->
+<div class="modal fade" id="modalFormRestock" tabindex="-1" aria-labelledby="modalFormRestockLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-sm rounded-4 overflow-hidden">
+      <!-- Modal Header -->
+      <div class="modal-header border-bottom px-4 py-3 bg-white">
+        <div class="d-flex align-items-center gap-2">
+          <div class="p-2 bg-primary-subtle text-primary rounded-3">
+            <i data-lucide="package-plus" class="icon-sm"></i>
+          </div>
+          <div>
+            <h6 class="modal-title fw-bold text-dark mb-0" id="modalFormRestockLabel">Catat Restock Barang</h6>
+            <small class="text-muted" style="font-size: 0.75rem;">Catat penambahan stok barang masuk</small>
+          </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Modal Body Form -->
+      <div class="modal-body p-4">
+        <form id="form-restock" onsubmit="event.preventDefault(); saveRestockFromModal();">
+          <!-- Pilih Produk -->
+          <div class="mb-3">
+            <label for="modal-restock-produk" class="form-label small fw-semibold text-muted mb-1">Pilih Barang <span class="text-danger">*</span></label>
+            <select id="modal-restock-produk" class="form-select form-control-standard" required onchange="handleModalPilihProduk(this.value)">
+              <option value="" disabled selected>-- Pilih Barang --</option>
+              <option value="PRD-001" data-nama="Beras Ramos Setra 5kg" data-satuan="Karung" data-modal="62000">Beras Ramos Setra 5kg (Stok saat ini: 8)</option>
+              <option value="PRD-002" data-nama="Minyak Goreng Bimoli 2L" data-satuan="Pcs" data-modal="31000">Minyak Goreng Bimoli 2L (Stok saat ini: 24)</option>
+              <option value="PRD-003" data-nama="Telur Ayam Negeri 1kg" data-satuan="Kg" data-modal="26000">Telur Ayam Negeri 1kg (Stok saat ini: 15)</option>
+              <option value="PRD-004" data-nama="Gula Pasir Kristal 1kg" data-satuan="Kg" data-modal="14500">Gula Pasir Kristal 1kg (Stok saat ini: 62)</option>
+              <option value="PRD-005" data-nama="Kopi Kapal Api Spesial 165g" data-satuan="Pcs" data-modal="12000">Kopi Kapal Api Spesial 165g (Stok saat ini: 40)</option>
+              <option value="PRD-006" data-nama="Mie Instan Goreng (Karton)" data-satuan="Karton" data-modal="110000">Mie Instan Goreng (Karton) (Stok saat ini: 18)</option>
+            </select>
+          </div>
+
+          <!-- Jumlah Masuk & Harga Beli -->
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <label for="modal-restock-qty" class="form-label small fw-semibold text-muted mb-1">Jumlah Masuk <span class="text-danger">*</span></label>
+              <input type="number" id="modal-restock-qty" class="form-control form-control-standard" min="1" value="10" required oninput="hitungModalRestockTotal()">
+            </div>
+            <div class="col-6">
+              <label for="modal-restock-modal" class="form-label small fw-semibold text-muted mb-1">Harga Beli / Satuan</label>
+              <input type="number" id="modal-restock-modal" class="form-control form-control-standard" value="62000" required oninput="hitungModalRestockTotal()">
+            </div>
+          </div>
+
+          <!-- Ringkasan Total Biaya -->
+          <div class="p-3 bg-light rounded-3 border d-flex justify-content-between align-items-center">
+            <span class="small text-muted">Total Biaya Beli:</span>
+            <span class="fw-bold text-dark fs-6" id="modal-restock-total-preview">Rp 620.000</span>
+          </div>
+        </form>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer border-top bg-light px-4 py-3 d-flex justify-content-between">
+        <button type="button" class="btn btn-sm btn-outline-secondary px-3 py-2 fw-medium" data-bs-dismiss="modal">
+          Batal
+        </button>
+        <button type="button" class="btn btn-sm btn-primary px-4 py-2 fw-semibold d-inline-flex align-items-center gap-2 shadow-sm" onclick="saveRestockFromModal()">
+          <i data-lucide="check" class="icon-sm"></i> Simpan &amp; Tambah Stok
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

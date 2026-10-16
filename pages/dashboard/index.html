@@ -1,126 +1,141 @@
-<!-- 4 Metric Cards (Hari Ini - Realtime Cockpit) -->
+<!-- Page Header: Dashboard Harian -->
+<div class="mb-4">
+  <h4 class="fw-bold text-dark mb-1">Dashboard Harian</h4>
+  <p class="text-muted mb-0 small">Ringkasan aktivitas operasional warung hari ini, rekonsiliasi kas, dan inventaris.</p>
+</div>
+
+<!-- 4 Kartu Metrik Finansial & Kasir Harian -->
 <div class="row g-3 mb-4">
-  <!-- Total Omzet Hari Ini -->
+  <!-- Card 1: Omzet Hari Ini -->
   <div class="col-12 col-sm-6 col-xl-3">
     <div class="card-modern p-3 h-100 metric-card">
       <div class="d-flex align-items-center justify-content-between mb-2">
-        <span class="text-muted fw-medium metric-label">Omzet Hari Ini</span>
-        <div class="metric-icon-box metric-icon-blue">
-          <i data-lucide="banknote" class="icon-lg"></i>
+        <span class="text-muted small fw-medium">Omzet Hari Ini</span>
+        <div class="metric-icon-box">
+          <i data-lucide="banknote" class="icon-sm text-primary"></i>
         </div>
       </div>
       <div class="d-flex align-items-center justify-content-between gap-2">
         <span class="metric-value text-dark">Rp 478.500</span>
       </div>
-      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">Estimasi laba bersih: <strong class="text-success">Rp 138.500</strong></small>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">38 transaksi • Rata-rata Rp 12.592</small>
     </div>
   </div>
 
-  <!-- Total Transaksi Hari Ini -->
+  <!-- Card 2: Uang Tunai di Laci Kasir -->
   <div class="col-12 col-sm-6 col-xl-3">
     <div class="card-modern p-3 h-100 metric-card">
       <div class="d-flex align-items-center justify-content-between mb-2">
-        <span class="text-muted fw-medium metric-label">Transaksi Hari Ini</span>
-        <div class="metric-icon-box metric-icon-purple">
-          <i data-lucide="receipt" class="icon-lg"></i>
+        <span class="text-muted small fw-medium">Uang Tunai di Laci</span>
+        <div class="metric-icon-box">
+          <i data-lucide="wallet" class="icon-sm text-success"></i>
         </div>
       </div>
       <div class="d-flex align-items-center justify-content-between gap-2">
-        <span class="metric-value text-dark">38 Pesanan</span>
+        <span class="metric-value text-success">Rp 369.000</span>
       </div>
-      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">Rata-rata: <strong>Rp 12.592</strong> / pesanan</small>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">26 pembayaran tunai kasir</small>
     </div>
   </div>
 
-  <!-- Uang Fisik di Laci Kasir -->
+  <!-- Card 3: Non-Tunai / QRIS -->
   <div class="col-12 col-sm-6 col-xl-3">
     <div class="card-modern p-3 h-100 metric-card">
       <div class="d-flex align-items-center justify-content-between mb-2">
-        <span class="text-muted fw-medium metric-label">Uang Kas di Laci</span>
-        <div class="metric-icon-box metric-icon-green">
-          <i data-lucide="wallet" class="icon-lg"></i>
+        <span class="text-muted small fw-medium">QRIS / Non-Tunai</span>
+        <div class="metric-icon-box">
+          <i data-lucide="qr-code" class="icon-sm text-primary"></i>
         </div>
       </div>
       <div class="d-flex align-items-center justify-content-between gap-2">
-        <span class="metric-value text-dark">Rp 369.000</span>
-        <span class="badge-status neutral">26 Trx</span>
+        <span class="metric-value text-primary">Rp 109.500</span>
       </div>
-      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">QRIS Masuk: <strong class="text-primary">Rp 109.500</strong> (12 Trx)</small>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">12 transaksi QRIS digital</small>
     </div>
   </div>
 
-  <!-- Status & Peringatan Stok -->
+  <!-- Card 4: Estimasi Laba Bersih -->
   <div class="col-12 col-sm-6 col-xl-3">
     <div class="card-modern p-3 h-100 metric-card">
       <div class="d-flex align-items-center justify-content-between mb-2">
-        <span class="text-muted fw-medium metric-label">Perlu Kulakan</span>
-        <div class="metric-icon-box metric-icon-orange">
-          <i data-lucide="alert-triangle" class="icon-lg"></i>
+        <span class="text-muted small fw-medium">Estimasi Laba Bersih</span>
+        <div class="metric-icon-box">
+          <i data-lucide="trending-up" class="icon-sm text-success"></i>
         </div>
       </div>
       <div class="d-flex align-items-center justify-content-between gap-2">
-        <span class="metric-value text-danger">1 SKU Kritis</span>
-        <span class="badge-status danger">Perhatian</span>
+        <span class="metric-value text-dark">Rp 138.500</span>
+        <span class="badge-status success">28.9%</span>
       </div>
-      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">5 SKU lainnya dalam batas aman</small>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">Margin bersih setelah modal</small>
     </div>
   </div>
 </div>
 
-<!-- Charts Section: Tren Omzet 7 Hari & Komposisi Pembayaran Hari Ini -->
+<!-- Section Grafik & Rekonsiliasi Kasir -->
 <div class="row g-3 mb-4">
-  <!-- Grafik Omzet 7 Hari (Sinkron dengan Laporan Laba Rugi) -->
+  <!-- Grafik Tren 7 Hari -->
   <div class="col-12 col-lg-8">
-    <div class="card-modern p-4 h-100">
-      <div class="d-flex align-items-center justify-content-between mb-3">
+    <div class="card-modern h-100">
+      <div class="p-3 border-bottom d-flex align-items-center justify-content-between">
         <div>
-          <h6 class="fw-bold text-dark mb-1">Tren Penjualan 7 Hari Terakhir</h6>
-          <small class="text-muted">Pergerakan omzet harian sinkron dengan buku kas</small>
+          <h6 class="fw-bold text-dark mb-0">Tren Penjualan 7 Hari Terakhir</h6>
+          <small class="text-muted">Pergerakan omzet harian menuju hari ini (24 Sep)</small>
         </div>
         <button class="btn btn-sm btn-outline-secondary rounded-btn-sm" onclick="loadPage('laporan-laba-rugi')">
           Laporan Lengkap
         </button>
       </div>
-      <div id="chart-total-profit"></div>
+      <div class="p-3">
+        <div id="chart-total-profit"></div>
+      </div>
     </div>
   </div>
 
-  <!-- Donut Chart: Metode Pembayaran Hari Ini (Kas vs QRIS) -->
+  <!-- Rekonsiliasi Kasir Hari Ini -->
   <div class="col-12 col-lg-4">
-    <div class="card-modern p-4 h-100 d-flex flex-column justify-content-between">
-      <div class="d-flex align-items-center justify-content-between mb-2">
+    <div class="card-modern h-100 d-flex flex-column justify-content-between">
+      <div class="p-3 border-bottom d-flex align-items-center justify-content-between">
         <div>
-          <h6 class="fw-bold text-dark mb-0">Pembayaran Hari Ini</h6>
-          <small class="text-muted" style="font-size: 0.75rem;">Rekonsiliasi Kasir</small>
+          <h6 class="fw-bold text-dark mb-0">Rekonsiliasi Kasir</h6>
+          <small class="text-muted">Metode bayar hari ini</small>
         </div>
-        <span class="badge bg-light text-muted border">38 Trx</span>
+        <span class="badge bg-light text-dark border">38 Trx</span>
       </div>
-      <div id="chart-customer-rate" class="my-auto"></div>
-      <div class="d-flex justify-content-around text-center pt-3 border-top">
-        <div>
-          <span class="text-muted small d-block">Tunai (Laci)</span>
-          <span class="fw-bold text-dark">Rp 369.000</span>
-          <small class="text-muted d-block" style="font-size: 0.7rem;">77.1% (26 trx)</small>
+      
+      <div class="p-3 my-auto">
+        <div id="chart-customer-rate"></div>
+      </div>
+
+      <div class="p-3 border-top bg-light">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <span class="small text-muted d-flex align-items-center gap-2">
+            <span class="badge bg-success p-1 rounded-circle" style="width: 8px; height: 8px;"></span>
+            Tunai (Laci)
+          </span>
+          <span class="small fw-bold text-dark">Rp 369.000 <span class="text-muted fw-normal" style="font-size: 0.725rem;">(77.1%)</span></span>
         </div>
-        <div>
-          <span class="text-muted small d-block">QRIS / Digital</span>
-          <span class="fw-bold text-primary">Rp 109.500</span>
-          <small class="text-muted d-block" style="font-size: 0.7rem;">22.9% (12 trx)</small>
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="small text-muted d-flex align-items-center gap-2">
+            <span class="badge bg-primary p-1 rounded-circle" style="width: 8px; height: 8px;"></span>
+            QRIS / Digital
+          </span>
+          <span class="small fw-bold text-primary">Rp 109.500 <span class="text-muted fw-normal" style="font-size: 0.725rem;">(22.9%)</span></span>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Bottom Section: Transaksi Terakhir (Live Stream) & Peringatan Stok Kritis -->
+<!-- Section Operasional: Transaksi Terakhir & Inventaris -->
 <div class="row g-3">
-  <!-- 5 Transaksi Terkini -->
+  <!-- 5 Transaksi Terkini Hari Ini -->
   <div class="col-12 col-lg-7">
     <div class="card-modern h-100">
-      <div class="p-3 d-flex align-items-center justify-content-between border-bottom">
+      <div class="p-3 border-bottom d-flex align-items-center justify-content-between">
         <div>
           <h6 class="fw-bold text-dark mb-0">Transaksi Terbaru Hari Ini</h6>
-          <small class="text-muted">Aktivitas pesanan kasir masuk</small>
+          <small class="text-muted">Catatan penjualan kasir masuk</small>
         </div>
         <button class="btn btn-sm btn-outline-secondary px-3 fw-semibold rounded-btn-sm" onclick="loadPage('riwayat-transaksi')">
           Lihat Semua
@@ -130,42 +145,74 @@
         <table class="table table-modern align-middle mb-0">
           <thead>
             <tr>
-              <th class="ps-3">No. Faktur</th>
+              <th class="ps-4">No. Faktur</th>
               <th>Waktu</th>
+              <th>Kasir</th>
               <th>Metode</th>
-              <th class="text-end pe-3">Total</th>
+              <th class="text-end">Total</th>
+              <th class="text-center pe-4" style="width: 80px;">Aksi</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="ps-3 fw-semibold text-primary">#TRX-038</td>
-              <td class="text-muted small">14:22</td>
+              <td class="ps-4 fw-semibold text-primary">#TRX-20260924-038</td>
+              <td class="text-muted small">19:42 WIB</td>
+              <td class="small text-dark">Siti Aminah</td>
               <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle">QRIS</span></td>
-              <td class="text-end pe-3 fw-bold text-dark">Rp 74.500</td>
+              <td class="text-end fw-bold text-dark">Rp 74.500</td>
+              <td class="text-center pe-4">
+                <button class="btn btn-sm btn-outline-primary py-0 px-2 rounded-btn-sm" style="font-size: 0.75rem;" data-bs-toggle="modal" data-bs-target="#modalDetailTransaksi">
+                  Struk
+                </button>
+              </td>
             </tr>
             <tr>
-              <td class="ps-3 fw-semibold text-primary">#TRX-037</td>
-              <td class="text-muted small">13:50</td>
+              <td class="ps-4 fw-semibold text-primary">#TRX-20260924-037</td>
+              <td class="text-muted small">18:15 WIB</td>
+              <td class="small text-dark">Siti Aminah</td>
               <td><span class="badge bg-success-subtle text-success border border-success-subtle">Tunai</span></td>
-              <td class="text-end pe-3 fw-bold text-dark">Rp 23.000</td>
+              <td class="text-end fw-bold text-dark">Rp 142.000</td>
+              <td class="text-center pe-4">
+                <button class="btn btn-sm btn-outline-primary py-0 px-2 rounded-btn-sm" style="font-size: 0.75rem;" data-bs-toggle="modal" data-bs-target="#modalDetailTransaksi">
+                  Struk
+                </button>
+              </td>
             </tr>
             <tr>
-              <td class="ps-3 fw-semibold text-primary">#TRX-036</td>
-              <td class="text-muted small">13:15</td>
-              <td><span class="badge bg-success-subtle text-success border border-success-subtle">Tunai</span></td>
-              <td class="text-end pe-3 fw-bold text-dark">Rp 12.000</td>
-            </tr>
-            <tr>
-              <td class="ps-3 fw-semibold text-primary">#TRX-035</td>
-              <td class="text-muted small">12:40</td>
+              <td class="ps-4 fw-semibold text-primary">#TRX-20260924-036</td>
+              <td class="text-muted small">17:05 WIB</td>
+              <td class="small text-dark">Budi Santoso</td>
               <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle">QRIS</span></td>
-              <td class="text-end pe-3 fw-bold text-dark">Rp 35.000</td>
+              <td class="text-end fw-bold text-dark">Rp 35.000</td>
+              <td class="text-center pe-4">
+                <button class="btn btn-sm btn-outline-primary py-0 px-2 rounded-btn-sm" style="font-size: 0.75rem;" data-bs-toggle="modal" data-bs-target="#modalDetailTransaksi">
+                  Struk
+                </button>
+              </td>
             </tr>
             <tr>
-              <td class="ps-3 fw-semibold text-primary">#TRX-034</td>
-              <td class="text-muted small">12:05</td>
+              <td class="ps-4 fw-semibold text-primary">#TRX-20260924-035</td>
+              <td class="text-muted small">15:30 WIB</td>
+              <td class="small text-dark">Siti Aminah</td>
               <td><span class="badge bg-success-subtle text-success border border-success-subtle">Tunai</span></td>
-              <td class="text-end pe-3 fw-bold text-dark">Rp 18.500</td>
+              <td class="text-end fw-bold text-dark">Rp 215.000</td>
+              <td class="text-center pe-4">
+                <button class="btn btn-sm btn-outline-primary py-0 px-2 rounded-btn-sm" style="font-size: 0.75rem;" data-bs-toggle="modal" data-bs-target="#modalDetailTransaksi">
+                  Struk
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td class="ps-4 fw-semibold text-primary">#TRX-20260924-034</td>
+              <td class="text-muted small">13:45 WIB</td>
+              <td class="small text-dark">Siti Aminah</td>
+              <td><span class="badge bg-success-subtle text-success border border-success-subtle">Tunai</span></td>
+              <td class="text-end fw-bold text-dark">Rp 12.000</td>
+              <td class="text-center pe-4">
+                <button class="btn btn-sm btn-outline-primary py-0 px-2 rounded-btn-sm" style="font-size: 0.75rem;" data-bs-toggle="modal" data-bs-target="#modalDetailTransaksi">
+                  Struk
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -173,49 +220,36 @@
     </div>
   </div>
 
-  <!-- Peringatan Stok & Fast Moving Quick Card -->
+  <!-- Panel Status Inventaris -->
   <div class="col-12 col-lg-5">
     <div class="card-modern h-100 d-flex flex-column justify-content-between">
-      <div class="p-3 d-flex align-items-center justify-content-between border-bottom">
-        <div>
-          <h6 class="fw-bold text-dark mb-0">Peringatan Inventaris</h6>
-          <small class="text-muted">Item yang membutuhkan tindakan</small>
-        </div>
-        <button class="btn btn-sm btn-outline-secondary px-3 fw-semibold rounded-btn-sm" onclick="loadPage('produk')">
-          Kelola Stok
+      <div class="p-3 border-bottom d-flex align-items-center justify-content-between">
+        <h6 class="fw-bold text-dark mb-0">Status Inventaris</h6>
+        <button class="btn btn-sm btn-outline-secondary rounded-btn-sm" onclick="loadPage('restock')">
+          Restock
         </button>
       </div>
 
-      <div class="p-3 d-flex flex-column gap-3 mb-auto">
-        <!-- Item Kritis -->
-        <div class="p-3 rounded-3 bg-danger-subtle border border-danger-subtle d-flex align-items-center justify-content-between">
-          <div class="d-flex align-items-center gap-2">
-            <span class="p-2 bg-white rounded-3 text-danger"><i data-lucide="alert-octagon" class="icon-sm"></i></span>
-            <div>
-              <h6 class="fw-bold text-dark mb-0 font-sm">Beras Ramos Setra 5kg</h6>
-              <small class="text-danger fw-semibold">Sisa: 8 karung (Batas min: 10)</small>
-            </div>
+      <div class="p-3 d-flex flex-column gap-3 my-auto">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <span class="fw-semibold text-dark d-block">Beras Ramos Setra 5kg</span>
+            <small class="text-danger">Stok menipis: sisa 8 karung</small>
           </div>
-          <button class="btn btn-sm btn-danger px-2 py-1 rounded-btn-sm font-sm" onclick="loadPage('produk')">
-            Restock
-          </button>
+          <span class="badge-status danger">Perlu Restock</span>
         </div>
 
-        <!-- Item Terlaris Highlight (Pintasan ringkas, bukan tabel duplikat) -->
-        <div class="p-3 rounded-3 bg-light border d-flex align-items-center justify-content-between">
-          <div class="d-flex align-items-center gap-2">
-            <span class="p-2 bg-white rounded-3 text-primary"><i data-lucide="trending-up" class="icon-sm"></i></span>
-            <div>
-              <h6 class="fw-bold text-dark mb-0 font-sm">Minyak Goreng Sawit 2L</h6>
-              <small class="text-muted">Fast Moving: 95 pcs terjual bulan ini</small>
-            </div>
+        <div class="d-flex align-items-center justify-content-between pt-3 border-top">
+          <div>
+            <span class="fw-semibold text-dark d-block">Minyak Goreng Sawit 2L</span>
+            <small class="text-muted">Terlaris hari ini: 14 terjual</small>
           </div>
-          <span class="badge bg-success-subtle text-success border border-success-subtle">Stok: 45</span>
+          <span class="badge-status success">Stok Aman (45)</span>
         </div>
       </div>
 
-      <div class="p-3 border-top bg-light text-center rounded-bottom-4">
-        <small class="text-muted">Gunakan menu <a href="#" class="text-primary text-decoration-none fw-semibold" onclick="loadPage('laporan-terlaris')">Laporan Terlaris</a> untuk analisa komprehensif.</small>
+      <div class="p-2 border-top bg-light text-center">
+        <small class="text-muted" style="font-size: 0.75rem;">Total 6 SKU aktif dalam katalog warung</small>
       </div>
     </div>
   </div>

@@ -7,7 +7,7 @@
     
     <!-- Store Title -->
     <div>
-      <span class="fw-semibold text-dark font-sm">WarungKu</span>
+      <span id="topbar-warung-name" class="fw-semibold text-dark font-sm">Warung Suka Maju</span>
     </div>
   </div>
 
@@ -42,33 +42,5 @@
       </div>
     </div>
 
-    <!-- User Profile Dropdown (Compact: Ganti Password & Logout) -->
-    <div class="dropdown ms-1">
-      <a href="#" class="d-flex align-items-center gap-2 text-decoration-none dropdown-toggle text-dark p-1 rounded-3 user-dropdown-btn" data-bs-toggle="dropdown" aria-expanded="false">
-        <div class="avatar-box bg-primary-subtle text-primary d-flex align-items-center justify-content-center">
-          <i data-lucide="user" class="icon-sm"></i>
-        </div>
-        <div class="d-none d-lg-block text-start pe-1">
-          <div class="fw-semibold user-profile-name">Budi Santoso</div>
-          <small class="text-muted user-profile-role" id="topbar-role-badge">OWNER</small>
-        </div>
-      </a>
-
-      <div class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-3 mt-2 p-1 user-profile-menu-compact">
-        <a class="dropdown-item py-1.5 px-2.5 rounded-2 d-flex align-items-center gap-2" href="#" onclick="openProfilWarungModal()">
-          <i data-lucide="store" class="icon-xs text-muted"></i>
-          <span>Profil Warung</span>
-        </a>
-        <a class="dropdown-item py-1.5 px-2.5 rounded-2 d-flex align-items-center gap-2" href="#" onclick="openChangePasswordModal()">
-          <i data-lucide="key" class="icon-xs text-muted"></i>
-          <span>Ganti Password</span>
-        </a>
-        <hr class="dropdown-divider my-1">
-        <a class="dropdown-item py-1.5 px-2.5 rounded-2 text-danger d-flex align-items-center gap-2" href="#" onclick="handleLogout()">
-          <i data-lucide="log-out" class="icon-xs"></i>
-          <span class="fw-semibold">Keluar (Logout)</span>
-        </a>
-      </div>
-    </div>
   </div>
 </div>

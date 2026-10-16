@@ -19,7 +19,7 @@ function initDashboardCharts() {
     const profitOptions = {
       series: [{
         name: 'Omzet Penjualan',
-        data: [478500, 560000, 430000, 385000, 610000, 520000, 690000]
+        data: [520000, 610000, 430000, 560000, 385000, 690000, 478500]
       }],
       chart: {
         type: 'area',
@@ -85,7 +85,7 @@ function initDashboardCharts() {
                 label: 'Total Masuk',
                 fontSize: '12px',
                 color: '#64748b',
-                formatter: () => 'Rp 478.5k'
+                formatter: () => 'Rp 478.500'
               }
             }
           }

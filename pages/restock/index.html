@@ -1,0 +1,204 @@
+<!-- Page Header: Restock Barang -->
+<div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4 gap-3">
+  <div>
+    <h4 class="fw-bold text-dark mb-1">Restock Barang</h4>
+    <p class="text-muted mb-0 small">Catat barang masuk dan pantau riwayat restock stok dagangan.</p>
+  </div>
+  <div class="d-flex align-items-center gap-2">
+    <button class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-2 bg-white" onclick="exportDataRestock()">
+      <i data-lucide="download" class="icon-xs"></i>
+      <span>Export Excel</span>
+    </button>
+    <button class="btn btn-sm btn-primary d-flex align-items-center gap-2 fw-semibold" onclick="openModalRestock()">
+      <i data-lucide="plus" class="icon-xs"></i>
+      <span>Catat Restock Baru</span>
+    </button>
+  </div>
+</div>
+
+<!-- Summary Metric Cards -->
+<div class="row g-3 mb-4">
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card-modern p-3 h-100 metric-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="text-muted small fw-medium">Total Pengeluaran Beli</span>
+        <div class="metric-icon-box">
+          <i data-lucide="wallet" class="icon-sm text-primary"></i>
+        </div>
+      </div>
+      <span class="metric-value text-dark" id="stat-total-restock">Rp 1.240.000</span>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">Hari ini • 2 restock masuk</small>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card-modern p-3 h-100 metric-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="text-muted small fw-medium">Barang Masuk Hari Ini</span>
+        <div class="metric-icon-box">
+          <i data-lucide="package-plus" class="icon-sm text-success"></i>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between gap-2">
+        <span class="metric-value text-success" id="stat-unit-masuk">25 Unit</span>
+        <span class="badge-status success"><i data-lucide="arrow-up" class="icon-xs"></i> Masuk</span>
+      </div>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">Stok langsung diperbarui</small>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card-modern p-3 h-100 metric-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="text-muted small fw-medium">Stok Hampir Habis</span>
+        <div class="metric-icon-box">
+          <i data-lucide="alert-triangle" class="icon-sm text-danger"></i>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between gap-2">
+        <span class="metric-value text-danger">1 Item</span>
+        <span class="badge-status danger">Segera Restock</span>
+      </div>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">Beras Ramos Setra (sisa 8)</small>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="card-modern p-3 h-100 metric-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="text-muted small fw-medium">Restock Bulan Ini</span>
+        <div class="metric-icon-box">
+          <i data-lucide="calendar-check" class="icon-sm text-primary"></i>
+        </div>
+      </div>
+      <span class="metric-value text-dark">12 Kali</span>
+      <small class="text-muted mt-2 d-block" style="font-size: 0.725rem;">Oktober 2026</small>
+    </div>
+  </div>
+</div>
+
+<!-- Main Table Card -->
+<div class="card-modern">
+  <!-- Filter Toolbar -->
+  <div class="p-3 border-bottom d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3">
+    <div class="position-relative topbar-search-wrapper w-100-mobile">
+      <i data-lucide="search" class="search-icon-pos icon-sm"></i>
+      <input type="text" id="restock-table-search" class="search-input-box" placeholder="Cari nomor restock atau nama barang..." oninput="filterRestockTable()">
+    </div>
+
+    <div class="d-flex flex-wrap align-items-center gap-2">
+      <select id="restock-filter-periode" class="form-select form-select-sm border filter-select" onchange="filterRestockTable()">
+        <option value="today">Hari Ini</option>
+        <option value="7days">7 Hari Terakhir</option>
+        <option value="30days">Bulan Ini</option>
+        <option value="all">Semua</option>
+      </select>
+
+      <button class="btn btn-sm btn-outline-secondary" title="Reset Filter" onclick="resetRestockFilter()">
+        <i data-lucide="rotate-ccw" class="icon-xs"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Data Table -->
+  <div class="table-responsive">
+    <table class="table table-modern align-middle mb-0">
+      <thead>
+        <tr>
+          <th class="ps-4">No. Restock</th>
+          <th>Tanggal &amp; Waktu</th>
+          <th>Nama Barang</th>
+          <th>Qty Masuk</th>
+          <th>Total Beli</th>
+          <th>Status</th>
+          <th class="text-center pe-4" style="width: 100px;">Aksi</th>
+        </tr>
+      </thead>
+      <tbody id="tabel-riwayat-restock">
+        <tr class="restock-row" data-faktur="#RCK-20260924-002" data-produk="Minyak Goreng Bimoli 2L">
+          <td class="ps-4">
+            <span class="trx-faktur">#RCK-20260924-002</span>
+          </td>
+          <td>
+            <div class="trx-waktu">
+              <span class="trx-tanggal">24 Sep 2026</span>
+              <span class="trx-jam">09:30 WIB</span>
+            </div>
+          </td>
+          <td>
+            <span class="fw-semibold text-dark d-block">Minyak Goreng Bimoli 2L</span>
+            <small class="text-muted">Kode: #PRD-002</small>
+          </td>
+          <td>
+            <span class="badge bg-success-subtle text-success border border-success-subtle">+15 Pcs</span>
+          </td>
+          <td class="fw-bold text-dark">Rp 465.000</td>
+          <td>
+            <span class="badge-status success"><i data-lucide="check-circle" class="icon-xs"></i> Masuk</span>
+          </td>
+          <td class="text-center pe-4">
+            <button class="btn btn-sm btn-outline-primary px-2" onclick="alert('Restock #RCK-20260924-002 sudah tercatat.')">
+              Detail
+            </button>
+          </td>
+        </tr>
+
+        <tr class="restock-row" data-faktur="#RCK-20260924-001" data-produk="Gula Pasir Kristal 1kg">
+          <td class="ps-4">
+            <span class="trx-faktur">#RCK-20260924-001</span>
+          </td>
+          <td>
+            <div class="trx-waktu">
+              <span class="trx-tanggal">24 Sep 2026</span>
+              <span class="trx-jam">08:15 WIB</span>
+            </div>
+          </td>
+          <td>
+            <span class="fw-semibold text-dark d-block">Gula Pasir Kristal 1kg</span>
+            <small class="text-muted">Kode: #PRD-004</small>
+          </td>
+          <td>
+            <span class="badge bg-success-subtle text-success border border-success-subtle">+10 Kg</span>
+          </td>
+          <td class="fw-bold text-dark">Rp 145.000</td>
+          <td>
+            <span class="badge-status success"><i data-lucide="check-circle" class="icon-xs"></i> Masuk</span>
+          </td>
+          <td class="text-center pe-4">
+            <button class="btn btn-sm btn-outline-primary px-2" onclick="alert('Restock #RCK-20260924-001 sudah tercatat.')">
+              Detail
+            </button>
+          </td>
+        </tr>
+
+        <tr class="restock-row" data-faktur="#RCK-20260923-005" data-produk="Telur Ayam Negeri 1kg">
+          <td class="ps-4">
+            <span class="trx-faktur">#RCK-20260923-005</span>
+          </td>
+          <td>
+            <div class="trx-waktu">
+              <span class="trx-tanggal">23 Sep 2026</span>
+              <span class="trx-jam">16:40 WIB</span>
+            </div>
+          </td>
+          <td>
+            <span class="fw-semibold text-dark d-block">Telur Ayam Negeri 1kg</span>
+            <small class="text-muted">Kode: #PRD-003</small>
+          </td>
+          <td>
+            <span class="badge bg-success-subtle text-success border border-success-subtle">+20 Kg</span>
+          </td>
+          <td class="fw-bold text-dark">Rp 520.000</td>
+          <td>
+            <span class="badge-status success"><i data-lucide="check-circle" class="icon-xs"></i> Masuk</span>
+          </td>
+          <td class="text-center pe-4">
+            <button class="btn btn-sm btn-outline-primary px-2" onclick="alert('Restock #RCK-20260923-005 sudah tercatat.')">
+              Detail
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -18,17 +18,22 @@
         </a>
       </li>
 
-      <!-- Transaksi -->
+      <!-- Transaksi (Dropdown Terbuka) -->
       <li class="nav-item">
-        <a href="#collapse-transaksi" class="nav-link-custom justify-content-between collapsed" data-bs-toggle="collapse" role="button" aria-expanded="false">
+        <a href="#collapse-transaksi" class="nav-link-custom justify-content-between" data-bs-toggle="collapse" role="button" aria-expanded="true">
           <span class="d-flex align-items-center gap-2">
             <i data-lucide="shopping-cart"></i>
             <span>Transaksi</span>
           </span>
           <i data-lucide="chevron-down" class="rotate-icon"></i>
         </a>
-        <div class="collapse" id="collapse-transaksi">
+        <div class="collapse show" id="collapse-transaksi">
           <ul class="submenu-nav">
+            <li>
+              <a href="#/dashboard-kasir" class="nav-link-custom" onclick="loadPage('dashboard-kasir', this)">
+                <span>Kasir Harian</span>
+              </a>
+            </li>
             <li>
               <a href="#/kasir" class="nav-link-custom" onclick="loadPage('kasir', this)">
                 <span>Kasir</span>
@@ -43,20 +48,25 @@
         </div>
       </li>
 
-      <!-- Produk -->
+      <!-- Produk (Dropdown Terbuka) -->
       <li class="nav-item">
-        <a href="#collapse-produk" class="nav-link-custom justify-content-between collapsed" data-bs-toggle="collapse" role="button" aria-expanded="false">
+        <a href="#collapse-produk" class="nav-link-custom justify-content-between" data-bs-toggle="collapse" role="button" aria-expanded="true">
           <span class="d-flex align-items-center gap-2">
             <i data-lucide="package"></i>
             <span>Produk</span>
           </span>
           <i data-lucide="chevron-down" class="rotate-icon"></i>
         </a>
-        <div class="collapse" id="collapse-produk">
+        <div class="collapse show" id="collapse-produk">
           <ul class="submenu-nav">
             <li>
               <a href="#/produk" class="nav-link-custom" onclick="loadPage('produk', this)">
                 <span>Daftar Produk</span>
+              </a>
+            </li>
+            <li>
+              <a href="#/restock" class="nav-link-custom" onclick="loadPage('restock', this)">
+                <span>Restock Barang</span>
               </a>
             </li>
             <li>
@@ -68,16 +78,16 @@
         </div>
       </li>
 
-      <!-- Laporan (Owner Only) -->
+      <!-- Laporan (Owner Only - Dropdown Terbuka) -->
       <li class="nav-item" data-role="owner">
-        <a href="#collapse-laporan" class="nav-link-custom justify-content-between collapsed" data-bs-toggle="collapse" role="button" aria-expanded="false">
+        <a href="#collapse-laporan" class="nav-link-custom justify-content-between" data-bs-toggle="collapse" role="button" aria-expanded="true">
           <span class="d-flex align-items-center gap-2">
             <i data-lucide="bar-chart-3"></i>
             <span>Laporan</span>
           </span>
           <i data-lucide="chevron-down" class="rotate-icon"></i>
         </a>
-        <div class="collapse" id="collapse-laporan">
+        <div class="collapse show" id="collapse-laporan">
           <ul class="submenu-nav">
             <li>
               <a href="#/owner/laporan-laba-rugi" class="nav-link-custom" onclick="loadPage('owner/laporan-laba-rugi', this)">
@@ -107,43 +117,60 @@
       </li>
 
       <!-- Menu Autentikasi / Halaman Auth -->
-      <li class="nav-item pt-2 border-top mt-2">
+      <!-- <li class="nav-item pt-2 border-top mt-2">
         <a href="pages/login/index.html" class="nav-link-custom">
           <i data-lucide="log-in"></i>
           <span>Login</span>
         </a>
-      </li>
-      <li class="nav-item">
+      </li> -->
+      <!-- <li class="nav-item">
         <a href="pages/register/index.html" class="nav-link-custom">
           <i data-lucide="user-plus"></i>
           <span>Register</span>
         </a>
-      </li>
-      <li class="nav-item">
+      </li> -->
+      <!-- <li class="nav-item">
         <a href="preview-modals.html" class="nav-link-custom" target="_blank">
           <i data-lucide="layers"></i>
           <span>Preview Modals</span>
           <span class="badge bg-primary-subtle text-primary ms-auto" style="font-size: 0.65rem;">Figma</span>
         </a>
-      </li>
+      </li> -->
     </ul>
   </div>
 
-  <!-- Sidebar Bottom: Shift Status Widget -->
+  <!-- Sidebar Bottom: Profil Pengguna & Aksi Cepat -->
   <div class="mt-auto p-3 border-top">
-    <div class="p-3 bg-light border rounded-3">
-      <div class="d-flex align-items-center justify-content-between mb-2">
-        <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2 py-0" style="font-size: 0.675rem;">Toko Buka</span>
-        <small class="text-muted" style="font-size: 0.675rem;">Shift Pagi</small>
+    <div class="sidebar-user-card">
+      <!-- Identitas User & Logout -->
+      <div class="d-flex align-items-center justify-content-between mb-2 pb-2 border-bottom">
+        <div class="d-flex align-items-center gap-2 overflow-hidden me-1">
+          <div class="sidebar-user-avatar">
+            <i data-lucide="user" class="icon-sm"></i>
+          </div>
+          <div class="overflow-hidden">
+            <div class="fw-semibold text-dark text-truncate" style="font-size: 0.8125rem; line-height: 1.25;" id="sidebar-staff-name">Budi Santoso</div>
+            <div class="d-flex align-items-center gap-1 mt-0.5">
+              <span class="badge bg-success-subtle text-success border border-success-subtle px-1 py-0" style="font-size: 0.625rem;">Buka</span>
+              <small class="text-muted text-truncate" style="font-size: 0.675rem;" id="sidebar-staff-role">Owner</small>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn-sidebar-logout" onclick="handleLogout()" title="Keluar dari sesi (Logout)" aria-label="Logout">
+          <i data-lucide="log-out" class="icon-xs"></i>
+        </button>
       </div>
-      <div class="d-flex align-items-center gap-2">
-        <div class="p-1.5 bg-white border rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 28px; height: 28px;">
-          <i data-lucide="user-check" class="icon-xs text-primary"></i>
-        </div>
-        <div class="overflow-hidden">
-          <div class="fw-semibold text-dark text-truncate" style="font-size: 0.775rem;" id="sidebar-staff-name">Budi Santoso</div>
-          <small class="text-muted d-block" style="font-size: 0.675rem;" id="sidebar-staff-role">Owner (Kasir Aktif)</small>
-        </div>
+
+      <!-- Tombol Aksi: Profil & Ganti Password -->
+      <div class="d-flex gap-1.5">
+        <button type="button" class="btn-sidebar-action" onclick="openProfilWarungModal()">
+          <i data-lucide="store"></i>
+          <span>Profil</span>
+        </button>
+        <button type="button" class="btn-sidebar-action" onclick="openChangePasswordModal()">
+          <i data-lucide="key"></i>
+          <span>Password</span>
+        </button>
       </div>
     </div>
   </div>
